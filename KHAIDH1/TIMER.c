@@ -95,6 +95,10 @@ ISR(TIMER1_COMPA_vect)
 	t_g_ui8_100US_count++;
 	if (t_g_ui8_100US_count > 10)
 	{
+		if (bFlag_1MS == 1)
+		{
+			bFlag_1MS_Over = 1;
+		}
 		bFlag_1MS = 1;
 		t_g_ui8_1MS_count++;
 		t_g_ui8_100US_count = 0;

@@ -1,13 +1,12 @@
 
 #include "OS.h"
 
-
-
 void Task_Control()
 {
 	bF_TaskRunning = 1;
 	do
 	{
+
 		if (bFlag_100US == 1)
 		{
 			
@@ -18,7 +17,10 @@ void Task_Control()
 		{
 
 			Task_1MS();
-			bFlag_1MS = 0;
+			if (bFlag_1MS_Over ==0)
+			{ 
+				bFlag_1MS = 0;		
+			}
 		}
 		else if (bFlag_10MS == 1)
 		{
@@ -44,8 +46,6 @@ void Task_Control()
 		}
 	} 
 	while (bF_TaskRunning == 1);
-
-
 }
 
 /*ADD  Tasks */
@@ -74,7 +74,6 @@ void Task_RUNNING()
 		}
 	}
 }
-
 
 void AddTask_Custom(uint8_t id, void(*handleTask)(void), void *paramIn, uint16_t timer)
 {

@@ -31,6 +31,7 @@ extern boolean bFlag_1MS;
 extern boolean bFlag_10MS;
 extern boolean bFlag_100MS;
 extern boolean bFlag_1S;
+extern boolean bFlag_1MS_Over;
 
 
 /*****   STEP MOTOR       ******/

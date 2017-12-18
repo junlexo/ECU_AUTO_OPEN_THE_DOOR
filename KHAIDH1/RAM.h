@@ -14,6 +14,11 @@
 #include "FLAG.h"
 #include "TIMER.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 /*  TIMER  */
 extern  uint8_t currentTimer;
 extern  volatile uint16_t us1;
@@ -46,6 +51,9 @@ extern  boolean g_fblinkled;
 
 /*****   STEP MOTOR   *******/
 
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 
 #endif

@@ -21,6 +21,7 @@ boolean bFlag_1MS =0 ;
 boolean bFlag_10MS =0 ;
 boolean bFlag_100MS =0 ;
 boolean bFlag_1S =0 ;
+boolean bFlag_1MS_Over = 0;
 
 
 /*****   STEP MOTOR       ******/
