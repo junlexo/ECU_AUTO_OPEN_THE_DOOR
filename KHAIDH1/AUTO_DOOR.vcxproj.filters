@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\OS">
+      <UniqueIdentifier>{8717353d-3aa4-4290-b985-5c0d7be80bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LIB">
+      <UniqueIdentifier>{f09383c8-ba64-46f6-b0c7-62ec94eb410d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SYS">
+      <UniqueIdentifier>{0a76f486-2346-4ecb-aacc-7feea53d9b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TIMER">
+      <UniqueIdentifier>{2a37afb1-df7d-45e2-977c-9f936ada236f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ADC">
+      <UniqueIdentifier>{daff7a61-c4d1-4b5b-bfd5-18f20354c780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\STEP MOTOR">
+      <UniqueIdentifier>{1f71a9ce-d572-4261-af1d-a57c12fdb747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DC MOTOR">
+      <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BUTTON">
+      <UniqueIdentifier>{d5989b61-5dd5-438e-8dc2-26e6a74f0353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UART">
+      <UniqueIdentifier>{348c4c3e-9964-44ca-975a-43c7e2338d1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\I2C">
+      <UniqueIdentifier>{c94afe14-b343-442d-b90f-5082e32469ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LCD">
+      <UniqueIdentifier>{5159facb-a5eb-466a-8e66-1c10cca4dffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LED">
+      <UniqueIdentifier>{e762e911-dfbf-48de-bf6d-b66590ab8d60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO">
+      <UniqueIdentifier>{931b122c-a58b-4c5f-b575-67f2d7874ee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LIB">
+      <UniqueIdentifier>{ed97bec0-23fa-4388-916b-5b413df20fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OS">
+      <UniqueIdentifier>{cc3f1ec9-756f-4894-8c69-d4b752b296f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STEP MOTOR">
+      <UniqueIdentifier>{11b7f349-a106-46f9-92c8-9fd3df72ae16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LED">
+      <UniqueIdentifier>{0ceba9f5-e0ac-4c15-b6ac-49a359b55574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ADC">
+      <UniqueIdentifier>{c4b15751-975a-4529-b4ea-a6a782621f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TIMER">
+      <UniqueIdentifier>{63e007be-6661-46a8-9562-dd15bf98a57f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{cb1f122d-32b3-42e4-8658-4ad824016471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\I2S">
+      <UniqueIdentifier>{6504667f-7025-4d3e-af40-155902b3f92d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UART">
+      <UniqueIdentifier>{5a79eaa9-a4f4-4b00-9cd0-1457d30906ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EEPROM">
+      <UniqueIdentifier>{0208eefa-6a05-480d-b442-6b98ee31fcbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EPPROM">
+      <UniqueIdentifier>{b8c3f0d2-0240-4387-b784-990c06a1991b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SYS">
+      <UniqueIdentifier>{fe8cc782-3cec-4be5-8598-a161af6097bd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AUTO_DOOR.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.AUTO_DOOR.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_1MS.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_1S.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_10MS.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_100MS.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="Task_100US.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer_count.h">
+      <Filter>Header Files\TIMER</Filter>
+    </ClInclude>
+    <ClInclude Include="TIMER.h">
+      <Filter>Header Files\TIMER</Filter>
+    </ClInclude>
+    <ClInclude Include="SYS.h">
+      <Filter>Header Files\SYS</Filter>
+    </ClInclude>
+    <ClInclude Include="STEP_MOTOR.h">
+      <Filter>Header Files\STEP MOTOR</Filter>
+    </ClInclude>
+    <ClInclude Include="RAM.h">
+      <Filter>Header Files\LIB</Filter>
+    </ClInclude>
+    <ClInclude Include="PREFERENT.h">
+      <Filter>Header Files\LIB</Filter>
+    </ClInclude>
+    <ClInclude Include="FLAG.h">
+      <Filter>Header Files\LIB</Filter>
+    </ClInclude>
+    <ClInclude Include="Global_Define.h">
+      <Filter>Header Files\LIB</Filter>
+    </ClInclude>
+    <ClInclude Include="IO.h">
+      <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="OS_TimerCount.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="OS.h">
+      <Filter>Header Files\OS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Task_100US.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_1MS.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_1S.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_10MS.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="Task_100MS.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="OS.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="OS_TimerCount.c">
+      <Filter>Source Files\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="FLAG.c">
+      <Filter>Source Files\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="Global_Define.c">
+      <Filter>Source Files\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="PREFERENT.c">
+      <Filter>Source Files\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="RAM.c">
+      <Filter>Source Files\LIB</Filter>
+    </ClCompile>
+    <ClCompile Include="IO.c">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TIMER.c">
+      <Filter>Source Files\TIMER</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer_count.c">
+      <Filter>Source Files\TIMER</Filter>
+    </ClCompile>
+    <ClCompile Include="STEP_MOTOR.c">
+      <Filter>Source Files\STEP MOTOR</Filter>
+    </ClCompile>
+    <ClCompile Include="SYS.c">
+      <Filter>Source Files\SYS</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
