@@ -114,9 +114,6 @@
     <ClInclude Include="Timer_count.h">
       <Filter>Header Files\TIMER</Filter>
     </ClInclude>
-    <ClInclude Include="TIMER.h">
-      <Filter>Header Files\TIMER</Filter>
-    </ClInclude>
     <ClInclude Include="SYS.h">
       <Filter>Header Files\SYS</Filter>
     </ClInclude>
@@ -132,17 +129,14 @@
     <ClInclude Include="FLAG.h">
       <Filter>Header Files\LIB</Filter>
     </ClInclude>
-    <ClInclude Include="Global_Define.h">
-      <Filter>Header Files\LIB</Filter>
-    </ClInclude>
     <ClInclude Include="IO.h">
       <Filter>Header Files\IO</Filter>
     </ClInclude>
-    <ClInclude Include="OS_TimerCount.h">
-      <Filter>Header Files\OS</Filter>
-    </ClInclude>
     <ClInclude Include="OS.h">
       <Filter>Header Files\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="OS_TimerCounter.h">
+      <Filter>Header Files\TIMER</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -164,13 +158,7 @@
     <ClCompile Include="OS.c">
       <Filter>Source Files\OS</Filter>
     </ClCompile>
-    <ClCompile Include="OS_TimerCount.c">
-      <Filter>Source Files\OS</Filter>
-    </ClCompile>
     <ClCompile Include="FLAG.c">
-      <Filter>Source Files\LIB</Filter>
-    </ClCompile>
-    <ClCompile Include="Global_Define.c">
       <Filter>Source Files\LIB</Filter>
     </ClCompile>
     <ClCompile Include="PREFERENT.c">
@@ -182,9 +170,6 @@
     <ClCompile Include="IO.c">
       <Filter>Source Files\IO</Filter>
     </ClCompile>
-    <ClCompile Include="TIMER.c">
-      <Filter>Source Files\TIMER</Filter>
-    </ClCompile>
     <ClCompile Include="Timer_count.c">
       <Filter>Source Files\TIMER</Filter>
     </ClCompile>
@@ -193,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="SYS.c">
       <Filter>Source Files\SYS</Filter>
+    </ClCompile>
+    <ClCompile Include="OS_TimerCounter.c">
+      <Filter>Source Files\TIMER</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

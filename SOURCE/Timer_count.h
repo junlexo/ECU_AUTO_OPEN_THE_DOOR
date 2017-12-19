@@ -2,36 +2,28 @@
 
 #ifndef _TIMER_COUNT_h
 #define _TIMER_COUNT_h
-
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
-
 #include "RAM.h"
 
 /************************************************************************************/
 #define TIMER_UINT8_100US		1U
-#define TIMER_UINT16_100US		1U
-#define TIMER_UINT32_100US		1U
+#define TIMER_UINT16_100US		0U
+#define TIMER_UINT32_100US		0U
 
 #define TIMER_UINT8_1MS			1U
-#define TIMER_UINT16_1MS		1U
-#define TIMER_UINT32_1MS		1U
+#define TIMER_UINT16_1MS		0U
+#define TIMER_UINT32_1MS		0U
 
 #define TIMER_UINT8_10MS		1U
-#define TIMER_UINT16_10MS		1U
-#define TIMER_UINT32_10MS		1U
+#define TIMER_UINT16_10MS		0U
+#define TIMER_UINT32_10MS		0U
 
 #define TIMER_UINT8_100MS		1U
-#define TIMER_UINT16_100MS		1U
-#define TIMER_UINT32_100MS		1U
+#define TIMER_UINT16_100MS		0U
+#define TIMER_UINT32_100MS		0U
 
 #define TIMER_UINT8_1000MS		1U
-#define TIMER_UINT16_1000MS		1U
-#define TIMER_UINT32_1000MS		1U
-
+#define TIMER_UINT16_1000MS		0U
+#define TIMER_UINT32_1000MS		0U
 
 
 
@@ -191,12 +183,9 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_1000ms
 {
-	uint8_t dummy;
+	uint8_t LedBlinkingWaitTime;
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
-
-#define	t_uint8_1000ms_dummy		timer_uint8_1000ms.dummy
-
 #endif
 
 #if TIMER_UINT16_1000MS != 0U
@@ -222,6 +211,9 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 #define	t_ui32_1000ms_dummy		timer_uint32_1000ms.dummy
 
 #endif
+
+/******************************* Define task processing interval *********************************************/
+#define LedBlinkingWaitTime timer_uint8_1000ms.LedBlinkingWaitTime
 
 #endif
 

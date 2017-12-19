@@ -3,12 +3,8 @@
 #ifndef _PREFERENT_h
 #define _PREFERENT_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
-
+#include <avr/io.h>
+#include <stddef.h>
 
 #define HIGH 1
 #define LOW 0
@@ -43,6 +39,48 @@
 /*IO */
 #define	MAX_PORT_NUM 22
 
+
+#define Bit(bit) (1 << (bit))
+#define CharToInt(c) ((uint8_t)(c)-'0')
+#define IntToChar(i) ((uint8_t)(i)+'0')
+
+#define	CLR	0U
+#define	SET	1U
+
+/***************** set/clear flag define ***************/
+#define SETFLAG(flag) ((flag)=(1U))
+#define CLRFLAG(flag) ((flag)=(0U))
+#define TSTFLAG(flag) ((flag))
+
+#define MIN(a,b) ((a>b)?b:a)
+#define MAX(a,b) ((a>b)?a:b)
+#define MIN_MAX(a,min,max)		((a>max)?max:((a<min)?min:a))
+
+/***************** set/clear timer define ***************/
+#define StartTimer(timer,time) ((timer)=(time))
+#define IsTimeOut(timer) (((timer)==0U)?1:0)
+
+
+/***************** set/clear counter define ***************/
+#define START_COUNTER(counter,times) 	((counter)=(times))
+#define CHECK_COUNTER(counter) 			(((counter)==0U))
+
+
+/******************* Typedef ******************/
+typedef void(*FuncPtr)(void*);
+typedef unsigned long ulong_t;
+typedef long long_t;
+typedef float float_t;
+typedef double double_t;
+typedef unsigned char uchar_t;
+
+typedef struct Data_frame {
+	uint8_t commandId;
+	uchar_t breakChar;
+	uchar_t endFrame;
+	uint16_t dataID : 16;
+	uint32_t data;
+} DataFrame;
 
 
 #endif

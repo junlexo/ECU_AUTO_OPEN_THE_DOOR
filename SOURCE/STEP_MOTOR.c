@@ -6,15 +6,15 @@
 void STEP_PWM()
 {
  
-	if ( g_bF_StepPWM == 1)
+	if (TSTFLAG(g_bF_StepPWM) == 1)
 	{
-		IOPort_Write(D_9, HIGH);
-		g_bF_StepPWM = 0;
+		IOPort_Write(D_13, HIGH);
+		CLRFLAG(g_bF_StepPWM);
 	}
 	else
 	{
-		IOPort_Write(D_9, LOW);
-		g_bF_StepPWM = 1;
+		IOPort_Write(D_13, LOW);
+		SETFLAG(g_bF_StepPWM);
 	}
 
 }

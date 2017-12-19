@@ -2,41 +2,40 @@
 
 #ifndef _FLAG_h
 #define _FLAG_h
+#include <stdint.h>
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+struct _flag_list {
+	/****  INIT   *****/
+	uint8_t bF_Hardware_Init : 1;
+	uint8_t bF_Software_Init : 1;
 
-/****  INIT   *****/
+	/****  Task OS   *****/
+	uint8_t bF_TaskRunning : 1;
+	uint8_t bF_Task_100US : 1;
+	uint8_t bF_Task_1MS : 1;
+	uint8_t bF_Task_10MS : 1;
+	uint8_t bF_Task_100MS : 1;
+	uint8_t bF_Task_1S : 1;
 
-extern boolean bF_Hardware_Init;
-extern boolean bF_Software_Init;
+	/*****   STEP MOTOR       ******/
+	uint8_t g_bF_StepPWM : 1;
 
+	/***** LED EXAMPLE ****/
+	uint8_t g_bF_LedController : 1;
+};
 
+extern struct _flag_list flags_list;
 
+/******************************** Global Flags ***********************************************/
 
-/****  Task OS   *****/
-extern boolean bF_TaskRunning;
-extern boolean bF_Task_1MS ;
-extern boolean bF_Task_10MS ;
-extern boolean bF_Task_100MS;
-extern boolean bF_Task_1S ;
-
-/***   TIMER  *** */
-
-extern boolean bFlag_100US;
-extern boolean bFlag_1MS;
-extern boolean bFlag_10MS;
-extern boolean bFlag_100MS;
-extern boolean bFlag_1S;
-
-
-/*****   STEP MOTOR       ******/
-
-extern boolean g_bF_StepPWM;
-
+#define bF_TaskRunning        			flags_list.bF_TaskRunning
+#define bF_Task_100US       			flags_list.bF_Task_100US
+#define bF_Task_1MS 					flags_list.bF_Task_1MS
+#define bF_Task_10MS   					flags_list.bF_Task_10MS
+#define bF_Task_100MS  					flags_list.bF_Task_100MS
+#define bF_Task_1S  					flags_list.bF_Task_1S
+#define g_bF_StepPWM  					flags_list.g_bF_StepPWM
+#define g_bF_LedController				flags_list.g_bF_LedController
 
 #endif
 

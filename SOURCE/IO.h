@@ -3,12 +3,6 @@
 #ifndef _IO_h
 #define _IO_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
-#endif
-
 #include "RAM.h"
 #include "PREFERENT.h"
 
