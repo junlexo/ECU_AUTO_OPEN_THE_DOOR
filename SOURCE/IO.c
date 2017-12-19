@@ -5,14 +5,14 @@
 #include "IO.h"
 void IO_Init()
 {
-
-	SetPin(D_13, OUTPUT); // Blink LED in number_port 13
+	SetPin(D_10, INPUT_PULLUP); // SW2 in number_port 10
+	SetPin(D_11, INPUT_PULLUP); // SW1 in number_port 11
+	SetPin(D_12, OUTPUT); // Blink LED1 in number_port 12
+	SetPin(D_13, OUTPUT); // Blink LED0 in number_port 13
 /*****     STEP MOTOR    *****/
 	SetPin(D_8, OUTPUT);
 	SetPin(D_9, OUTPUT);
 	SetPin(D_7, OUTPUT);
-
-
 }
 
 const uint8_t port_arr[MAX_PORT_NUM] = {
