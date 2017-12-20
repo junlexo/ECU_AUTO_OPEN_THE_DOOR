@@ -22,6 +22,7 @@ typedef struct _ADC_DATA
 }ADC_DATA;
 
 #define CHANNELS 6
+#define ALPHA 9/10
 
 extern volatile ADC_DATA adc_info[CHANNELS];
 extern volatile uint16_t adc_interrupt_result[CHANNELS];

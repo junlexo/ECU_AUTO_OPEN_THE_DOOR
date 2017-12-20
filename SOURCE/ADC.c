@@ -68,7 +68,7 @@ void ADCUpdateEvery10ms()
 	uint16_t currentValue;
 	for (uint8_t i = 0; i < CHANNELS; i++)
 	{
-		currentValue = adc_interrupt_result[i];
+		currentValue = adc_lpf_result[i];
 		/*Update count when current digital value same before value*/
 		if (adc_info[i].ADC_AnalogValue == currentValue)
 			adc_info[i].ADC_CountTimeMS += 10;
@@ -79,11 +79,11 @@ void ADCUpdateEvery10ms()
 		if (adc_info[i].ADC_CountTimeMS >= adc_info[i].ADC_ErrorTimeMS)
 		{
 			adc_info[i].ADC_Status = ADC_ERROR;
-			flags_list.g_bF_SystemError = ERROR_BTN;
+			g_bF_SystemError = ERROR_BTN;
 		}
 			
-		adc_info[i].ADC_AnalogValue = adc_interrupt_result[i];
-		adc_info[i].ADC_VoltageValue = voltageConvert(adc_interrupt_result[i]);
+		adc_info[i].ADC_AnalogValue = adc_lpf_result[i];
+		adc_info[i].ADC_VoltageValue = voltageConvert(adc_lpf_result[i]);
 
 	}
 	ADCSRA |= (1 << ADSC);
@@ -91,5 +91,8 @@ void ADCUpdateEvery10ms()
 
 void lowPassFilter()
 {
-
+	//for (uint8_t i = 0; i < length; i++)
+	//{
+	//	adc_lpf_result[i] = adc_lpf_result[i] + (ALPHA*());
+	//}
 }
