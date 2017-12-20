@@ -4,7 +4,9 @@
 
 volatile int isr_chnl;
 volatile ADC_DATA adc_info[CHANNELS];
-volatile uint16_t adc_interrupt_result[CHANNELS];
+volatile uint16_t adc_interrupt_result[CHANNELS]; /*store adc value when interrupt*/
+volatile uint16_t adc_lpf_result[CHANNELS]; //low pass filter result
+
 
 void initADCData() 
 {
@@ -85,4 +87,9 @@ void ADCUpdateEvery10ms()
 
 	}
 	ADCSRA |= (1 << ADSC);
+}
+
+void lowPassFilter()
+{
+
 }

@@ -88,15 +88,6 @@
     <Filter Include="Source Files\SYS">
       <UniqueIdentifier>{fe8cc782-3cec-4be5-8598-a161af6097bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\SW">
-      <UniqueIdentifier>{a2ac339b-f7dc-437d-b603-3fbd24eedd5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\SW">
-      <UniqueIdentifier>{a9b4b104-4367-44a7-9c4e-68c2f398a9a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DC MOTOR">
-      <UniqueIdentifier>{f48bbcbd-5828-4974-acde-3baa9698b9ff}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -151,13 +142,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LED.h">
-      <Filter>Header Files\LED</Filter>
-    </ClInclude>
-    <ClInclude Include="SW.h">
-      <Filter>Header Files\SW</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MOTOR_DC.h">
-      <Filter>Header Files\DC MOTOR</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADC.h">
+      <Filter>Header Files\ADC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -204,13 +198,16 @@
       <Filter>Source Files\TIMER</Filter>
     </ClCompile>
     <ClCompile Include="LED.c">
-      <Filter>Source Files\LED</Filter>
-    </ClCompile>
-    <ClCompile Include="SW.c">
-      <Filter>Source Files\SW</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MOTOR_DC.c">
-      <Filter>Source Files\DC MOTOR</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SW.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADC.c">
+      <Filter>Source Files\ADC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -31,6 +31,7 @@ extern "C" {
 #endif
 	void initADCData();
 	void ADC_init();
+	void lowPassFilter();
 	uint16_t voltageConvert(uint16_t value);
 #ifdef __cplusplus
 } // extern "C"
