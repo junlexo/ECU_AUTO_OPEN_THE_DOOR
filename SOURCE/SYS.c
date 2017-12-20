@@ -8,6 +8,7 @@
 #include "STEP_MOTOR.h"
 #include "OS_TimerCounter.h"
 #include "LED.h"
+#include "SW.h"
 void CPU_Init()
 {
 	Hardware_Init();
@@ -19,6 +20,7 @@ void Hardware_Init()
 	IO_Init();
 	OS_TimerCounter_Init();
 	LED_Init();
+	SW_Init();
 	//bF_Hardware_Init = 1;
 
 }

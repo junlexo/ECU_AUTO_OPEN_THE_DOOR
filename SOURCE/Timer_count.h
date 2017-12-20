@@ -107,10 +107,12 @@ extern struct _timer_uint32_1ms timer_uint32_1ms;
 struct _timer_uint8_10ms
 {
 	uint8_t dummy;
+	uint8_t SW_WaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
 #define	t_ui8_10ms_dummy		timer_uint8_10ms.dummy
+#define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
 #endif
 
 #if TIMER_UINT16_10MS != 0U
