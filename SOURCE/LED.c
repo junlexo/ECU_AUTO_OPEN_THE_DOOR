@@ -11,7 +11,7 @@ void LED_Init()
 }
 void LED()
 {
-	if (g_bF_SystemError == ERROR_VOLUME || g_bF_SystemError == ERROR_BTN)
+	if (g_bF_Led_Error == ERROR_VOLUME || g_bF_Led_Error == ERROR_BTN)
 	{
 #ifdef OPTION2
 		if (TSTFLAG(g_bF_Led_State) == 0) {
@@ -32,11 +32,39 @@ void LED()
 		if (g_bF_UART_Error_Frame == 1)
 		{
 			IOPort_Write(D_12, LOW);
+			if (TSTFLAG(g_bF_Led_State) == 0) {
+				IOPort_Write(D_13, g_bF_Led_State);
+				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
+				SETFLAG(g_bF_Led_State);
+			}
+			else {
+				IOPort_Write(D_13, g_bF_Led_State);
+				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
+				CLRFLAG(g_bF_Led_State);
+			}
 		}
 		else
 			if (g_bF_Led_Btn1 == 1)
 			{
-				IOPort_Write(D_12, HIGH);
+				if (g_bF_Led_Press == 1)
+				{
+					if (TSTFLAG(g_bF_Led_State) == 0) {
+						IOPort_Write(D_12, g_bF_Led_State);
+						IOPort_Write(D_13, g_bF_Led_State);
+						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn on led 0.5s */
+						SETFLAG(g_bF_Led_State);
+					}
+					else {
+						IOPort_Write(D_12, g_bF_Led_State);
+						IOPort_Write(D_13, g_bF_Led_State);
+						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn off led 0.5s */
+						CLRFLAG(g_bF_Led_State);
+					}
+				}
+				else
+				{
+					IOPort_Write(D_12, HIGH);
+				}
 			}
 			else
 				if (g_bF_Led_Normal == 1)
@@ -64,8 +92,11 @@ void LED()
 }
 void resetFlagLED()
 {
+	g_bF_SystemError = NON_ERROR;
 	g_bF_Led_Normal = 1;
 	g_bF_Led_Error = 0;
 	g_bF_Led_State = 0;
 	g_bF_Led_Btn1 = 0;
+	g_bF_Led_Press = 0;
+	g_bF_UART_Error_Frame = 0;
 }
