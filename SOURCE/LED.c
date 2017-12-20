@@ -4,44 +4,45 @@
 #include "FLAG.h"
 #include "IO.h"
 #include "Timer_count.h"
-
-uint8_t l_unit8_led_normal = 0;
-uint8_t l_unit8_led_error = 1;
-uint8_t l_unit8_led_State = 0;
-uint8_t l_uint8_led_btn1 = 0;
+void LED_Init()
+{
+	resetFlagLED();
+}
 void LED()
 {
-	if (l_unit8_led_normal == 1)
+	if (g_bF_Led_Error == 1)
 	{
-		if (TSTFLAG(l_unit8_led_State) == 0) {
-			IOPort_Write(D_13, l_unit8_led_State);
-			StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
-			SETFLAG(l_unit8_led_State);
+		if (TSTFLAG(g_bF_Led_State) == 0) {
+			IOPort_Write(D_13, g_bF_Led_State);
+			StartTimer(LedBlinkingWaitTimeMS, 20); /* Turn off led 2s */
+			SETFLAG(g_bF_Led_State);
 		}
 		else {
-			IOPort_Write(D_13, l_unit8_led_State);
-			StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
-			CLRFLAG(l_unit8_led_State);
+			IOPort_Write(D_13, g_bF_Led_State);
+			StartTimer(LedBlinkingWaitTimeMS, 20); /* Turn on led 2s */
+			CLRFLAG(g_bF_Led_State);
 		}
 	}
 	else
-		if (l_unit8_led_error == 1)
+		if (g_bF_Led_Btn1 == 1)
 		{
-			if (TSTFLAG(l_unit8_led_State) == 0) {
-				IOPort_Write(D_13, l_unit8_led_State);
-				StartTimer(LedBlinkingWaitTimeMS, 20); /* Turn off led 2s */
-				SETFLAG(l_unit8_led_State);
-			}
-			else {
-				IOPort_Write(D_13, l_unit8_led_State);
-				StartTimer(LedBlinkingWaitTimeMS, 20); /* Turn on led 2s */
-				CLRFLAG(l_unit8_led_State);
-			}
+			IOPort_Write(D_13, HIGH);
 		}
 		else
-			if (l_uint8_led_btn1 == 1)
+			if (g_bF_Led_Normal == 1)
 			{
-				IOPort_Write(D_13, HIGH);
+				if (TSTFLAG(g_bF_Led_State) == 0) {
+					IOPort_Write(D_13, g_bF_Led_State);
+					IOPort_Write(D_12, g_bF_Led_State);
+					StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
+					SETFLAG(g_bF_Led_State);
+				}
+				else {
+					IOPort_Write(D_13, g_bF_Led_State);
+					IOPort_Write(D_12, g_bF_Led_State);
+					StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
+					CLRFLAG(g_bF_Led_State);
+				}
 			}
 			else
 			{
@@ -52,7 +53,8 @@ void LED()
 }
 void resetFlagLED()
 {
-	l_unit8_led_normal = 1;
-	l_unit8_led_error = 0;
-	l_unit8_led_State = 0;
+	g_bF_Led_Normal = 1;
+	g_bF_Led_Error = 0;
+	g_bF_Led_State = 0;
+	g_bF_Led_Btn1 = 0;
 }
