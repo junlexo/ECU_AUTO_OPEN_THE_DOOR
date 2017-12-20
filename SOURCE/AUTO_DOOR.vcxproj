@@ -48,10 +48,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SOURCE;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\arduino\avr\libraries;C:\Users\hungtp2\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\Tool\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SOURCE;C:\arduino-1.8.5\libraries;C:\arduino-1.8.5\hardware\arduino\avr\libraries;C:\arduino-1.8.5\hardware\libraries;C:\arduino-1.8.5\hardware\arduino\avr\cores\arduino;C:\arduino-1.8.5\hardware\arduino\avr\variants\standard;C:\arduino-1.8.5\hardware\tools\avr\avr\include\;C:\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;C:\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;C:\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;C:\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.SOURCE.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_NANO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClInclude Include="FLAG.h" />
     <ClInclude Include="IO.h" />
+    <ClInclude Include="LED.h" />
     <ClInclude Include="OS.h" />
     <ClInclude Include="OS_TimerCounter.h" />
     <ClInclude Include="PREFERENT.h" />
@@ -95,10 +96,12 @@
     <ClInclude Include="Task_1S.h" />
     <ClInclude Include="Timer_count.h" />
     <ClInclude Include="__vm\.AUTO_DOOR.vsarduino.h" />
+    <ClInclude Include="__vm\.SOURCE.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FLAG.c" />
     <ClCompile Include="IO.c" />
+    <ClCompile Include="LED.c" />
     <ClCompile Include="OS.c" />
     <ClCompile Include="OS_TimerCounter.c" />
     <ClCompile Include="PREFERENT.c" />

@@ -138,6 +138,12 @@
     <ClInclude Include="OS_TimerCounter.h">
       <Filter>Header Files\TIMER</Filter>
     </ClInclude>
+    <ClInclude Include="__vm\.SOURCE.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LED.h">
+      <Filter>Header Files\LED</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task_100US.c">
@@ -181,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="OS_TimerCounter.c">
       <Filter>Source Files\TIMER</Filter>
+    </ClCompile>
+    <ClCompile Include="LED.c">
+      <Filter>Source Files\LED</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
