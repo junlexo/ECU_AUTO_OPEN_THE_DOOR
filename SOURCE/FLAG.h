@@ -29,7 +29,7 @@ struct _flag_list {
 	uint8_t g_bF_Led_Error : 1;
 	uint8_t g_bF_Led_State : 1;
 	uint8_t g_bF_Led_Btn1 : 1;
-	
+	uint8_t g_bF_UART_Error_Frame : 1;
 };
 
 extern struct _flag_list flags_list;
@@ -47,6 +47,7 @@ extern struct _flag_list flags_list;
 #define g_bF_Led_Error					flags_list.g_bF_Led_Error
 #define g_bF_Led_State					flags_list.g_bF_Led_State
 #define g_bF_Led_Btn1					flags_list.g_bF_Led_Btn1
+#define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
 #define g_bF_SW1						flags_list.g_bF_SW1
 #define g_bF_SW2						flags_list.g_bF_SW2
 

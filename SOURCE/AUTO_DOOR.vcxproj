@@ -88,6 +88,7 @@
     <ClInclude Include="PREFERENT.h" />
     <ClInclude Include="RAM.h" />
     <ClInclude Include="STEP_MOTOR.h" />
+    <ClInclude Include="SW.h" />
     <ClInclude Include="SYS.h" />
     <ClInclude Include="Task_100MS.h" />
     <ClInclude Include="Task_100US.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="PREFERENT.c" />
     <ClCompile Include="RAM.c" />
     <ClCompile Include="STEP_MOTOR.c" />
+    <ClCompile Include="SW.c" />
     <ClCompile Include="SYS.c" />
     <ClCompile Include="Task_100MS.c" />
     <ClCompile Include="Task_100US.c" />
