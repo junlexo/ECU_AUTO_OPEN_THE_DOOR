@@ -117,7 +117,6 @@ extern struct _timer_uint8_10ms timer_uint8_10ms;
 /* List variable timer type uint16 */
 struct _timer_uint16_10ms
 {
-
 	//uint16_t LCDPrintWating;
 	//uint16_t ADC_Sampleting;
 	//uint16_t OBD_CMDTimming;
@@ -147,11 +146,11 @@ extern struct _timer_uint32_10ms timer_uint32_10ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_100ms
 {
-	uint8_t dummy;
+	uint8_t LedBlinkingWaitTimeMS;
 };
 extern struct _timer_uint8_100ms timer_uint8_100ms;
 
-#define	t_uint8_100ms_dummy		timer_uint8_100ms.dummy
+#define	LedBlinkingWaitTimeMS		timer_uint8_100ms.LedBlinkingWaitTimeMS
 #endif
 
 #if TIMER_UINT16_100MS != 0U
@@ -170,11 +169,11 @@ extern struct _timer_uint16_100ms timer_uint16_100ms;
 /* List variable timer type uint32 */
 struct _timer_uint32_100ms
 {
-	uint32_t dummy;
+	uint32_t LedBlinkingWaitTimeMS;
 };
 extern struct _timer_uint32_100ms timer_uint32_100ms;
 
-#define	t_ui32_100ms_dummy		timer_uint32_100ms.dummy
+#define	LedBlinkingWaitTimeMS		timer_uint32_100ms.LedBlinkingWaitTimeMS
 
 #endif
 
