@@ -94,6 +94,9 @@
     <Filter Include="Source Files\SW">
       <UniqueIdentifier>{a9b4b104-4367-44a7-9c4e-68c2f398a9a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DC MOTOR">
+      <UniqueIdentifier>{f48bbcbd-5828-4974-acde-3baa9698b9ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -153,6 +156,9 @@
     <ClInclude Include="SW.h">
       <Filter>Header Files\SW</Filter>
     </ClInclude>
+    <ClInclude Include="MOTOR_DC.h">
+      <Filter>Header Files\DC MOTOR</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task_100US.c">
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="SW.c">
       <Filter>Source Files\SW</Filter>
+    </ClCompile>
+    <ClCompile Include="MOTOR_DC.c">
+      <Filter>Source Files\DC MOTOR</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
