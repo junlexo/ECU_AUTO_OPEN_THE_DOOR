@@ -53,6 +53,7 @@ extern struct _flag_list flags_list;
 #define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
 #define g_bF_SW1						flags_list.g_bF_SW1
 #define g_bF_SW2						flags_list.g_bF_SW2
+#define g_bF_SystemError				flags_list.g_bF_SystemError
 
 #endif
 
