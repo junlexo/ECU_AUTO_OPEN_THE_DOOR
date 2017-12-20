@@ -3,6 +3,7 @@
 #ifndef _FLAG_h
 #define _FLAG_h
 #include <stdint.h>
+#include <PREFERENT.h>
 
 struct _flag_list {
 	/****  INIT   *****/
@@ -23,6 +24,8 @@ struct _flag_list {
 	/***** SW ****/
 	uint8_t g_bF_SW1 : 1;
 	uint8_t g_bF_SW2 : 1;
+	/**** ERROR FLAG ****/
+	uint8_t g_bF_SystemError;
 
 	/***** LED ****/
 	uint8_t g_bF_Led_Normal : 1;

@@ -9,6 +9,8 @@
 #include "OS_TimerCounter.h"
 #include "LED.h"
 #include "SW.h"
+#include "ADC.h"
+
 void CPU_Init()
 {
 	Hardware_Init();
@@ -21,6 +23,7 @@ void Hardware_Init()
 	OS_TimerCounter_Init();
 	LED_Init();
 	SW_Init();
+	
 	//bF_Hardware_Init = 1;
 
 }
