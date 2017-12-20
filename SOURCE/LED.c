@@ -11,7 +11,7 @@ void LED_Init()
 }
 void LED()
 {
-	if (g_bF_Led_Error == 1)
+	if (g_bF_SystemError == ERROR_VOLUME || g_bF_SystemError == ERROR_BTN)
 	{
 #ifdef OPTION2
 		if (TSTFLAG(g_bF_Led_State) == 0) {
