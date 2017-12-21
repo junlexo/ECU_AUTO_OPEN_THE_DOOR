@@ -16,7 +16,6 @@
 	  volatile uint16_t voltage = 0;
 	  volatile uint16_t angle = 0;
 	  volatile uint16_t temperature = 0;
-	  volatile ADC_DATA adc_info[CHANNELS];
 
   /*LED */
 	  uint8_t g_fblinkled = 0;

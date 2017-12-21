@@ -30,16 +30,6 @@ extern volatile uint8_t g_ui8_SpeedStepValue;
 extern volatile uint32_t g_ui32_StepCount;
 extern volatile uint32_t g_ui32_StepDemention;
 
-typedef struct _ADC_DATA
-{
-	uint8_t ADC_index;
-	uint16_t ADC_AnalogValue;
-	uint8_t ADC_Pin;
-	uint16_t ADC_VoltageValue;
-	uint8_t ADC_Status;
-	uint16_t ADC_CountTimeMS;
-}ADC_DATA;
-
 extern uint8_t getADCStatus(uint8_t);
 /* define use ADC in here */
 /*
