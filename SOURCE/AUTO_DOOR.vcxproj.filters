@@ -31,9 +31,6 @@
     <Filter Include="Header Files\STEP MOTOR">
       <UniqueIdentifier>{1f71a9ce-d572-4261-af1d-a57c12fdb747}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DC MOTOR">
-      <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\BUTTON">
       <UniqueIdentifier>{d5989b61-5dd5-438e-8dc2-26e6a74f0353}</UniqueIdentifier>
     </Filter>
@@ -73,9 +70,6 @@
     <Filter Include="Source Files\IO">
       <UniqueIdentifier>{cb1f122d-32b3-42e4-8658-4ad824016471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\I2S">
-      <UniqueIdentifier>{6504667f-7025-4d3e-af40-155902b3f92d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\UART">
       <UniqueIdentifier>{5a79eaa9-a4f4-4b00-9cd0-1457d30906ec}</UniqueIdentifier>
     </Filter>
@@ -96,6 +90,21 @@
     </Filter>
     <Filter Include="Header Files\SWITCH">
       <UniqueIdentifier>{e8213bfb-a231-498a-bd29-cf03e7eed611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MOTOR_DC">
+      <UniqueIdentifier>{64a7579b-0d44-4b87-b08c-125744ebc023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\I2C">
+      <UniqueIdentifier>{6504667f-7025-4d3e-af40-155902b3f92d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WDT">
+      <UniqueIdentifier>{a057716d-5850-4154-a403-6237fbaae9c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WDT">
+      <UniqueIdentifier>{b02a8a78-2d21-4738-8112-5a34a2776871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MOTOR DC">
+      <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +159,33 @@
     <ClInclude Include="__vm\.SOURCE.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ADC.h">
+      <Filter>Header Files\ADC</Filter>
+    </ClInclude>
+    <ClInclude Include="LED.h">
+      <Filter>Header Files\LED</Filter>
+    </ClInclude>
+    <ClInclude Include="SW.h">
+      <Filter>Header Files\SWITCH</Filter>
+    </ClInclude>
+    <ClInclude Include="UARTDebugging.h">
+      <Filter>Header Files\UART</Filter>
+    </ClInclude>
+    <ClInclude Include="UART.h">
+      <Filter>Header Files\UART</Filter>
+    </ClInclude>
+    <ClInclude Include="MOTOR_DC.h">
+      <Filter>Header Files\MOTOR DC</Filter>
+    </ClInclude>
+    <ClInclude Include="EEPROM.h">
+      <Filter>Header Files\EPPROM</Filter>
+    </ClInclude>
+    <ClInclude Include="I2C.h">
+      <Filter>Header Files\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="WDT.h">
+      <Filter>Header Files\WDT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task_100US.c">
@@ -193,6 +229,33 @@
     </ClCompile>
     <ClCompile Include="OS_TimerCounter.c">
       <Filter>Source Files\TIMER</Filter>
+    </ClCompile>
+    <ClCompile Include="ADC.c">
+      <Filter>Source Files\ADC</Filter>
+    </ClCompile>
+    <ClCompile Include="LED.c">
+      <Filter>Source Files\LED</Filter>
+    </ClCompile>
+    <ClCompile Include="SW.c">
+      <Filter>Source Files\SWITCH</Filter>
+    </ClCompile>
+    <ClCompile Include="UARTDebugging.c">
+      <Filter>Source Files\UART</Filter>
+    </ClCompile>
+    <ClCompile Include="UART.c">
+      <Filter>Source Files\UART</Filter>
+    </ClCompile>
+    <ClCompile Include="MOTOR_DC.c">
+      <Filter>Source Files\MOTOR_DC</Filter>
+    </ClCompile>
+    <ClCompile Include="EEPROM.c">
+      <Filter>Source Files\EEPROM</Filter>
+    </ClCompile>
+    <ClCompile Include="I2C.c">
+      <Filter>Source Files\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="WDT.c">
+      <Filter>Source Files\WDT</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -106,13 +106,13 @@ extern struct _timer_uint32_1ms timer_uint32_1ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_10ms
 {
-	uint8_t dummy;
 	uint8_t SW_WaitTime;
+	uint8_t UARTWritingWaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
-#define	t_ui8_10ms_dummy		timer_uint8_10ms.dummy
 #define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
+#define UARTWritingWaitTime		timer_uint8_10ms.UARTWritingWaitTime
 #endif
 
 #if TIMER_UINT16_10MS != 0U
@@ -184,10 +184,14 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_1000ms
 {
-	uint8_t LedBlinkingWaitTime;
+	uint8_t UARTDebuggingOverTime;
 	uint8_t StepMotorWattingClose;
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
+/******************************* Define task processing interval *********************************************/
+#define UARTDebuggingOverTime						timer_uint8_1000ms.UARTDebuggingOverTime
+#define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
+
 #endif
 
 #if TIMER_UINT16_1000MS != 0U
@@ -214,9 +218,6 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 
 #endif
 
-/******************************* Define task processing interval *********************************************/
-#define LedBlinkingWaitTime				timer_uint8_1000ms.LedBlinkingWaitTime
-#define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
 
 #endif
 

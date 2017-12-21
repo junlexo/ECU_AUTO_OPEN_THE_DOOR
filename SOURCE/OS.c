@@ -1,10 +1,18 @@
 
 #include "OS.h"
 #include "RAM.h"
-#include "IO.h"
-#include "STEP_MOTOR.h"
+#include "FLAG.h"
+#include "PREFERENT.h"
 
-void Task_Control()
+static void OS_ControlTask();
+
+void OS_Init()
+{
+	OS_TimerCounter_Init();
+	RegisterOSTask(&OS_ControlTask);
+}
+
+void OS_ControlTask()
 {
 	if (TSTFLAG(bF_TaskRunning) == 0) {
 		return;
