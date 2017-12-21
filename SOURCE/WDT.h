@@ -1,19 +1,16 @@
-// Task_100US.h
+// WDT.h
 
-#ifndef _TASK_100US_h
-#define _TASK_100US_h
+#ifndef _WDT_h
+#define _WDT_h
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-	extern  void Task_100US();
-
+	extern void WDT_Init();
+	extern void WDT_Reset();
 #ifdef __cplusplus
 } // extern "C"
 #endif
-
-
 
 #endif
 

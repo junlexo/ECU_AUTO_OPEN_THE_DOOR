@@ -6,7 +6,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	extern  void Task_Control();
+	extern void OS_Init();
+	//extern void OS_ControlTask();
 #ifdef __cplusplus
 } // extern "C"
 #endif

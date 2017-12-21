@@ -10,11 +10,14 @@
 #include "PREFERENT.h"
 #include "FLAG.h"
 #include <avr/interrupt.h>
+#include "Timer_count.h"
 
 static volatile uint8_t counter_1ms = 0U;
 static volatile uint8_t counter_10ms = 0U;
 static volatile uint16_t counter_100ms = 0U;
 static volatile uint16_t counter_1000ms = 0U;
+static void	(*callbackFunc)(void);
+static void OS_Timer_Counter(void);
 
 /*********** Using Timer 1 for operation system **************/
 void OS_TimerCounter_Init()
@@ -27,6 +30,11 @@ void OS_TimerCounter_Init()
 	OCR1A = 24;
 	TIMSK1 |= (1 << OCIE1A);
 	sei();
+}
+
+void RegisterOSTask(void (*taskController)(void))
+{
+	callbackFunc = taskController;
 }
 
 void OS_Timer_Counter(void)
@@ -257,5 +265,5 @@ void OS_Timer_Counter(void)
 ISR(TIMER1_COMPA_vect)
 {
 	OS_Timer_Counter();
-	Task_Control();
+	callbackFunc();
 }

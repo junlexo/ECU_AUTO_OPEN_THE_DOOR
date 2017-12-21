@@ -47,7 +47,6 @@ struct _timer_uint16_100us
 	uint16_t dummy;
 };
 extern struct _timer_uint16_100us  timer_uint16_100us;
-
 #define	t_ui16_100us _dummy		timer_uint16_100us .dummy
 
 #endif
@@ -107,8 +106,10 @@ extern struct _timer_uint32_1ms timer_uint32_1ms;
 struct _timer_uint8_10ms
 {
 	uint8_t SW_WaitTime;
+	uint8_t UARTWritingWaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
+
 
 
 #endif
@@ -117,16 +118,11 @@ extern struct _timer_uint8_10ms timer_uint8_10ms;
 /* List variable timer type uint16 */
 struct _timer_uint16_10ms
 {
-	//uint16_t LCDPrintWating;
-	//uint16_t ADC_Sampleting;
-	//uint16_t OBD_CMDTimming;
+
 	uint16_t dummy;
 };
 extern struct _timer_uint16_10ms timer_uint16_10ms;
 
-//#define	t_ui16LCDPrintWating		timer_uint16_10ms.LCDPrintWating
-//#define t_ui16ADCSanpleting			timer_uint16_10ms.ADC_Sampleting
-//#define t_ui16OBDCMDTimming 		timer_uint16_10ms.OBD_CMDTimming
 #define	t_ui16_10ms_dummy		timer_uint16_10ms.dummy
 #endif
 
@@ -173,7 +169,7 @@ struct _timer_uint32_100ms
 };
 extern struct _timer_uint32_100ms timer_uint32_100ms;
 
-#define	LedBlinkingWaitTimeMS		timer_uint32_100ms.LedBlinkingWaitTimeMS
+
 
 #endif
 
@@ -182,7 +178,11 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_1000ms
 {
+
 	uint8_t Led_BlinkingWaitTime;
+
+	uint8_t UARTDebuggingOverTime;
+
 	uint8_t StepMotorWattingClose;
 
 #if DEBUG == ON
@@ -191,6 +191,9 @@ struct _timer_uint8_1000ms
 
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
+/******************************* Define task processing interval *********************************************/
+
+
 #endif
 
 #if TIMER_UINT16_1000MS != 0U
@@ -227,12 +230,14 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 #define LedBlinkingWaitTime				timer_uint8_1000ms.Led_BlinkingWaitTime
 #define	LedBlinkingWaitTimeMS		timer_uint8_100ms.Led_BlinkingWaitTimeMS
 /*STEP  MOTOR */
-#define	g_u8_StepSpeed_100us	timer_uint8_1ms.Step_SpeedPWM
+#define	g_u8_StepSpeed_100us			timer_uint8_1ms.Step_SpeedPWM
 #define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
 #if DEBUG == ON
 #define g_t_ui8_STEP_DEBUG							timer_uint8_1000ms.STEP_DEBUG
 #endif
 
-
+/*UART */
+#define UARTWritingWaitTime		timer_uint8_10ms.UARTWritingWaitTime
+#define UARTDebuggingOverTime						timer_uint8_1000ms.UARTDebuggingOverTime
 #endif
 
