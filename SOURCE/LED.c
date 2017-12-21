@@ -4,6 +4,7 @@
 #include "FLAG.h"
 #include "IO.h"
 #include "Timer_count.h"
+#include "UART.h"
 
 uint8_t pre_BTN1_STATUS = 0;
 void LED_Init()
@@ -11,7 +12,9 @@ void LED_Init()
 	resetFlagLED();
 }
 void LED()
-{
+{	
+	UART_Write(g_bF_SystemError + '0');
+	//When have Error ERROR_VOLUME or ERROR_BTN turn off LED1 and LED2
 	if (g_bF_SystemError == ERROR_VOLUME || g_bF_SystemError == ERROR_BTN)
 	{
 #ifdef OPTION2
@@ -29,90 +32,68 @@ void LED()
 		IOPort_Write(D_12, LOW);
 		IOPort_Write(D_13, LOW);
 	}
-	else
+	else //When have Error turn off LED1 and LED2 blink 1s
 		if (g_bF_SystemError == ERROR_UART)
 		{
 			IOPort_Write(D_12, LOW);
-			if (TSTFLAG(g_bF_Led_State) == 0) {
-				IOPort_Write(D_13, g_bF_Led_State);
-				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 1s */
-				SETFLAG(g_bF_Led_State);
-			}
-			else {
-				IOPort_Write(D_13, g_bF_Led_State);
-				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 1s */
-				CLRFLAG(g_bF_Led_State);
-			}
+			uint8_t Pin[2];
+			Pin[0] = D_13;
+			showLED(Pin, 10, 1);
 		}
-		else
+		else //when Button 1 put down LED1 DISPLAY AND LED2 blink 1s.
 			if (BTN1_STATUS == 1)
 			{
 				IOPort_Write(D_12, HIGH);
-				if (TSTFLAG(g_bF_Led_State) == 0) {
-					IOPort_Write(D_13, g_bF_Led_State);
-					StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 1s */
-					SETFLAG(g_bF_Led_State);
-				}
-				else {
-					IOPort_Write(D_13, g_bF_Led_State);
-					StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 1s */
-					CLRFLAG(g_bF_Led_State);
-				}
+				uint8_t Pin[2];
+				Pin[0] = D_13;
+				showLED(Pin, 10, 1);
 			}
-			else
+			else //when Button 1 up LED1 OFF AND LED2 blink 1s
 				if (pre_BTN1_STATUS == 1 && BTN1_STATUS == 0)
 				{
 					IOPort_Write(D_12, LOW);
-					if (TSTFLAG(g_bF_Led_State) == 0) {
-						IOPort_Write(D_13, g_bF_Led_State);
-						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 1s */
-						SETFLAG(g_bF_Led_State);
-					}
-					else {
-						IOPort_Write(D_13, g_bF_Led_State);
-						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 1s */
-						CLRFLAG(g_bF_Led_State);
-					}
+					uint8_t Pin[2];
+					Pin[0] = D_13;
+					showLED(Pin, 10, 1);
 				}
-				else
+				else //when Button 1 press LED1 blink 200ms AND LED2 blink 1s
 					if (BTN1_STATUS == 2)
 					{
-						if (TSTFLAG(g_bF_Led_State) == 0) {
-							IOPort_Write(D_12, g_bF_Led_State);
-							IOPort_Write(D_13, g_bF_Led_State);
-							StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn on led 200ms */
-							SETFLAG(g_bF_Led_State);
-						}
-						else {
-							IOPort_Write(D_12, g_bF_Led_State);
-							IOPort_Write(D_13, g_bF_Led_State);
-							StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn off led 200ms */
-							CLRFLAG(g_bF_Led_State);
-						}
+						uint8_t Pin[2];
+						Pin[0] = D_13;
+						Pin[1] = D_12;
+						showLED(Pin, 2, 2);
 					}
-					else
+					else //When normal LED1 and LED2 blink 1s
 						if (g_bF_SystemError == NON_ERROR)
 						{
-							if (TSTFLAG(g_bF_Led_State) == 0) {
-								IOPort_Write(D_12, g_bF_Led_State);
-								IOPort_Write(D_13, g_bF_Led_State);					
-								StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 1s */
-								SETFLAG(g_bF_Led_State);
-							}
-							else {
-								IOPort_Write(D_12, g_bF_Led_State);
-								IOPort_Write(D_13, g_bF_Led_State);					
-								StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 1s */
-								CLRFLAG(g_bF_Led_State);
-							}
+							uint8_t Pin[2];
+							Pin[0] = D_13;
+							Pin[1] = D_12;
+							showLED(Pin, 10, 2);
 						}
-						else
+						else //and more turn off both two LEDs
 						{
 							IOPort_Write(D_12, LOW);
 							IOPort_Write(D_13, LOW);
 						}
 
 	pre_BTN1_STATUS = BTN1_STATUS;
+}
+void showLED(uint8_t Pin[2], uint8_t time, uint8_t nPin)
+{
+	if (TSTFLAG(g_bF_Led_State) == 0) {
+		for(uint8_t i = 0; i < nPin; i++)
+			IOPort_Write(Pin[i], g_bF_Led_State);
+		StartTimer(LedBlinkingWaitTimeMS, time); /* Turn on led 1s */
+		SETFLAG(g_bF_Led_State);
+	}
+	else {
+		for (uint8_t i = 0; i < nPin; i++)
+			IOPort_Write(Pin[i], g_bF_Led_State);
+		StartTimer(LedBlinkingWaitTimeMS, time); /* Turn off led 1s */
+		CLRFLAG(g_bF_Led_State);
+	}
 }
 void resetFlagLED()
 {
