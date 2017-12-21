@@ -30,6 +30,12 @@ extern volatile uint32_t g_ui32_StepCount;
 extern volatile uint32_t g_ui32_StepDemention;
 
 extern uint8_t getADCStatus(uint8_t);
+
+/* MOTOR DC */
+extern uint16_t g_Kp;
+extern uint16_t g_Ki;
+extern uint16_t g_Kd;
+
 /* define use ADC in here */
 /*
 BTN1_STATUS == 0 <=> btn 1 off
