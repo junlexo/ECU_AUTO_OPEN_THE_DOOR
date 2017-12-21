@@ -5,12 +5,12 @@
 #include "IO.h"
 void SW_Init()
 {
-	g_bF_SW1 = 0;
-	g_bF_SW2 = 0;
+	g_bF_SW1_Status = 0;
+	g_bF_SW2_Status = 0;
 }
 
 void SW()
 {
-	g_bF_SW1 = !IOPort_Read(D_11);
-	g_bF_SW2 = !IOPort_Read(D_10);
+	g_bF_SW1_Status = !IOPort_Read(D_11);
+	g_bF_SW2_Status = !IOPort_Read(D_10);
 }
