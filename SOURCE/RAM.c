@@ -25,3 +25,8 @@
 	  volatile uint32_t g_ui32_StepCount=0 ;
 	  volatile uint32_t g_ui32_StepDemention= 0;
 
+	  /* MOTOR DC*/
+	  uint16_t g_Kp = 8;
+	  uint16_t g_Ki = 1;
+	  uint16_t g_Kd = 10;
+

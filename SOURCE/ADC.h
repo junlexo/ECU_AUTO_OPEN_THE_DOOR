@@ -15,7 +15,6 @@ typedef struct _ADC_DATA
 {
 	uint8_t ADC_index;
 	uint16_t ADC_AnalogValue;
-	uint8_t ADC_Pin;
 	uint16_t ADC_VoltageValue;
 	uint8_t ADC_Status;
 	uint16_t ADC_CountTimeMS;
@@ -33,6 +32,7 @@ typedef struct _ADC_DATA
 #define BTN_ON_TIME_MS 80
 #define BTN_ON_VALUE_MV 80
 #define BTN_ERROR_TIME_MS 15000
+#define BTN1_DISABLE_TIME_MS 30000U
 
 /**** VOLUME DEFINES ****/
 #define VOLUME_ERROR_TIME_MS 10000
@@ -46,10 +46,14 @@ extern "C" {
 	void ADC_init();
 	uint16_t lowPassFilter(uint16_t interrupt_result_value, uint16_t previous_lpf_value);
 	uint16_t voltageConvert(uint16_t value);
-	ADC_DATA updateBTNStatus(ADC_DATA data);
+	ADC_DATA updateBTN1Status(ADC_DATA data);
+	ADC_DATA updateBTN2Status(ADC_DATA data);
 	ADC_DATA updateVolumeStatus(ADC_DATA data);
 	ADC_DATA updateFIRStatus(ADC_DATA data);
 	uint8_t getADCStatus(uint8_t index);
+	uint8_t checkBTN1StatusHistory();
+	uint16_t getVolumeDegree();
+	uint8_t getVolumeVoltage();
 #ifdef __cplusplus
 } // extern "C"
 #endif

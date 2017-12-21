@@ -29,6 +29,7 @@ extern "C" {
 	void stop_Motor();
 	void open_Door();
 	void close_Door();
+	void rotate();
 
 #ifdef __cplusplus
 } // extern "C"

@@ -47,7 +47,6 @@ struct _timer_uint16_100us
 	uint16_t dummy;
 };
 extern struct _timer_uint16_100us  timer_uint16_100us;
-
 #define	t_ui16_100us _dummy		timer_uint16_100us .dummy
 
 #endif
@@ -73,7 +72,7 @@ struct _timer_uint8_1ms
 
 };
 extern struct _timer_uint8_1ms timer_uint8_1ms;
-#define	g_u8_StepSpeed_100us	timer_uint8_1ms.Step_SpeedPWM
+
 
 #endif
 
@@ -111,24 +110,19 @@ struct _timer_uint8_10ms
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
-#define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
-#define UARTWritingWaitTime		timer_uint8_10ms.UARTWritingWaitTime
+
+
 #endif
 
 #if TIMER_UINT16_10MS != 0U
 /* List variable timer type uint16 */
 struct _timer_uint16_10ms
 {
-	//uint16_t LCDPrintWating;
-	//uint16_t ADC_Sampleting;
-	//uint16_t OBD_CMDTimming;
+
 	uint16_t dummy;
 };
 extern struct _timer_uint16_10ms timer_uint16_10ms;
 
-//#define	t_ui16LCDPrintWating		timer_uint16_10ms.LCDPrintWating
-//#define t_ui16ADCSanpleting			timer_uint16_10ms.ADC_Sampleting
-//#define t_ui16OBDCMDTimming 		timer_uint16_10ms.OBD_CMDTimming
 #define	t_ui16_10ms_dummy		timer_uint16_10ms.dummy
 #endif
 
@@ -148,11 +142,11 @@ extern struct _timer_uint32_10ms timer_uint32_10ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_100ms
 {
-	uint8_t LedBlinkingWaitTimeMS;
+	uint8_t Led_BlinkingWaitTimeMS;
 };
 extern struct _timer_uint8_100ms timer_uint8_100ms;
 
-#define	LedBlinkingWaitTimeMS		timer_uint8_100ms.LedBlinkingWaitTimeMS
+
 #endif
 
 #if TIMER_UINT16_100MS != 0U
@@ -175,7 +169,7 @@ struct _timer_uint32_100ms
 };
 extern struct _timer_uint32_100ms timer_uint32_100ms;
 
-#define	LedBlinkingWaitTimeMS		timer_uint32_100ms.LedBlinkingWaitTimeMS
+
 
 #endif
 
@@ -184,13 +178,23 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_1000ms
 {
+
+	uint8_t Led_BlinkingWaitTime;
+
 	uint8_t UARTDebuggingOverTime;
+
 	uint8_t StepMotorWattingClose;
+	uint8_t WaitingPutButton;
+	uint8_t ReEnableButton1;
+
+#if DEBUG == ON
+	uint8_t STEP_DEBUG;
+#endif
+
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
 /******************************* Define task processing interval *********************************************/
-#define UARTDebuggingOverTime						timer_uint8_1000ms.UARTDebuggingOverTime
-#define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
+
 
 #endif
 
@@ -218,6 +222,26 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 
 #endif
 
+/******************************* Define task processing interval *********************************************/
 
+/*TIME */
+#define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
+
+
+/*LED */
+#define LedBlinkingWaitTime				timer_uint8_1000ms.Led_BlinkingWaitTime
+#define	LedBlinkingWaitTimeMS		timer_uint8_100ms.Led_BlinkingWaitTimeMS
+/*STEP  MOTOR */
+#define	g_u8_StepSpeed_100us			timer_uint8_1ms.Step_SpeedPWM
+#define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
+#if DEBUG == ON
+#define g_t_ui8_STEP_DEBUG							timer_uint8_1000ms.STEP_DEBUG
+#endif
+
+/*UART */
+#define UARTWritingWaitTime		timer_uint8_10ms.UARTWritingWaitTime
+#define UARTDebuggingOverTime						timer_uint8_1000ms.UARTDebuggingOverTime
+#define g_t_ui8_S_Button_WaitingInput				timer_uint8_1000ms.WaitingPutButton
+#define	g_t_ui8_S_Button_ReEnable				    timer_uint8_1000ms.ReEnableButton1
 #endif
 
