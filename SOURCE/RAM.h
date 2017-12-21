@@ -38,9 +38,13 @@ BTN1_STATUS == 2 <=> btn 1 press
 BTN2_STATUS == 0 <=> btn 2 off
 BTN2_STATUS == 1 <=> btn 2 on
 BTN2_STATUS == 2 <=> btn 2 press
+
+FIR_STATUS == 0 <=> fir off
+FIR_STATUS == 1 <=> fir on
 */
 #define BTN1_STATUS { return adc_info[1].ADC_Status; }
 #define BTN2_STATUS { return adc_info[2].ADC_Status; }
+#define FIR_STATUS { return adc_info[3].ADC_Status; }
 
 #endif
 
