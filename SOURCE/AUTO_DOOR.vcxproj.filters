@@ -31,9 +31,6 @@
     <Filter Include="Header Files\STEP MOTOR">
       <UniqueIdentifier>{1f71a9ce-d572-4261-af1d-a57c12fdb747}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DC MOTOR">
-      <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\BUTTON">
       <UniqueIdentifier>{d5989b61-5dd5-438e-8dc2-26e6a74f0353}</UniqueIdentifier>
     </Filter>
@@ -106,6 +103,9 @@
     <Filter Include="Source Files\WDT">
       <UniqueIdentifier>{b02a8a78-2d21-4738-8112-5a34a2776871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MOTOR DC">
+      <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -175,7 +175,7 @@
       <Filter>Header Files\UART</Filter>
     </ClInclude>
     <ClInclude Include="MOTOR_DC.h">
-      <Filter>Header Files\DC MOTOR</Filter>
+      <Filter>Header Files\MOTOR DC</Filter>
     </ClInclude>
     <ClInclude Include="EEPROM.h">
       <Filter>Header Files\EPPROM</Filter>
