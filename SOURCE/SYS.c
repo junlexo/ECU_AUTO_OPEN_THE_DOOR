@@ -23,7 +23,7 @@ void Hardware_Init()
 	OS_TimerCounter_Init();
 	LED_Init();
 	SW_Init();
-	
+	ADC_init();
 	//bF_Hardware_Init = 1;
 
 }

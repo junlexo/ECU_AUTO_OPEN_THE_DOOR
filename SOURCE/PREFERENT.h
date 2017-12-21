@@ -83,8 +83,6 @@ enum ERROR_CODE
 };
 
 
-
-
 /*LED */
 #define BLINK250MS 250
 #define BLINK500MS 500
@@ -110,9 +108,46 @@ enum ERROR_CODE
 #define CLOSE HIGH
 #define OPEN LOW
 
+/**** ADC DEFINES ****/
+#define CHANNELS 6
 
+/**** LOW PASS FILTER DEFINES ****/
 
+#define ALPHA 0.9
+/**** BTN DEFINES ****/
+#define BTN_PRESS_TIME_MS 2000
+#define BTN_OFF_TIME_MS 30
+#define BTN_ON_TIME_MS 80
+#define BTN_ON_VALUE_MV 80
+#define BTN_ERROR_TIME_MS 15000
 
+/**** VOLUME DEFINES ****/
+#define VOLUME_ERROR_TIME_MS 10000
+
+enum ADC_PIN_NAME
+{
+	ADC_VOLUME = 0,
+	ADC_BUTTON_1,
+	ADC_BUTTON_2,
+	ADC_FIR,
+};
+
+enum ADC_STATUS
+{
+	ADC_BTN_OFF = 0,
+	ADC_BTN_ON,
+	ADC_BTN_PRESS,
+};
+
+typedef struct _ADC_DATA
+{
+	uint8_t ADC_index;
+	uint16_t ADC_AnalogValue;
+	uint8_t ADC_Pin;
+	uint16_t ADC_VoltageValue;
+	uint8_t ADC_Status;
+	uint16_t ADC_CountTimeMS;
+}ADC_DATA;
 
 #endif
 
