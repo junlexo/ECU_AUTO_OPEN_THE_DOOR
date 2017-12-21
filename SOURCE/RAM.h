@@ -5,6 +5,7 @@
 
 #include <stdint.h>
 
+
 /*  TIMER  */
 extern uint8_t currentTimer;
 extern volatile uint8_t count_list;
@@ -23,6 +24,10 @@ extern  uint8_t g_fblinkled;
 
 
 /*****   STEP MOTOR   *******/
+
+extern volatile uint8_t g_ui8_SpeedStepValue;
+extern volatile uint32_t g_ui32_StepCount;
+extern volatile uint32_t g_ui32_StepDemention;
 
 
 

@@ -4,4 +4,4 @@
 
 #include "FLAG.h"
 
-struct _flag_list flags_list;
+struct _flag_list flags_list = {0};

@@ -88,6 +88,15 @@
     <Filter Include="Source Files\SYS">
       <UniqueIdentifier>{fe8cc782-3cec-4be5-8598-a161af6097bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BUTTON">
+      <UniqueIdentifier>{1a051283-6d80-4382-bc89-635deffabf69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SWITCH">
+      <UniqueIdentifier>{1d182bb4-bdf4-4a0e-afca-28ffef6d0e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SWITCH">
+      <UniqueIdentifier>{e8213bfb-a231-498a-bd29-cf03e7eed611}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -137,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="OS_TimerCounter.h">
       <Filter>Header Files\TIMER</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.SOURCE.vsarduino.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
