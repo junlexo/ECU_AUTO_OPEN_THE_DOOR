@@ -69,11 +69,11 @@ extern struct _timer_uint32_100us  timer_uint32_100us;
 /* List variable timer type uint8 */
 struct _timer_uint8_1ms
 {
-	uint8_t dummy;
+	uint8_t Step_SpeedPWM;
+
 };
 extern struct _timer_uint8_1ms timer_uint8_1ms;
-
-#define	t_ui8_1ms_dummy		timer_uint8_1ms.dummy
+#define	g_u8_StepSpeed_100us	timer_uint8_1ms.Step_SpeedPWM
 
 #endif
 
@@ -185,6 +185,7 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 struct _timer_uint8_1000ms
 {
 	uint8_t LedBlinkingWaitTime;
+	uint8_t StepMotorWattingClose;
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
 #endif
@@ -214,7 +215,8 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 #endif
 
 /******************************* Define task processing interval *********************************************/
-#define LedBlinkingWaitTime timer_uint8_1000ms.LedBlinkingWaitTime
+#define LedBlinkingWaitTime				timer_uint8_1000ms.LedBlinkingWaitTime
+#define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
 
 #endif
 
