@@ -73,7 +73,7 @@ struct _timer_uint8_1ms
 
 };
 extern struct _timer_uint8_1ms timer_uint8_1ms;
-#define	g_u8_StepSpeed_100us	timer_uint8_1ms.Step_SpeedPWM
+
 
 #endif
 
@@ -106,13 +106,11 @@ extern struct _timer_uint32_1ms timer_uint32_1ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_10ms
 {
-	uint8_t dummy;
 	uint8_t SW_WaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
-#define	t_ui8_10ms_dummy		timer_uint8_10ms.dummy
-#define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
+
 #endif
 
 #if TIMER_UINT16_10MS != 0U
@@ -148,11 +146,11 @@ extern struct _timer_uint32_10ms timer_uint32_10ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_100ms
 {
-	uint8_t LedBlinkingWaitTimeMS;
+	uint8_t Led_BlinkingWaitTimeMS;
 };
 extern struct _timer_uint8_100ms timer_uint8_100ms;
 
-#define	LedBlinkingWaitTimeMS		timer_uint8_100ms.LedBlinkingWaitTimeMS
+
 #endif
 
 #if TIMER_UINT16_100MS != 0U
@@ -184,8 +182,13 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_1000ms
 {
-	uint8_t LedBlinkingWaitTime;
+	uint8_t Led_BlinkingWaitTime;
 	uint8_t StepMotorWattingClose;
+
+#if DEBUG == ON
+	uint8_t STEP_DEBUG;
+#endif
+
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
 #endif
@@ -215,8 +218,21 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 #endif
 
 /******************************* Define task processing interval *********************************************/
-#define LedBlinkingWaitTime				timer_uint8_1000ms.LedBlinkingWaitTime
+
+/*TIME */
+#define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
+
+
+/*LED */
+#define LedBlinkingWaitTime				timer_uint8_1000ms.Led_BlinkingWaitTime
+#define	LedBlinkingWaitTimeMS		timer_uint8_100ms.Led_BlinkingWaitTimeMS
+/*STEP  MOTOR */
+#define	g_u8_StepSpeed_100us	timer_uint8_1ms.Step_SpeedPWM
 #define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
+#if DEBUG == ON
+#define g_t_ui8_STEP_DEBUG							timer_uint8_1000ms.STEP_DEBUG
+#endif
+
 
 #endif
 

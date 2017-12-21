@@ -20,7 +20,7 @@ struct _flag_list {
 
 	/*****   STEP MOTOR       ******/
 	uint8_t StepPWM : 1;
-	uint8_t HOLDON : 1;
+	uint8_t HOLD_ON : 1;
 	uint8_t HOLD_OFF : 1;
 	uint8_t STEP_RUN : 1;
 	uint8_t STEP_STOP : 1;

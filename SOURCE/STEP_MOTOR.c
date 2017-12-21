@@ -6,6 +6,32 @@
 
 void STEP_MANNER()
 {
+#if DEBUG != ON	
+	if (BTN1_STATUS == 2U)
+	{
+		SETFLAG(g_bF_BT1_Press);
+	}
+	else
+	{
+		CLRFLAG(g_bF_BT1_Press);
+	}
+	if (BTN2_STATUS == 2U)
+	{
+		SETFLAG(g_bF_BT2_Press);
+	}
+	else
+	{
+		CLRFLAG(g_bF_BT2_Press);
+	}
+	if (ADC_FIR_STATUS == 1U)
+	{	
+		SETFLAG(g_bF_FIR_Status);
+	}
+	else
+	{
+		CLRFLAG(g_bF_FIR_Status);
+	}
+#endif
 	STEP_InitStart();
 	if (TSTFLAG(g_bF_STEP_Init))
 	{
@@ -128,7 +154,6 @@ void STEP_WAITING_CLOSE()
 	}
 }
 
-
 /*
 Funtion : STEP_InitStart()
 Dep :
@@ -139,12 +164,19 @@ void STEP_InitStart()
 {
 	if (TSTFLAG(g_bF_STEP_Init) == 0)
 	{
-		if ((TSTFLAG(g_bF_SW1_Status) == 0) && (TSTFLAG(g_bF_STEPMOTOR_Stop)))
+		if ((TSTFLAG(g_bF_SW1_Status) == 0) && ( TSTFLAG(g_bF_STEPMOTOR_Stop)))
 		{
 			SETFLAG(g_bF_STEPMOTOR_DIR_Close);
 			CLRFLAG(g_bF_STEPMOTOR_DIR_Open);
 			STEP_RUN_DEFAULT();
 			START_TIMER(g_t_ui8_S_StepMotor_WattingClose, TIMEWAITTING_CLOSE_INIT);
+
+#if DEBUG == ON
+			{ 
+				g_bF_SW1_Status = 1;
+				g_t_ui8_STEP_DEBUG = 0;
+			}
+#endif
 		}
 		else
 		{
@@ -162,7 +194,6 @@ void STEP_InitStart()
 			{
 
 				STEP_STOP();
-
 				// ERROR 0x004
 			}
 			else

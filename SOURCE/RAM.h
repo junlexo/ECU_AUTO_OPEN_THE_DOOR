@@ -5,8 +5,7 @@
 
 #include <stdint.h>
 #include "PREFERENT.h"
-
-
+#include "FLAG.h"
 /*  TIMER  */
 extern uint8_t currentTimer;
 extern volatile uint8_t count_list;
@@ -41,8 +40,8 @@ BTN2_STATUS == 0 <=> btn 2 off
 BTN2_STATUS == 1 <=> btn 2 on
 BTN2_STATUS == 2 <=> btn 2 press
 
-FIR_STATUS == 0 <=> fir off
-FIR_STATUS == 1 <=> fir on
+ADC_FIR_STATUS == 0 <=> fir off
+ADC_FIR_STATUS == 1 <=> fir on
 */
 #define BTN1_STATUS getADCStatus(1)
 #define BTN2_STATUS getADCStatus(2)

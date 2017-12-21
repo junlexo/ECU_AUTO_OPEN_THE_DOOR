@@ -108,6 +108,7 @@ enum ERROR_CODE
 #define TimTIMEWAITTING_CLOSE 10
 #define CLOSE HIGH
 #define OPEN LOW
+#define DEBUG ON
 
 
 enum ADC_PIN_NAME
