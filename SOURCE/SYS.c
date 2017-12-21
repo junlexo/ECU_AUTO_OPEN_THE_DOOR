@@ -28,6 +28,7 @@ void Hardware_Init()
 	SW_Init();
 	ADC_init();
 	OS_Init();
+
 	//bF_Hardware_Init = 1;
 
 }
