@@ -3,6 +3,7 @@
 #ifndef _FLAG_h
 #define _FLAG_h
 #include <stdint.h>
+#include "PREFERENT.h"
 
 struct _flag_list {
 	/****  INIT   *****/
@@ -56,6 +57,18 @@ struct _flag_list {
 
 	/* SYS MARCHINE LEARNING*/
 	uint8_t DOOR_OPEN : 1;
+	/***** SW ****/
+	uint8_t g_bF_SW1 : 1;
+	uint8_t g_bF_SW2 : 1;
+	/**** ERROR FLAG ****/
+	uint8_t g_bF_SystemError;
+	/***** LED ****/
+	uint8_t g_bF_Led_Normal : 1;
+	uint8_t g_bF_Led_Error : 1;
+	uint8_t g_bF_Led_State : 1;
+	uint8_t g_bF_Led_Btn1 : 1;
+	uint8_t g_bF_UART_Error_Frame : 1;
+	uint8_t g_bF_Led_Press : 1;
 
 };
 
@@ -112,5 +125,15 @@ extern struct _flag_list flags_list;
 
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
 
+#define g_bF_StepPWM  					flags_list.g_bF_StepPWM
+#define g_bF_Led_Normal					flags_list.g_bF_Led_Normal
+#define g_bF_Led_Error					flags_list.g_bF_Led_Error
+#define g_bF_Led_State					flags_list.g_bF_Led_State
+#define g_bF_Led_Btn1					flags_list.g_bF_Led_Btn1
+#define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
+#define g_bF_SW1						flags_list.g_bF_SW1
+#define g_bF_SW2						flags_list.g_bF_SW2
+#define g_bF_SystemError				flags_list.g_bF_SystemError
+#define g_bF_Led_Press					flags_list.g_bF_Led_Press
 #endif
 

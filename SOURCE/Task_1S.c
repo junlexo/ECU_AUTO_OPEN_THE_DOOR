@@ -10,7 +10,6 @@
 void Task_1S()
 {
 	if (IsTimeOut(LedBlinkingWaitTime) == 1) {
-		blinkLED();
 	}
 }
 

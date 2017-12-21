@@ -5,8 +5,10 @@
 #include "IO.h"
 void IO_Init()
 {
+/*****     SW    *****/
 	SetPin(D_10, INPUT_PULLUP); // SW2 in number_port 10
 	SetPin(D_11, INPUT_PULLUP); // SW1 in number_port 11
+/*****     LED    *****/
 	SetPin(D_12, OUTPUT); // Blink LED1 in number_port 12
 	SetPin(D_13, OUTPUT); // Blink LED0 in number_port 13
 /*****     STEP MOTOR    *****/

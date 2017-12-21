@@ -74,6 +74,14 @@ typedef struct Data_frame {
 	uint32_t data;
 } DataFrame;
 
+/******************* ENUM ******************/
+enum ERROR_CODE
+{
+	NON_ERROR = 0,
+	ERROR_VOLUME,
+	ERROR_BTN,
+};
+
 
 
 

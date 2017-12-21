@@ -1,74 +1,102 @@
 #include "LED.h"
-static uint8_t l_uint8_led_blink_off = 500;
-static uint8_t l_uint8_led_blink_on = 500;
-static uint8_t l_uint8_led_blink_normal = 1000;
-uint8_t l_unit8_led_normal = 0;
-uint8_t l_unit8_led_error = 1;
-uint8_t l_unit8_led_status = 0;
-static uint8_t l_uint8_led_error_time = 5000;
+#include "PREFERENT.h"
+#include "RAM.h"
+#include "FLAG.h"
+#include "IO.h"
+#include "Timer_count.h"
+
+void LED_Init()
+{
+	resetFlagLED();
+}
 void LED()
 {
-	if (l_unit8_led_normal == 1)
+	if (g_bF_Led_Error == ERROR_VOLUME || g_bF_Led_Error == ERROR_BTN)
 	{
-		if (l_uint8_led_blink_normal > 0)
-		{
-			IOPort_Write(D_13, HIGH);
-			l_uint8_led_blink_normal -= 10;
+#ifdef OPTION2
+		if (TSTFLAG(g_bF_Led_State) == 0) {
+			IOPort_Write(D_13, g_bF_Led_State);
+			StartTimer(LedBlinkingWaitTimeMS, 20); /* Turn off led 2s */
+			SETFLAG(g_bF_Led_State);
 		}
-		else
-		{
-			l_uint8_led_blink_normal = 1000;
+		else {
+			IOPort_Write(D_13, g_bF_Led_State);
+			StartTimer(LedBlinkingWaitTimeMS, 20); /* Turn on led 2s */
+			CLRFLAG(g_bF_Led_State);
 		}
-		return;
+#endif
+		IOPort_Write(D_12, LOW);
+		IOPort_Write(D_13, LOW);
 	}
 	else
-	{
-		IOPort_Write(D_13, LOW);
-		return;
-	}
-
-	if (l_unit8_led_status == 1)
-	{
-		IOPort_Write(D_13, HIGH);
-		return;
-	}
-	else
-	{
-		IOPort_Write(D_13, LOW);
-		return;
-	}
-	if (l_unit8_led_error == 1)
-	{
-		//blink led
-		if(l_uint8_led_blink_on > 0)
+		if (g_bF_UART_Error_Frame == 1)
 		{
-			IOPort_Write(D_13, HIGH);		
-			l_uint8_led_blink_on -= 10;
+			IOPort_Write(D_12, LOW);
+			if (TSTFLAG(g_bF_Led_State) == 0) {
+				IOPort_Write(D_13, g_bF_Led_State);
+				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
+				SETFLAG(g_bF_Led_State);
+			}
+			else {
+				IOPort_Write(D_13, g_bF_Led_State);
+				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
+				CLRFLAG(g_bF_Led_State);
+			}
 		}
 		else
-			if (l_uint8_led_blink_off > 0)
+			if (g_bF_Led_Btn1 == 1)
 			{
-				IOPort_Write(D_13, LOW);
-				l_uint8_led_blink_off -= 10;
+				if (g_bF_Led_Press == 1)
+				{
+					if (TSTFLAG(g_bF_Led_State) == 0) {
+						IOPort_Write(D_12, g_bF_Led_State);
+						IOPort_Write(D_13, g_bF_Led_State);
+						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn on led 0.5s */
+						SETFLAG(g_bF_Led_State);
+					}
+					else {
+						IOPort_Write(D_12, g_bF_Led_State);
+						IOPort_Write(D_13, g_bF_Led_State);
+						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn off led 0.5s */
+						CLRFLAG(g_bF_Led_State);
+					}
+				}
+				else
+				{
+					IOPort_Write(D_12, HIGH);
+				}
 			}
 			else
-			{
-				l_uint8_led_blink_off = 500;
-				l_uint8_led_blink_on = 500;
-			}
+				if (g_bF_Led_Normal == 1)
+				{
+					if (TSTFLAG(g_bF_Led_State) == 0) {
+						IOPort_Write(D_12, g_bF_Led_State);
+						IOPort_Write(D_13, g_bF_Led_State);					
+						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
+						SETFLAG(g_bF_Led_State);
+					}
+					else {
+						IOPort_Write(D_12, g_bF_Led_State);
+						IOPort_Write(D_13, g_bF_Led_State);					
+						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
+						CLRFLAG(g_bF_Led_State);
+					}
+				}
+				else
+				{
+					IOPort_Write(D_12, LOW);
+					IOPort_Write(D_13, LOW);
+				}
 
-		if (l_uint8_led_error_time == 0)
-		{
-			l_unit8_led_error = 0;
-			l_uint8_led_error_time = 5000;
-		}
-		l_uint8_led_error_time -= 10;
-		return;
-	}
+	
 }
 void resetFlagLED()
 {
-	l_unit8_led_normal = 1;
-	l_unit8_led_error = 0;
-	l_unit8_led_status = 0;
+	g_bF_SystemError = NON_ERROR;
+	g_bF_Led_Normal = 1;
+	g_bF_Led_Error = 0;
+	g_bF_Led_State = 0;
+	g_bF_Led_Btn1 = 0;
+	g_bF_Led_Press = 0;
+	g_bF_UART_Error_Frame = 0;
 }
