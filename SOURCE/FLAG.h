@@ -63,7 +63,7 @@ struct _flag_list {
 	/***** SW ****/
 
 	/**** ERROR FLAG ****/
-	uint8_t g_bF_SystemError;
+	uint8_t g_iF_SystemError;
 
 	/***** LED ****/
 	uint8_t g_bF_Led_Normal : 1;
@@ -141,7 +141,7 @@ extern struct _flag_list flags_list;
 #define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
 
 /* SYSTEM*/
-#define g_bF_SystemError				flags_list.g_bF_SystemError
+#define g_bF_SystemError				flags_list.g_iF_SystemError
 
 
 

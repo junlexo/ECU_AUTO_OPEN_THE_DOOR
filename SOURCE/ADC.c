@@ -141,12 +141,6 @@ ADC_DATA updateBTNStatus(ADC_DATA data)
 	return tempData;
 };
 
-ADC_DATA updateVolumeStatus(ADC_DATA data)
-{
-	ADC_DATA tempData = data;
-	return tempData;
-};
-
 ADC_DATA updateFIRStatus(ADC_DATA data)
 {
 	ADC_DATA tempData = data;
@@ -161,4 +155,17 @@ ADC_DATA updateFIRStatus(ADC_DATA data)
 	};
 
 	return tempData;
+};
+
+ADC_DATA updateVolumeStatus(ADC_DATA data)
+{
+	ADC_DATA tempData = data;
+	return tempData;
+};
+
+uint8_t getADCStatus(uint8_t index)
+{
+	uint8_t i = index;
+	if (i < 6)
+		return adc_info[i].ADC_Status;
 };
