@@ -11,7 +11,6 @@ extern "C" {
 	extern void LED();
 	extern void LED_Init();
 	extern void resetFlagLED();
-
 #ifdef __cplusplus
 } // extern "C"
 #endif

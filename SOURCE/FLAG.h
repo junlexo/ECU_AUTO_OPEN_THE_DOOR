@@ -66,12 +66,8 @@ struct _flag_list {
 	uint8_t g_iF_SystemError;
 
 	/***** LED ****/
-	uint8_t g_bF_Led_Normal : 1;
-	uint8_t g_bF_Led_Error : 1;
-	uint8_t g_bF_Led_State : 1;
-	uint8_t g_bF_Led_Btn1 : 1;
+	uint8_t g_bF_Led_State : 1;;
 	uint8_t g_bF_UART_Error_Frame : 1;
-	uint8_t g_bF_Led_Press : 1;
 
 };
 
@@ -126,13 +122,7 @@ extern struct _flag_list flags_list;
 
 
 /* LED */
-#define g_bF_LedController				flags_list.g_bF_LedController
-#define g_bF_Led_Normal					flags_list.g_bF_Led_Normal
-#define g_bF_Led_Error					flags_list.g_bF_Led_Error
 #define g_bF_Led_State					flags_list.g_bF_Led_State
-#define g_bF_Led_Btn1					flags_list.g_bF_Led_Btn1
-#define g_bF_Led_Press					flags_list.g_bF_Led_Press
-
 /* SYS MARCHINE LEARNING*/
 
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
