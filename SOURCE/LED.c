@@ -34,12 +34,12 @@ void LED()
 			IOPort_Write(D_12, LOW);
 			if (TSTFLAG(g_bF_Led_State) == 0) {
 				IOPort_Write(D_13, g_bF_Led_State);
-				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
+				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 1s */
 				SETFLAG(g_bF_Led_State);
 			}
 			else {
 				IOPort_Write(D_13, g_bF_Led_State);
-				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
+				StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 1s */
 				CLRFLAG(g_bF_Led_State);
 			}
 		}
@@ -51,13 +51,13 @@ void LED()
 					if (TSTFLAG(g_bF_Led_State) == 0) {
 						IOPort_Write(D_12, g_bF_Led_State);
 						IOPort_Write(D_13, g_bF_Led_State);
-						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn on led 0.5s */
+						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn on led 200ms */
 						SETFLAG(g_bF_Led_State);
 					}
 					else {
 						IOPort_Write(D_12, g_bF_Led_State);
 						IOPort_Write(D_13, g_bF_Led_State);
-						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn off led 0.5s */
+						StartTimer(LedBlinkingWaitTimeMS, 2); /* Turn off led 200ms */
 						CLRFLAG(g_bF_Led_State);
 					}
 				}
@@ -72,13 +72,13 @@ void LED()
 					if (TSTFLAG(g_bF_Led_State) == 0) {
 						IOPort_Write(D_12, g_bF_Led_State);
 						IOPort_Write(D_13, g_bF_Led_State);					
-						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 0.5s */
+						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn on led 1s */
 						SETFLAG(g_bF_Led_State);
 					}
 					else {
 						IOPort_Write(D_12, g_bF_Led_State);
 						IOPort_Write(D_13, g_bF_Led_State);					
-						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 0.5s */
+						StartTimer(LedBlinkingWaitTimeMS, 10); /* Turn off led 1s */
 						CLRFLAG(g_bF_Led_State);
 					}
 				}
