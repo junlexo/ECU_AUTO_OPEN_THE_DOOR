@@ -184,6 +184,8 @@ struct _timer_uint8_1000ms
 	uint8_t UARTDebuggingOverTime;
 
 	uint8_t StepMotorWattingClose;
+	uint8_t WaitingPutButton;
+	uint8_t ReEnableButton1;
 
 #if DEBUG == ON
 	uint8_t STEP_DEBUG;
@@ -239,5 +241,7 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 /*UART */
 #define UARTWritingWaitTime		timer_uint8_10ms.UARTWritingWaitTime
 #define UARTDebuggingOverTime						timer_uint8_1000ms.UARTDebuggingOverTime
+#define g_t_ui8_S_Button_WaitingInput				timer_uint8_1000ms.WaitingPutButton
+#define	g_t_ui8_S_Button_ReEnable				    timer_uint8_1000ms.ReEnableButton1
 #endif
 
