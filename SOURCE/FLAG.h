@@ -125,7 +125,6 @@ extern struct _flag_list flags_list;
 
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
 
-#define g_bF_StepPWM  					flags_list.g_bF_StepPWM
 #define g_bF_Led_Normal					flags_list.g_bF_Led_Normal
 #define g_bF_Led_Error					flags_list.g_bF_Led_Error
 #define g_bF_Led_State					flags_list.g_bF_Led_State
