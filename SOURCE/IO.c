@@ -70,7 +70,7 @@ void IOPort_Write(uint8_t pinNum, uint8_t val)
 	}
 }
 
-int IOPort_Read(uint8_t pinNum)
+uint8_t IOPort_Read(uint8_t pinNum)
 {
 	if (pinNum < MAX_PORT_NUM) {
 		volatile uint8_t * pin_reg = port_reg_addr_arr[((1 << (pinNum >> 4)) & (pinNum >> 3)) + 6];

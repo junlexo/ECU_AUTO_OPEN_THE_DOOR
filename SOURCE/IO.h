@@ -49,7 +49,7 @@ extern "C" {
 
 	extern void IOPort_Write(uint8_t pinNum, uint8_t val);
 
-	extern int IOPort_Read(uint8_t pinNum);
+	extern uint8_t IOPort_Read(uint8_t pinNum);
 
 	extern void IO_Init();
 

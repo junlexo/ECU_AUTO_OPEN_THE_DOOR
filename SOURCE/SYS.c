@@ -10,6 +10,8 @@
 #include "LED.h"
 #include "SW.h"
 #include "ADC.h"
+#include "EEPROM.h"
+#include "UART.h"
 
 void CPU_Init()
 {
@@ -20,10 +22,12 @@ void CPU_Init()
 void Hardware_Init()
 {
 	IO_Init();
-	OS_TimerCounter_Init();
+	UART_Init(9600);
+	EEPROM_Init();
 	LED_Init();
 	SW_Init();
 	ADC_init();
+	OS_Init();
 	//bF_Hardware_Init = 1;
 
 }

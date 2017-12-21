@@ -7,6 +7,7 @@
 #include "PREFERENT.h"
 #include "Timer_count.h"
 #include "ADC.h"
+#include "UARTDebugging.h"
 
 void Task_10MS()
 {
@@ -14,5 +15,6 @@ void Task_10MS()
 		SW();
 	}
 	ADCUpdateEvery10ms();
+	DBG_RespondUART();
 }
 
