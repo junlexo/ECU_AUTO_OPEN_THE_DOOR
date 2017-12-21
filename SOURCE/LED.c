@@ -30,7 +30,7 @@ void LED()
 		IOPort_Write(D_13, LOW);
 	}
 	else
-		if (g_bF_UART_Error_Frame == 1)
+		if (g_bF_SystemError == ERROR_UART)
 		{
 			IOPort_Write(D_12, LOW);
 			if (TSTFLAG(g_bF_Led_State) == 0) {
