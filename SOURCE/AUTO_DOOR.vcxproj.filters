@@ -88,6 +88,12 @@
     <Filter Include="Source Files\SYS">
       <UniqueIdentifier>{fe8cc782-3cec-4be5-8598-a161af6097bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SW">
+      <UniqueIdentifier>{aa23e3a5-ed4f-4988-abea-af4cdec1220a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SW">
+      <UniqueIdentifier>{513b2d69-7d77-4318-8265-e57ef7360a1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -141,17 +147,17 @@
     <ClInclude Include="__vm\.SOURCE.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LED.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MOTOR_DC.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SW.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ADC.h">
       <Filter>Header Files\ADC</Filter>
+    </ClInclude>
+    <ClInclude Include="LED.h">
+      <Filter>Header Files\LED</Filter>
+    </ClInclude>
+    <ClInclude Include="SW.h">
+      <Filter>Header Files\SW</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,17 +203,17 @@
     <ClCompile Include="OS_TimerCounter.c">
       <Filter>Source Files\TIMER</Filter>
     </ClCompile>
-    <ClCompile Include="LED.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MOTOR_DC.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SW.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ADC.c">
       <Filter>Source Files\ADC</Filter>
+    </ClCompile>
+    <ClCompile Include="LED.c">
+      <Filter>Source Files\LED</Filter>
+    </ClCompile>
+    <ClCompile Include="SW.c">
+      <Filter>Source Files\SW</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
