@@ -63,7 +63,9 @@ struct _flag_list {
 	uint8_t g_iF_SystemError;
 
 	/***** LED ****/
-	uint8_t g_bF_Led_State : 1;;
+	uint8_t g_bF_Led_State : 1;
+
+	/***** UART  ****/
 	uint8_t g_bF_UART_Error_Frame : 1;
 
 };

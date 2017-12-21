@@ -73,9 +73,6 @@ void Init_FLAG_SYS()
 		g_bF_SW1_Status = 0;
 		g_bF_SW2_Status = 0;
 
-		g_bF_SW1 = 0;
-		g_bF_SW2 = 0;
-
 
 
 		/*BOTTON */
@@ -89,12 +86,7 @@ void Init_FLAG_SYS()
 
 
 		/* LED */
-		g_bF_LedController = 0;
-		g_bF_Led_Normal = 0;
-		g_bF_Led_Error = 0;
 		g_bF_Led_State = 0;
-		g_bF_Led_Btn1 = 0;
-		g_bF_Led_Press = 0;
 
 		/* SYS MARCHINE LEARNING*/
 
