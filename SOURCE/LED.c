@@ -12,8 +12,7 @@ void LED_Init()
 	resetFlagLED();
 }
 void LED()
-{	
-	UART_Write(g_bF_SystemError + '0');
+{
 	//When have Error ERROR_VOLUME or ERROR_BTN turn off LED1 and LED2
 	if (g_bF_SystemError == ERROR_VOLUME || g_bF_SystemError == ERROR_BTN)
 	{
@@ -32,58 +31,58 @@ void LED()
 		IOPort_Write(D_12, LOW);
 		IOPort_Write(D_13, LOW);
 	}
-	else //When have Error turn off LED1 and LED2 blink 1s
-		if (g_bF_SystemError == ERROR_UART)
-		{
-			IOPort_Write(D_12, LOW);
-			uint8_t Pin[2];
-			Pin[0] = D_13;
-			showLED(Pin, 10, 1);
-		}
-		else //when Button 1 put down LED1 DISPLAY AND LED2 blink 1s.
-			if (BTN1_STATUS == 1)
-			{
-				IOPort_Write(D_12, HIGH);
-				uint8_t Pin[2];
-				Pin[0] = D_13;
-				showLED(Pin, 10, 1);
-			}
-			else //when Button 1 up LED1 OFF AND LED2 blink 1s
-				if (pre_BTN1_STATUS == 1 && BTN1_STATUS == 0)
-				{
-					IOPort_Write(D_12, LOW);
-					uint8_t Pin[2];
-					Pin[0] = D_13;
-					showLED(Pin, 10, 1);
-				}
-				else //when Button 1 press LED1 blink 200ms AND LED2 blink 1s
-					if (BTN1_STATUS == 2)
-					{
-						uint8_t Pin[2];
-						Pin[0] = D_13;
-						Pin[1] = D_12;
-						showLED(Pin, 2, 2);
-					}
-					else //When normal LED1 and LED2 blink 1s
-						if (g_bF_SystemError == NON_ERROR)
-						{
-							uint8_t Pin[2];
-							Pin[0] = D_13;
-							Pin[1] = D_12;
-							showLED(Pin, 10, 2);
-						}
-						else //and more turn off both two LEDs
-						{
-							IOPort_Write(D_12, LOW);
-							IOPort_Write(D_13, LOW);
-						}
+	//When have Error turn off LED1 and LED2 blink 1s
+	else if (g_bF_SystemError == ERROR_UART)
+	{
+		IOPort_Write(D_12, LOW);
+		uint8_t Pin[2];
+		Pin[0] = D_13;
+		showLED(Pin, 10, 1);
+	}
+	//when Button 1 put down LED1 DISPLAY AND LED2 blink 1s.
+	else if (BTN1_STATUS == 1)
+	{
+		IOPort_Write(D_12, HIGH);
+		uint8_t Pin[2];
+		Pin[0] = D_13;
+		showLED(Pin, 10, 1);
+	}
+	//when Button 1 up LED1 OFF AND LED2 blink 1s
+	else if (pre_BTN1_STATUS == 1 && BTN1_STATUS == 0)
+	{
+		IOPort_Write(D_12, LOW);
+		uint8_t Pin[2];
+		Pin[0] = D_13;
+		showLED(Pin, 10, 1);
+	}
+	//when Button 1 press LED1 blink 200ms AND LED2 blink 1s
+	else if (BTN1_STATUS == 2)
+	{
+		uint8_t Pin[2];
+		Pin[0] = D_13;
+		Pin[1] = D_12;
+		showLED(Pin, 2, 2);
+	}
+	//When normal LED1 and LED2 blink 1s
+	else if (g_bF_SystemError == NON_ERROR)
+	{
+		uint8_t Pin[2];
+		Pin[0] = D_13;
+		Pin[1] = D_12;
+		showLED(Pin, 10, 2);
+	}
+	else //and more turn off both two LEDs
+	{
+		IOPort_Write(D_12, LOW);
+		IOPort_Write(D_13, LOW);
+	}
 
 	pre_BTN1_STATUS = BTN1_STATUS;
 }
 void showLED(uint8_t Pin[2], uint8_t time, uint8_t nPin)
 {
 	if (TSTFLAG(g_bF_Led_State) == 0) {
-		for(uint8_t i = 0; i < nPin; i++)
+		for (uint8_t i = 0; i < nPin; i++)
 			IOPort_Write(Pin[i], g_bF_Led_State);
 		StartTimer(LedBlinkingWaitTimeMS, time); /* Turn on led 1s */
 		SETFLAG(g_bF_Led_State);
