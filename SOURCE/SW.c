@@ -44,12 +44,12 @@ void checkSW1()
 	{
 		time_g_bF_SW1_Status_off = 0;
 	}
-
+/*
 	if (time_g_bF_SW1_Status_on >= 19)
 	{
 		g_bF_SW1_Status = 2;
 	}
-	else if(time_g_bF_SW1_Status_on >= 7)
+	else */if(time_g_bF_SW1_Status_on >= 7)
 	{
 		g_bF_SW1_Status = 1;
 
@@ -89,11 +89,11 @@ void checkSW2()
 		time_g_bF_SW2_Status_off = 0;
 	}
 
-	if (time_g_bF_SW2_Status_on >= 19)
+	/*if (time_g_bF_SW2_Status_on >= 19)
 	{
 		g_bF_SW2_Status = 2;
 	}
-	else if (time_g_bF_SW2_Status_on >= 7)
+	else */if (time_g_bF_SW2_Status_on >= 7)
 	{
 		g_bF_SW2_Status = 1;
 
