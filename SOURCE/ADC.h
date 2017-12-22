@@ -54,6 +54,10 @@ extern "C" {
 	uint8_t checkBTN1StatusHistory();
 	uint16_t getVolumeDegree();
 	uint8_t getVolumeVoltage();
+	uint8_t isBTN1Disable();
+	void setStatusIntoHistory(uint8_t status);
+	void sendRequestToMotorStep();
+	void ADC_HISTORY_DBG(uint8_t status); //DBG
 #ifdef __cplusplus
 } // extern "C"
 #endif
