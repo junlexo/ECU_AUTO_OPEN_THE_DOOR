@@ -37,8 +37,8 @@ struct _flag_list {
 
 	/*******     SWITCH    ************/
 
-	uint8_t SW1_STATUS : 1;
-	uint8_t SW2_STATUS : 1;
+	uint8_t SW1_STATUS ;
+	uint8_t SW2_STATUS ; 
 
 	/*******     BUTTON   ************/
 

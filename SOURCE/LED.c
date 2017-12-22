@@ -40,7 +40,7 @@ void LED()
 		showLED(Pin, 10, 1);
 	}
 	//when Button 1 put down LED1 DISPLAY AND LED2 blink 1s.
-	else if (BTN1_STATUS == 1)
+	else if (BTN1_STATUS == 1 && !BTN1_DISABLE)
 	{
 		IOPort_Write(D_12, HIGH);
 		uint8_t Pin[2];
@@ -48,7 +48,7 @@ void LED()
 		showLED(Pin, 10, 1);
 	}
 	//when Button 1 up LED1 OFF AND LED2 blink 1s
-	else if (pre_BTN1_STATUS == 1 && BTN1_STATUS == 0)
+	else if (pre_BTN1_STATUS == 1 && BTN1_STATUS == 0 && !BTN1_DISABLE)
 	{
 		IOPort_Write(D_12, LOW);
 		uint8_t Pin[2];
@@ -56,7 +56,7 @@ void LED()
 		showLED(Pin, 10, 1);
 	}
 	//when Button 1 press LED1 blink 200ms AND LED2 blink 1s
-	else if (BTN1_STATUS == 2)
+	else if (BTN1_STATUS == 2 && !BTN1_DISABLE)
 	{
 		uint8_t Pin[2];
 		Pin[0] = D_13;

@@ -53,9 +53,9 @@ ADC_FIR_STATUS == 1 <=> fir on
 */
 #define BTN1_STATUS getADCStatus(1)
 #define BTN2_STATUS getADCStatus(2)
+#define BTN1_DISABLE 0
 #define ADC_FIR_STATUS getADCStatus(3)
 #define ADC_GET_VOLUME_DEGREE getVolumeDegree()
-#define ADC_GET_VOLUME_VOLTAGE getVolumeVoltage()
-
+#define ADC_GET_VOLUME_VOLTAGE getVolumeVoltage() 
 #endif
 
