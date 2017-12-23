@@ -22,7 +22,7 @@ void SW()
 {
 	checkSW1();
 	checkSW2();
-	UART_Write(cur_g_bF_SW1_Status + '0');
+	
 }
 
 void checkSW1()
