@@ -20,8 +20,6 @@ struct _flag_list {
 
 	/*****   STEP MOTOR       ******/
 	uint8_t StepPWM : 1;
-	uint8_t HOLD_ON : 1;
-	uint8_t HOLD_OFF : 1;
 	uint8_t STEP_RUN : 1;
 	uint8_t STEP_STOP : 1;
 	uint8_t DIR_CLOSE : 1;
@@ -34,6 +32,7 @@ struct _flag_list {
 	uint8_t READ_DEMENTION : 1;
 	uint8_t REOPEN : 1;
 	uint8_t TAKE_DEMENTION : 1;
+	uint8_t WAITTINGOPEN : 1;
 
 	/*******     SWITCH    ************/
 
@@ -47,17 +46,14 @@ struct _flag_list {
 	uint8_t BT1_PRESS : 1;
 	uint8_t BT2_PRESS : 1;
 
-
 	/***** LED EXAMPLE ****/
 	uint8_t g_bF_LedController : 1;
 
 	/*  FIR **/
-	uint8_t FIR_STATUS : 1; 
-
+	uint8_t FIR_STATUS : 1;
 
 	/* SYS MARCHINE LEARNING*/
 	uint8_t DOOR_OPEN : 1;
-	/***** SW ****/
 
 	/**** ERROR FLAG ****/
 	uint8_t g_iF_SystemError;
@@ -67,6 +63,11 @@ struct _flag_list {
 
 	/***** UART  ****/
 	uint8_t g_bF_UART_Error_Frame : 1;
+
+	/******  FAIL SAFE *******/
+	uint8_t StepMotor_TimeClose : 1;
+	uint8_t StepMotor_TimeOpen : 1;
+	uint8_t StepMotor_TimeCloseInit : 1;
 
 };
 
@@ -81,11 +82,8 @@ extern struct _flag_list flags_list;
 #define bF_Task_100MS  					flags_list.bF_Task_100MS
 #define bF_Task_1S  					flags_list.bF_Task_1S
 
-
 /*STEP MOTOR */
 #define g_bF_StepPWM  					flags_list.StepPWM
-#define g_bF_HOLD_ON					flags_list.HOLD_ON
-#define g_bF_HOLD_OFF					flags_list.HOLD_OFF
 #define g_bF_STEPMOTOR_Running			flags_list.STEP_RUN
 #define g_bF_STEPMOTOR_Stop				flags_list.STEP_STOP
 #define g_bF_STEPMOTOR_DIR_Close		flags_list.DIR_CLOSE
@@ -98,40 +96,32 @@ extern struct _flag_list flags_list;
 #define g_bF_READ_DEMENTION				flags_list.READ_DEMENTION	
 #define g_bF_STEP_ReOpen				flags_list.REOPEN
 #define g_bF_STEP_TAKE_DEMENTION		flags_list.TAKE_DEMENTION
-
-
+#define g_bF_STEP_WAITTING_OPEN			flags_list.WAITTINGOPEN
 
 /*SWITCH */
 #define g_bF_SW1_Status					flags_list.SW1_STATUS
 #define g_bF_SW2_Status					flags_list.SW2_STATUS
-
-
-
-
 /*BOTTON */
 #define g_bF_BT1_Status					flags_list.BT1_STATUS
 #define g_bF_BT2_Status					flags_list.BT2_STATUS
 #define g_bF_BT1_Press					flags_list.BT1_PRESS
 #define g_bF_BT2_Press					flags_list.BT2_PRESS
-
 /* FIR  */
 #define g_bF_FIR_Status					flags_list.FIR_STATUS
-
 
 /* LED */
 #define g_bF_Led_State					flags_list.g_bF_Led_State
 /* SYS MARCHINE LEARNING*/
-
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
-
 /* UART*/
 #define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
-
 /* SYSTEM*/
 #define g_bF_SystemError				flags_list.g_iF_SystemError
-
-
-
+/* FailSafe*/
+/* Step Motor*/
+#define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	
+#define g_bF_FS_StepMotor_TimeOpen			flags_list.StepMotor_TimeOpen	
+#define g_bF_FS_StepMotor_TimeCloseInit		flags_list.StepMotor_TimeCloseInit
 
 
 #endif

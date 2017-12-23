@@ -4,9 +4,9 @@
 #define _STEP_MOTOR_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
+#include "arduino.h"
 #else
-	#include "WProgram.h"
+#include "WProgram.h"
 #endif
 
 #include "RAM.h"
@@ -30,25 +30,26 @@ extern "C" {
 #endif
 
 	extern void STEP_PWM();
-	extern void STEP_Speed(uint8_t ui8_StepSpeed_SET);
-	extern void STEP_Control();
-	extern void STEP_InitStart();
-	extern void STEP_InitDIR();
-	extern void STEP_CLOSE_DEFAULT();
-	extern void STEP_OPEN_DEFAULT();
-	extern void STEP_STOP();
-	extern void STEP_RUN();
-	extern void STEP_HOLD_ON();
-	extern void STEP_HOLD_OFF();
-	extern void STEP_SPEED_RANGE();
-	extern void STEP_READ_DEMENTION();
-	extern void STEP_WAITING_CLOSE();
-	extern void STEP_Control_Speed();
-	extern void STEP_Running_Open();
-	extern void STEP_Running_Close();
-	extern void STEP_RUN_DEFAULT();
 	extern void STEP_MANNER();
-
+	extern void STEPMOTOR_CheckFailSafe();
+	static void STEP_Speed(uint8_t ui8_StepSpeed_SET);
+	static void STEP_Control();
+	static void STEP_InitStart();
+	static void STEP_InitDIR();
+	static void STEP_CLOSE_DEFAULT();
+	static void STEP_OPEN_DEFAULT();
+	static void STEP_STOP();
+	static void STEP_RUN();
+	static void STEP_HOLD_ON();
+	static void STEP_HOLD_OFF();
+	static void STEP_SPEED_RANGE();
+	static void STEP_READ_DEMENTION();
+	static void STEP_WAITING_CLOSE();
+	static void STEP_Control_Speed();
+	static void STEP_Running_Open();
+	static void STEP_Running_Close();
+	static void STEP_RUN_DEFAULT();
+	static void STEP_CheckTimerOpen();
 
 
 

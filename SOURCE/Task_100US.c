@@ -7,6 +7,5 @@
 
 void Task_100US()
 {
-
-	STEP_PWM();
+//	STEP_PWM();
 }

@@ -29,6 +29,16 @@ void OS_TimerCounter_Init()
 	TCCR1B |= (1 << WGM12) | (1 << CS11) | (1 << CS10);
 	OCR1A = 24;
 	TIMSK1 |= (1 << OCIE1A);
+
+	/*timer 2*/
+	// Use Timer2 with 1 ms interrupts
+	TCCR2A = 0;// set entire TCCR2A register to 0
+	TCCR2B = 0;// same for TCCR2B
+	TCNT2 = 0;//initialize counter value to 0		  
+	TCCR2B |= (1 << CS22) | (1 << CS21); // Set CS21 bit for 16 prescaler
+	TCCR2A |= (1 << WGM21);
+	TIMSK2 |= (1 << OCIE2A);
+	OCR2A = 50;
 	sei();
 }
 
@@ -266,4 +276,8 @@ ISR(TIMER1_COMPA_vect)
 {
 	OS_Timer_Counter();
 	callbackFunc();
+}
+ISR(TIMER2_COMPA_vect)
+{
+	STEP_PWM();
 }

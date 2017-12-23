@@ -106,7 +106,7 @@ extern struct _timer_uint32_1ms timer_uint32_1ms;
 struct _timer_uint8_10ms
 {
 	uint8_t SW_WaitTime;
-	uint8_t UARTWritingWaitTime;
+	uint8_t UART_WritingWaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
@@ -178,19 +178,12 @@ extern struct _timer_uint32_100ms timer_uint32_100ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_1000ms
 {
-
 	uint8_t Led_BlinkingWaitTime;
-
-	uint8_t UARTDebuggingOverTime;
-
+	uint8_t UART_DebuggingOverTime;
 	uint8_t StepMotorWattingClose;
+	uint8_t StepMotorWattingOpen;
 	uint8_t WaitingPutButton;
 	uint8_t ReEnableButton1;
-
-#if DEBUG == ON
-	uint8_t STEP_DEBUG;
-#endif
-
 };
 extern struct _timer_uint8_1000ms timer_uint8_1000ms;
 /******************************* Define task processing interval *********************************************/
@@ -225,23 +218,19 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 /******************************* Define task processing interval *********************************************/
 
 /*TIME */
-#define	SW_WaitTime				timer_uint8_10ms.SW_WaitTime
-
-
+#define	SW_WaitTime									timer_uint8_10ms.SW_WaitTime
 /*LED */
-#define LedBlinkingWaitTime				timer_uint8_1000ms.Led_BlinkingWaitTime
-#define	LedBlinkingWaitTimeMS		timer_uint8_100ms.Led_BlinkingWaitTimeMS
+#define LedBlinkingWaitTime							timer_uint8_1000ms.Led_BlinkingWaitTime
+#define	LedBlinkingWaitTimeMS						timer_uint8_100ms.Led_BlinkingWaitTimeMS
 /*STEP  MOTOR */
-#define	g_u8_StepSpeed_100us			timer_uint8_1ms.Step_SpeedPWM
+#define	g_u8_StepSpeed_100us			            timer_uint8_1ms.Step_SpeedPWM
 #define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
-#if DEBUG == ON
-#define g_t_ui8_STEP_DEBUG							timer_uint8_1000ms.STEP_DEBUG
-#endif
-
+#define g_t_ui8_S_StepMotor_WattingOpen				timer_uint8_1000ms.StepMotorWattingOpen
 /*UART */
-#define UARTWritingWaitTime		timer_uint8_10ms.UARTWritingWaitTime
-#define UARTDebuggingOverTime						timer_uint8_1000ms.UARTDebuggingOverTime
+#define UARTWritingWaitTime							timer_uint8_10ms.UART_WritingWaitTime
+#define UARTDebuggingOverTime						timer_uint8_1000ms.UART_DebuggingOverTime
 #define g_t_ui8_S_Button_WaitingInput				timer_uint8_1000ms.WaitingPutButton
 #define	g_t_ui8_S_Button_ReEnable				    timer_uint8_1000ms.ReEnableButton1
+
 #endif
 
