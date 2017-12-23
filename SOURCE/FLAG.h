@@ -33,11 +33,12 @@ struct _flag_list {
 	uint8_t REOPEN : 1;
 	uint8_t TAKE_DEMENTION : 1;
 	uint8_t WAITTINGOPEN : 1;
+	uint8_t REQUEST_BY_PASSCODE_FROM_BTN1 : 1;
 
 	/*******     SWITCH    ************/
 
-	uint8_t SW1_STATUS : 1;
-	uint8_t SW2_STATUS : 1;
+	uint8_t SW1_STATUS ;
+	uint8_t SW2_STATUS ; 
 
 	/*******     BUTTON   ************/
 
@@ -97,6 +98,7 @@ extern struct _flag_list flags_list;
 #define g_bF_STEP_ReOpen				flags_list.REOPEN
 #define g_bF_STEP_TAKE_DEMENTION		flags_list.TAKE_DEMENTION
 #define g_bF_STEP_WAITTING_OPEN			flags_list.WAITTINGOPEN
+#define g_bF_REQUEST_BY_PASSCODE_FROM_BTN1			flags_list.REQUEST_BY_PASSCODE_FROM_BTN1
 
 /*SWITCH */
 #define g_bF_SW1_Status					flags_list.SW1_STATUS
@@ -122,7 +124,6 @@ extern struct _flag_list flags_list;
 #define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	
 #define g_bF_FS_StepMotor_TimeOpen			flags_list.StepMotor_TimeOpen	
 #define g_bF_FS_StepMotor_TimeCloseInit		flags_list.StepMotor_TimeCloseInit
-
 
 #endif
 

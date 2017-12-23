@@ -22,7 +22,7 @@ void SW()
 {
 	checkSW1();
 	checkSW2();
-	
+
 }
 
 void checkSW1()
@@ -30,7 +30,7 @@ void checkSW1()
 	cur_g_bF_SW1_Status = !IOPort_Read(D_11);	
 	if (cur_g_bF_SW1_Status == pre_g_bF_SW1_Status && cur_g_bF_SW1_Status == 1)
 	{
-		time_g_bF_SW1_Status_on += 1;
+		time_g_bF_SW1_Status_on += 1;		
 	}
 	else
 	{
@@ -45,12 +45,12 @@ void checkSW1()
 	{
 		time_g_bF_SW1_Status_off = 0;
 	}
-
+/*
 	if (time_g_bF_SW1_Status_on >= 19)
 	{
 		g_bF_SW1_Status = 2;
 	}
-	else if(time_g_bF_SW1_Status_on >= 7)
+	else */if(time_g_bF_SW1_Status_on >= 7)
 	{
 		g_bF_SW1_Status = 1;
 
@@ -63,6 +63,10 @@ void checkSW1()
 	{
 
 	}
+	if (time_g_bF_SW1_Status_on > 255)
+		time_g_bF_SW1_Status_on = 19;
+	if (time_g_bF_SW1_Status_off > 255)
+		time_g_bF_SW1_Status_off = 2;
 	pre_g_bF_SW1_Status = cur_g_bF_SW1_Status;
 }
 void checkSW2()
@@ -86,11 +90,11 @@ void checkSW2()
 		time_g_bF_SW2_Status_off = 0;
 	}
 
-	if (time_g_bF_SW2_Status_on >= 19)
+	/*if (time_g_bF_SW2_Status_on >= 19)
 	{
 		g_bF_SW2_Status = 2;
 	}
-	else if (time_g_bF_SW2_Status_on >= 7)
+	else */if (time_g_bF_SW2_Status_on >= 7)
 	{
 		g_bF_SW2_Status = 1;
 
@@ -103,5 +107,9 @@ void checkSW2()
 	{
 
 	}
+	if (time_g_bF_SW2_Status_on > 255)
+		time_g_bF_SW2_Status_on = 19;
+	if (time_g_bF_SW2_Status_off > 255)
+		time_g_bF_SW2_Status_off = 2;
 	pre_g_bF_SW2_Status = cur_g_bF_SW2_Status;
 }

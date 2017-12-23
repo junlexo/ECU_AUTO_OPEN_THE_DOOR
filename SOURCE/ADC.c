@@ -2,14 +2,17 @@
 #include "avr\interrupt.h"
 #include "FLAG.h"
 #include "Timer_count.h"
+#include "UART.h"
 
 volatile int isr_chnl;
 volatile ADC_DATA adc_info[CHANNELS];
 volatile uint16_t adc_interrupt_result[CHANNELS] = {0}; /*store adc value when interrupt*/
 volatile uint16_t adc_lpf_result[CHANNELS] = {0}; //low pass filter result
-volatile uint8_t btn1_status_history[4] = {0};
+volatile uint8_t btn1_status_history[6] = {0};
 volatile uint8_t btn1_check_motor_step_next_index = 0;
 volatile uint8_t g_disable_btn_1 = 0;
+volatile uint8_t g_bF_BTN1_PassCode = 0; /* 0 - PassCode is invalid / 1 - PassCode is valid*/
+uint8_t bF_writeHistory = 0; /* 0 - Write / 1 - Not Write*/
 
 void initADCData() 
 {
@@ -22,6 +25,7 @@ void initADCData()
 		adc_info[i].ADC_CountTimeMS = 0;
 		adc_info[i].ADC_Status = 0;
 	}
+	resetBTN1StatusHistory();
 };
 
 uint16_t voltageConvert(uint16_t value)
@@ -81,7 +85,7 @@ void ADCUpdateEvery10ms()
 			/*Check ADC and update system error flag for ADC_VOLUME*/
 			if (adc_info[i].ADC_CountTimeMS >= VOLUME_ERROR_TIME_MS)
 			{
-				g_bF_SystemError = ERROR_VOLUME;
+				//g_bF_SystemError = ERROR_VOLUME;
 			}
 			else
 			{
@@ -112,11 +116,17 @@ void ADCUpdateEvery10ms()
 					{
 						if (CHECK_TIMER(g_t_ui8_S_Button_ReEnable) == 1)
 						{
+							//UART_WriteString("RE-ENABLE BTN 1"); //DBG
 							enableBTN1after30S();
 						}
 					}
 					else
 					{
+						if ( (CHECK_TIMER(g_t_ui8_S_Button_WaitingInput)) == 1 && btn1_check_motor_step_next_index > 0)
+						{
+							//UART_WriteString("RESET BTN 1 HISTORY"); //DBG
+							resetBTN1StatusHistory();
+						}
 						adc_info[i].ADC_Status = updateBTN1Status(adc_info[i]).ADC_Status;
 					}
 					
@@ -144,45 +154,41 @@ uint16_t lowPassFilter(uint16_t interrupt_result_value, uint16_t previous_lpf_va
 ADC_DATA updateBTN1Status(ADC_DATA data)
 {
 	ADC_DATA tempData = data;
-	if (btn1_check_motor_step_next_index >= 4)
+	if (tempData.ADC_CountTimeMS >= BTN_PRESS_TIME_MS && tempData.ADC_VoltageValue <= BTN_ON_VALUE_MV)
 	{
-		if (checkBTN1StatusHistory() == 0)
+		tempData.ADC_Status = ADC_BTN_PRESS;
+		setStatusIntoHistory(ADC_BTN_PRESS);
+	}
+	else if (tempData.ADC_CountTimeMS >= BTN_ON_TIME_MS && tempData.ADC_VoltageValue <= BTN_ON_VALUE_MV)
+	{
+		tempData.ADC_Status = ADC_BTN_ON;
+		setStatusIntoHistory(ADC_BTN_ON);
+		
+	}
+	else if (tempData.ADC_CountTimeMS >= BTN_OFF_TIME_MS && tempData.ADC_VoltageValue > BTN_ON_VALUE_MV)
+	{
+		tempData.ADC_Status = ADC_BTN_OFF;
+		setStatusIntoHistory(ADC_BTN_OFF);		
+	}
+		
+	if (btn1_check_motor_step_next_index >= 6)
+	{	
+		g_bF_BTN1_PassCode = checkBTN1StatusHistory();
+		if (g_bF_BTN1_PassCode == 0)
 		{
-			START_TIMER(g_t_ui8_S_Button_ReEnable,15);
+			//UART_WriteString("DISABLE BTN 1"); //DBG
+			START_TIMER(g_t_ui8_S_Button_ReEnable, 15);
 			g_disable_btn_1 = 1;
 			tempData.ADC_Status = ADC_BTN_OFF;
 		}
 		else
 		{
-			g_disable_btn_1 = 0;
-			btn1_check_motor_step_next_index = 0;
+			//UART_WriteString("START MOTOR STEP"); //DBG
+			sendRequestToMotorStep(); /*REQUEST MOTOR START OPEN THE DOOR*/
+			resetBTN1StatusHistory();
 		}
 	}
-	else 
-	{
-		if (tempData.ADC_CountTimeMS >= BTN_PRESS_TIME_MS && tempData.ADC_VoltageValue <= BTN_ON_VALUE_MV)
-		{
-			tempData.ADC_Status = ADC_BTN_PRESS;
-			btn1_check_motor_step_next_index += 1;
-			btn1_status_history[btn1_check_motor_step_next_index] = ADC_BTN_PRESS;
-			START_TIMER(g_t_ui8_S_Button_WaitingInput, 15);
-		}
-		else if (tempData.ADC_CountTimeMS >= BTN_ON_TIME_MS && tempData.ADC_VoltageValue <= BTN_ON_VALUE_MV)
-		{
-			tempData.ADC_Status = ADC_BTN_ON;
-			btn1_check_motor_step_next_index += 1;
-			btn1_status_history[btn1_check_motor_step_next_index] = ADC_BTN_ON;
-			START_TIMER(g_t_ui8_S_Button_WaitingInput, 15);
-		}
-		else if (tempData.ADC_CountTimeMS >= BTN_OFF_TIME_MS && tempData.ADC_VoltageValue > BTN_ON_VALUE_MV)
-		{
-			tempData.ADC_Status = ADC_BTN_OFF;
-			if (CHECK_TIMER(g_t_ui8_S_Button_WaitingInput) == 1)
-				resetBTN1StatusHistory();
-		};
-		
-		return tempData;
-	}
+	return tempData;
 };
 
 ADC_DATA updateBTN2Status(ADC_DATA data)
@@ -239,6 +245,11 @@ uint16_t getVolumeDegree()
 	return ((long)(adc_info[0].ADC_VoltageValue*5)/90000);
 };
 
+uint8_t isBTN1Disable()
+{
+	return g_disable_btn_1;
+};
+
 uint8_t getVolumeVoltage()
 {
 	return adc_info[0].ADC_VoltageValue;
@@ -250,26 +261,22 @@ uint8_t checkBTN1StatusHistory()
 	uint8_t ret = 0;
 
 	if (btn1_status_history[0] == ADC_BTN_ON)
-		ret = 1;
+		ret += 1;
+	if (btn1_status_history[1] == ADC_BTN_OFF)
+		ret += 1;
+	if (btn1_status_history[2] == ADC_BTN_ON)
+		ret += 1;
+	if (btn1_status_history[3] == ADC_BTN_PRESS)
+		ret += 1;
+	if (btn1_status_history[4] == ADC_BTN_OFF)
+		ret += 1;
+	if (btn1_status_history[5] == ADC_BTN_ON)
+		ret += 1;
+
+	if (ret >= 6)
+		return 1;
 	else
 		return 0;
-
-	if (btn1_status_history[1] == ADC_BTN_ON)
-		ret = 1;
-	else
-		return 0;
-
-	if (btn1_status_history[2] == ADC_BTN_PRESS)
-		ret = 1;
-	else
-		return 0;
-
-	if (btn1_status_history[3] == ADC_BTN_ON)
-		ret = 1;
-	else
-		return 0;
-
-	return ret;
 }
 
 void enableBTN1after30S()
@@ -280,5 +287,53 @@ void enableBTN1after30S()
 
 void resetBTN1StatusHistory()
 {
+	START_TIMER(g_t_ui8_S_Button_WaitingInput,0);
 	btn1_check_motor_step_next_index = 0;
+	btn1_status_history[0] = 0;
+	btn1_status_history[1] = 0;
+	btn1_status_history[2] = 0;
+	btn1_status_history[3] = 0;
+	btn1_status_history[4] = 0;
+	btn1_status_history[5] = 0;
+}
+void setStatusIntoHistory(uint8_t status)
+{
+	if (btn1_check_motor_step_next_index == 0)
+	{
+		btn1_status_history[btn1_check_motor_step_next_index] = status;
+		btn1_check_motor_step_next_index += 1;
+		//ADC_HISTORY_DBG(status);
+		START_TIMER(g_t_ui8_S_Button_WaitingInput, 15);
+	}
+	else
+	{
+		if (btn1_status_history[btn1_check_motor_step_next_index - 1] != status)
+		{				
+			btn1_status_history[btn1_check_motor_step_next_index] = status;
+			btn1_check_motor_step_next_index += 1;
+			//ADC_HISTORY_DBG(status);
+			START_TIMER(g_t_ui8_S_Button_WaitingInput, 15);
+		}
+	}
+		
+}
+void ADC_HISTORY_DBG(uint8_t status)
+{
+	UART_Write(btn1_check_motor_step_next_index + '0');
+	if (status == 0)
+	{
+		UART_WriteString("OFF"); //DBG
+	}
+	else if (status == 1)
+	{
+		UART_WriteString("ON"); //DBG
+	}
+	else if (status == 2)
+	{
+		UART_WriteString("PRESS"); //DBG
+	}
+}
+void sendRequestToMotorStep()
+{
+	g_bF_REQUEST_BY_PASSCODE_FROM_BTN1 = 1;
 }
