@@ -18,7 +18,9 @@ struct _flag_list {
 	uint8_t bF_Task_100MS : 1;
 	uint8_t bF_Task_1S : 1;
 
+
 	/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 	uint8_t StepPWM : 1;
 	uint8_t STEP_RUN : 1;
 	uint8_t STEP_STOP : 1;
@@ -34,6 +36,7 @@ struct _flag_list {
 	uint8_t TAKE_DEMENTION : 1;
 	uint8_t WAITTINGOPEN : 1;
 	uint8_t REQUEST_BY_PASSCODE_FROM_BTN1 : 1;
+#endif 
 
 	/*******     SWITCH    ************/
 

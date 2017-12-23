@@ -20,10 +20,12 @@
   /*LED */
 	  uint8_t g_fblinkled = 0;
 
- /*****   STEP MOTOR   *******/
+	  /*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 	  volatile uint8_t g_ui8_SpeedStepValue = 0;
 	  volatile uint32_t g_ui32_StepCount=0 ;
 	  volatile uint32_t g_ui32_StepDemention= 0;
+#endif // STEP MOTOR
 
 	  /* MOTOR DC*/
 	  uint16_t g_Kp = 8;

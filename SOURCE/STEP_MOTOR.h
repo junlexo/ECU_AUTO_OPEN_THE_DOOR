@@ -15,7 +15,8 @@
 #include "Timer_count.h"
 #include "PREFERENT.h"
 
-
+/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 static uint16_t step_Fullspeed;
 static uint16_t step_Decelerating;
 static uint16_t step_Accelerating;
@@ -56,6 +57,7 @@ extern "C" {
 #ifdef __cplusplus
 } // extern "C"
 #endif
+#endif  // STEP MOTOR
 
 #endif
 

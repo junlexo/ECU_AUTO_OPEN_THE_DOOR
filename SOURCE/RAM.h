@@ -23,7 +23,8 @@ extern volatile uint16_t temperature ;
 extern  uint8_t g_fblinkled;
 
 
-/*****   STEP MOTOR   *******/
+/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 
 extern volatile uint8_t g_ui8_SpeedStepValue;
 extern volatile uint32_t g_ui32_StepCount;
@@ -34,6 +35,7 @@ extern uint16_t getVolumeDegree();
 extern uint8_t getVolumeVoltage();
 extern uint8_t isBTN1Disable();;
 
+#endif
 /* MOTOR DC */
 extern uint16_t g_Kp;
 extern uint16_t g_Ki;

@@ -30,6 +30,9 @@ void OS_TimerCounter_Init()
 	OCR1A = 24;
 	TIMSK1 |= (1 << OCIE1A);
 
+
+	/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 	/*timer 2*/
 	// Use Timer2 with 1 ms interrupts
 	TCCR2A = 0;// set entire TCCR2A register to 0
@@ -39,6 +42,8 @@ void OS_TimerCounter_Init()
 	TCCR2A |= (1 << WGM21);
 	TIMSK2 |= (1 << OCIE2A);
 	OCR2A = 50;
+#endif // STEP MOTOR
+
 	sei();
 }
 
@@ -277,7 +282,11 @@ ISR(TIMER1_COMPA_vect)
 	OS_Timer_Counter();
 	callbackFunc();
 }
+
+/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 ISR(TIMER2_COMPA_vect)
 {
 	STEP_PWM();
 }
+#endif // STEP MOTOR

@@ -48,7 +48,9 @@ void Init_FLAG_SYS()
 	bF_Task_10MS = 0;
 	bF_Task_100MS = 0;
 	bF_Task_1S = 0;
-	/*STEP MOTOR */
+	/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
+
 	g_bF_StepPWM = 0;
 	g_bF_STEPMOTOR_Running = 0;
 	g_bF_STEPMOTOR_Stop = 1;
@@ -63,7 +65,7 @@ void Init_FLAG_SYS()
 	g_bF_STEP_ReOpen = 0;
 	g_bF_STEP_TAKE_DEMENTION = 0;
 
-
+#endif  // STEP MOTOR
 
 	/*SWITCH */
 	g_bF_SW1_Status = 0;

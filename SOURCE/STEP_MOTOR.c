@@ -3,6 +3,8 @@
 // 
 
 #include "STEP_MOTOR.h"
+/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 
 void STEP_MANNER()
 {
@@ -527,3 +529,5 @@ void STEP_Speed(uint8_t ui8_StepSpeed_SET)
 	}
 	g_ui8_SpeedStepValue = 275 - ui8_StepSpeed_SET;
 }
+
+#endif // STEP MOTOR 

@@ -68,11 +68,10 @@ extern struct _timer_uint32_100us  timer_uint32_100us;
 /* List variable timer type uint8 */
 struct _timer_uint8_1ms
 {
-	uint8_t Step_SpeedPWM;
-
+	uint8_t dummy;
 };
 extern struct _timer_uint8_1ms timer_uint8_1ms;
-
+#define	t_ui8_1ms_dummy		timer_uint8_1ms.dummy
 
 #endif
 
@@ -105,7 +104,7 @@ extern struct _timer_uint32_1ms timer_uint32_1ms;
 /* List variable timer type uint8 */
 struct _timer_uint8_10ms
 {
-	uint8_t SW_WaitTime;
+	uint8_t SWWaitTime;
 	uint8_t UART_WritingWaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
@@ -180,8 +179,13 @@ struct _timer_uint8_1000ms
 {
 	uint8_t Led_BlinkingWaitTime;
 	uint8_t UART_DebuggingOverTime;
+
+	/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 	uint8_t StepMotorWattingClose;
 	uint8_t StepMotorWattingOpen;
+#endif // STEP MOTOR
+
 	uint8_t WaitingPutButton;
 	uint8_t ReEnableButton1;
 };
@@ -218,14 +222,16 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 /******************************* Define task processing interval *********************************************/
 
 /*TIME */
-#define	SW_WaitTime									timer_uint8_10ms.SW_WaitTime
+#define	SW_WaitTime									timer_uint8_10ms.SWWaitTime
 /*LED */
 #define LedBlinkingWaitTime							timer_uint8_1000ms.Led_BlinkingWaitTime
 #define	LedBlinkingWaitTimeMS						timer_uint8_100ms.Led_BlinkingWaitTimeMS
-/*STEP  MOTOR */
+/*****   STEP MOTOR       ******/
+#if STEPMOTOR == ON
 #define	g_u8_StepSpeed_100us			            timer_uint8_1ms.Step_SpeedPWM
 #define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
 #define g_t_ui8_S_StepMotor_WattingOpen				timer_uint8_1000ms.StepMotorWattingOpen
+#endif // STEP MOTOR
 /*UART */
 #define UARTWritingWaitTime							timer_uint8_10ms.UART_WritingWaitTime
 #define UARTDebuggingOverTime						timer_uint8_1000ms.UART_DebuggingOverTime
