@@ -94,7 +94,7 @@ void Init_FLAG_SYS()
 	g_bF_UART_Error_Frame = 0;
 
 	/* SYSTEM*/
-	g_bF_SystemError = 0;
+	g_SystemError = NON_ERROR;
 
 }
 void Init_RAM_SYS()

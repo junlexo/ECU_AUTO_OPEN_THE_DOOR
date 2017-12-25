@@ -14,7 +14,7 @@ void LED_Init()
 void LED()
 {
 	//When have Error ERROR_VOLUME or ERROR_BTN turn off LED1 and LED2
-	if (g_bF_SystemError == ERROR_VOLUME || g_bF_SystemError == ERROR_BTN)
+	if (g_SystemError == ERROR_VOLUME || g_SystemError == ERROR_BTN)
 	{
 #ifdef OPTION2
 		if (TSTFLAG(g_bF_Led_State) == 0) {
@@ -32,7 +32,7 @@ void LED()
 		IOPort_Write(D_13, LOW);
 	}
 	//When have Error turn off LED1 and LED2 blink 1s
-	else if (g_bF_SystemError == ERROR_UART)
+	else if (g_SystemError == ERROR_UART)
 	{
 		IOPort_Write(D_12, LOW);
 		uint8_t Pin[2];
@@ -71,7 +71,7 @@ void LED()
 		showLED(Pin, 2, 2);
 	}
 	//When normal LED1 and LED2 blink 1s
-	else if (g_bF_SystemError == NON_ERROR)
+	else if (g_SystemError == NON_ERROR)
 	{
 		uint8_t Pin[2];
 		Pin[0] = D_13;
@@ -103,6 +103,6 @@ void showLED(uint8_t Pin[2], uint8_t time, uint8_t nPin)
 }
 void resetFlagLED()
 {
-	g_bF_SystemError = NON_ERROR;
+	g_SystemError = NON_ERROR;
 	g_bF_UART_Error_Frame = 0;
 }

@@ -10,6 +10,9 @@
 extern uint8_t currentTimer;
 extern volatile uint8_t count_list;
 
+/**** ERROR FLAG ****/
+uint8_t g_SystemError;
+
 /*  ADC  */
 extern volatile uint8_t PB0_State ;
 extern volatile uint8_t PB1_State ;

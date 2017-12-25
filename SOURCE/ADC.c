@@ -85,7 +85,7 @@ void ADCUpdateEvery10ms()
 			/*Check ADC and update system error flag for ADC_VOLUME*/
 			if (adc_info[i].ADC_CountTimeMS >= VOLUME_ERROR_TIME_MS)
 			{
-				//g_bF_SystemError = ERROR_VOLUME;
+				//g_SystemError = ERROR_VOLUME;
 			}
 			else
 			{
@@ -103,7 +103,7 @@ void ADCUpdateEvery10ms()
 			/*Check ADC and update system error flag for ADC_BTN/ADC_FIR*/
 			if (adc_info[i].ADC_CountTimeMS >= BTN_ERROR_TIME_MS)
 			{
-				g_bF_SystemError = ERROR_BTN;
+				g_SystemError = ERROR_BTN;
 			}
 			else
 			{

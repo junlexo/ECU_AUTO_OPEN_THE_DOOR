@@ -48,7 +48,7 @@ static volatile  uint16_t data = 0U;
 
 void DBG_checkErrorUART(uint8_t c)
 {
-	if (waitForHandling == 1 || g_bF_SystemError == ERROR_UART) {
+	if (waitForHandling == 1 || g_SystemError == ERROR_UART) {
 		UART_WriteString("stop");
 		return;
 	}
@@ -72,7 +72,7 @@ void DBG_checkErrorUART(uint8_t c)
 		else {
 			// error
 			bufferCount = 0;
-			g_bF_SystemError = ERROR_UART;
+			g_SystemError = ERROR_UART;
 			uart_dbg_mode = NONE;
 			return;
 		}
@@ -99,7 +99,7 @@ void DBG_NotifyUARTError()
 		if (uart_dbg_notifyError == 1) {
 			//error
 			bufferCount = 0;
-			g_bF_SystemError = ERROR_UART;
+			g_SystemError = ERROR_UART;
 			uart_dbg_mode = NONE;
 		}
 	}
@@ -108,7 +108,7 @@ void DBG_NotifyUARTError()
 void DBG_ReadFrame()
 {
 	if (waitForHandling == 1
-		&& g_bF_SystemError != ERROR_UART
+		&& g_SystemError != ERROR_UART
 		&& uart_dbg_mode != NONE)
 	{
 		if (isControlEnabled) {

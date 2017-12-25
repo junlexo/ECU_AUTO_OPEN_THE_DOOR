@@ -59,9 +59,6 @@ struct _flag_list {
 	/* SYS MARCHINE LEARNING*/
 	uint8_t DOOR_OPEN : 1;
 
-	/**** ERROR FLAG ****/
-	uint8_t g_iF_SystemError;
-
 	/***** LED ****/
 	uint8_t g_bF_Led_State : 1;
 
@@ -120,8 +117,7 @@ extern struct _flag_list flags_list;
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
 /* UART*/
 #define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
-/* SYSTEM*/
-#define g_bF_SystemError				flags_list.g_iF_SystemError
+
 /* FailSafe*/
 /* Step Motor*/
 #define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	
