@@ -101,7 +101,7 @@ extern struct _flag_list flags_list;
 #define g_bF_STEP_ReOpen				flags_list.REOPEN
 #define g_bF_STEP_TAKE_DEMENTION		flags_list.TAKE_DEMENTION
 #define g_bF_STEP_WAITTING_OPEN			flags_list.WAITTINGOPEN
-#define g_bF_REQUEST_BY_PASSCODE_FROM_BTN1			flags_list.REQUEST_BY_PASSCODE_FROM_BTN1
+#define g_bF_REQUEST_BY_PASSCODE_FROM_BTN1	flags_list.REQUEST_BY_PASSCODE_FROM_BTN1
 
 /*SWITCH */
 #define g_bF_SW1_Status					flags_list.SW1_STATUS

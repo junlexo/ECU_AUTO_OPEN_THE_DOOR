@@ -81,7 +81,7 @@ enum ERROR_CODE
 	NON_ERROR = 0,
 	ERROR_VOLUME,
 	ERROR_BTN,
-	ERROR_UART
+	ERROR_UART,
 };
 
 
@@ -103,7 +103,7 @@ enum ERROR_CODE
 
 #define STEP_SPEED_MAX 255
 #define STEP_SPEED_MIN 20
-#define SPEED_DEFAULT 50
+#define SPEED_DEFAULT 75
 #define PIN_SPEED  9
 #define PIN_DIR 8
 #define PIN_HOLD 7

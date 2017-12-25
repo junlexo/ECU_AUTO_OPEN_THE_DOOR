@@ -34,6 +34,7 @@ void STEP_MANNER()
 		CLRFLAG(g_bF_FIR_Status);
 	}
 
+
 #else
 	g_bF_DOOR_OPEN = 0;
 	g_bF_BT2_Press = 0;
@@ -43,16 +44,16 @@ void STEP_MANNER()
 	STEP_InitStart();
 	if (TSTFLAG(g_bF_STEP_Init))
 	{
-		g_ui32_StepDemention = 3000;
-		g_bF_STEP_TAKE_DEMENTION = 1;
-		g_bF_FIR_Status = 0;
-
-		if ((TSTFLAG(g_bF_BT2_Press)) || (TSTFLAG(g_bF_DOOR_OPEN)))
+		if ((TSTFLAG(g_bF_BT2_Press)) || (TSTFLAG(g_bF_DOOR_OPEN)) || (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1)))
 		{
 			if ((g_ui32_StepDemention != 0) && (g_bF_STEP_Start == 0))
 			{
 				SETFLAG(g_bF_STEP_Start);
 				SETFLAG(g_bF_STEPMOTOR_DIR_Open);
+				if (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1))
+				{
+					CLRFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1);
+				}
 			}
 			else
 			{
@@ -85,6 +86,7 @@ void STEP_Control()
 			if (!TSTFLAG(g_bF_SW2_Status))
 			{
 				STEP_Running_Open();
+				STEP_SPEED_RANGE();
 				STEP_CheckTimerOpen();
 				g_bF_READ_DEMENTION = 0;
 			}
@@ -108,20 +110,17 @@ void STEP_Control()
 			}
 			else if ((TSTFLAG(g_bF_FIR_Status)) || (TSTFLAG(g_bF_BT1_Press)))
 			{
-				if (!(TSTFLAG(g_bF_FIR_Status)))
-				{
 					SETFLAG(g_bF_STEP_ReOpen);
 					STEP_STOP();
 					STEP_READ_DEMENTION();
 					STEP_SPEED_RANGE();
 					SETFLAG(g_bF_STEPMOTOR_DIR_Open);
 					CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
-				}
-
 			}
 			else if ((TSTFLAG(g_bF_STEP_Start)))
 			{
 				STEP_Running_Close();
+				STEP_SPEED_RANGE();
 				g_bF_READ_DEMENTION = 0;
 				if ((CHECK_TIMER(g_t_ui8_S_StepMotor_WattingClose)))
 				{
@@ -155,6 +154,7 @@ void STEPMOTOR_CheckFailSafe()
 	if (TSTFLAG(g_bF_FS_StepMotor_TimeClose))
 	{
 		// ma loi 0x06
+
 	}
 	if (TSTFLAG(g_bF_FS_StepMotor_TimeOpen))
 	{
@@ -387,27 +387,25 @@ void STEP_OPEN_DEFAULT()
 
 }
 
-
-
 void STEP_Control_Speed()
 {
 
-	if (TSTFLAG(g_bF_STEPMOTOR_Running) && TSTFLAG(g_bF_STEP_Cal_Range))
+	if (TSTFLAG(g_bF_STEPMOTOR_Running))
 	{
 		fullspeed = step_Decelerating + step_Fullspeed;
 
 		//accelerating = step_Decelerating + step_Fullspeed + step_Accelerating;
 		if (g_ui32_StepCount < step_Decelerating)
 		{
-			step_Speed = step_Speed + 10;
+			step_Speed = 50;
 		}
 		else if ((g_ui32_StepCount > step_Decelerating) && (g_ui32_StepCount <  fullspeed))
 		{
-			step_Speed = 240;
+			step_Speed = 220;
 		}
 		else if (g_ui32_StepCount >  fullspeed)
 		{
-			step_Speed = step_Speed - 10;
+			step_Speed = 75;
 		}
 		else
 		{
@@ -420,6 +418,7 @@ void STEP_Control_Speed()
 		step_Speed = 100; // Value Default
 		STEP_Speed(step_Speed);
 	}
+
 }
 
 

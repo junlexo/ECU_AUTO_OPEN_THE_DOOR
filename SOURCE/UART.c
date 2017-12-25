@@ -80,7 +80,30 @@ void UART_WriteNumber(uint32_t num)
 	for (uint8_t j = i - 1; j >= 1; j--) {
 		UART_Write(str[j]);
 	}
+	
 }
+
+void USART_SendIntNum(uint16_t num)
+{
+	uchar_t str[10];
+	uint8_t i = 1;
+	if (num == 0) {
+		str[i] = '0';
+		i++;
+	}
+	else {
+		while (num) {
+			str[i] = num % 10 + '0';
+			i++;
+			num = num / 10;
+		}
+	}
+	for (uint8_t j = i - 1; j >= 1; j--) {
+		UART_Write(str[j]);
+	}
+}
+
+
 
 uint8_t UART_IsRxBufferEmpty(void) {
 	// If the head and tail are equal, the buffer is empty.
