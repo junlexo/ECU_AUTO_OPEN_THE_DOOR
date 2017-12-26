@@ -3,10 +3,20 @@
 // 
 
 #include "EEPROM.h"
+#include "RAM.h"
 #include <avr/interrupt.h>
 
 static volatile uint8_t ee_isAvailable = 1;
 static volatile uint16_t ee_address = 0;
+
+const uint8_t ee_angle_id = 0x00;
+const uint8_t ee_turnOnTime_id = 0x04;
+const uint8_t ee_turnOffTime_id = 0x06;
+const uint8_t ee_kp_id = 0x08;
+const uint8_t ee_kd_id = 0x0A;
+const uint8_t ee_ki_id = 0x0C;
+const uint8_t ee_distance_id = 0x0E;
+const uint8_t ee_voltage_id = 0x20;
 
 struct DataPacket {
 	uint8_t _address;
@@ -19,15 +29,7 @@ static volatile uint8_t ee_stackCount = 0;
 
 void EEPROM_Init()
 {
-	if (EEPROM_Available()) {
-		uint8_t dataArr[4];
-		EEPROM_ReadBlock(ANGLE_ADDRESS, dataArr, 4);
-		//angle = (dataArr[2] << 8) | dataArr[3];
-		EEPROM_ReadBlock(TEMPERATURE_ADDRESS, dataArr, 2);
-		//temperature = (dataArr[0] << 8) | dataArr[1];
-		EEPROM_ReadBlock(VOLTAGE_ADDRESS, dataArr, 2);
-		//voltage = (dataArr[0] << 8) | dataArr[1];
-	}
+	EEPROM_GetAllData();
 }
 
 uint8_t EEPROM_ReadByte(uint16_t address)
@@ -96,6 +98,27 @@ uint8_t EEPROM_WriteBlock(uint16_t address, uint8_t * data, uint8_t sizeBlock)
 
 uint8_t EEPROM_Available() {
 	return ee_isAvailable;
+}
+
+void EEPROM_GetAllData()
+{
+	if (ee_isAvailable == 1) {
+		uint8_t dataArr[4];
+		EEPROM_ReadBlock(ee_angle_id, dataArr, 4);
+		ADC_angle = (dataArr[0] << 24) | (dataArr[1] << 16) | (dataArr[2] << 8) | dataArr[3];
+		EEPROM_ReadBlock(ee_voltage_id, dataArr, 2);
+		ADC_voltage = (dataArr[0] << 8) | dataArr[1];
+	}
+}
+
+void EEPROM_SaveAllData()
+{
+	if (ee_isAvailable == 1) {
+		uint8_t angle4byte[] = { ADC_angle >> 24, ADC_angle >> 16, ADC_angle >> 8, ADC_angle };
+		uint8_t voltage2byte[] = { ADC_voltage >> 8, ADC_voltage };
+		EEPROM_WriteBlock(ee_angle_id, angle4byte, 4);
+		EEPROM_WriteBlock(ee_voltage_id, voltage2byte, 2);
+	}
 }
 
 ISR(EE_READY_vect) {

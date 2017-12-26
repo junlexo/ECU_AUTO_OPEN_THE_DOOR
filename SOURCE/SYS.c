@@ -90,8 +90,8 @@ void Init_FLAG_SYS()
 
 	g_bF_DOOR_OPEN = 0;
 
-	/* UART*/
-	g_bF_UART_Error_Frame = 0;
+	/* ADC*/
+	g_bF_ReadingVol_state = 1;
 
 	/* SYSTEM*/
 	g_SystemError = NON_ERROR;
@@ -100,4 +100,8 @@ void Init_FLAG_SYS()
 void Init_RAM_SYS()
 {
 
+}
+
+void Application_SYS() {
+	OS_runApplicationTasks();
 }

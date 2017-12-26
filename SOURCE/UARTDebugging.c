@@ -38,13 +38,12 @@ static void processReadingMode();
 static void processWrittingMode();
 uint32_t pow(uint16_t num, uint8_t n);
 static void setConnectionState();
-static void BDG_writeData(uint8_t id);
+static void BDG_RespondData(uint8_t id);
 static void BDG_saveData(uint8_t id);
 
-
-static volatile uint8_t commandID = 0;
-static volatile uint8_t dataID = 0xFF;
-static volatile  uint16_t data = 0U;
+static volatile uint8_t uart_commandID = 0;
+static volatile uint8_t uart_dataID = 0xFF;
+static volatile  uint32_t uart_data = 0U;
 
 void DBG_checkErrorUART(uint8_t c)
 {
@@ -118,6 +117,7 @@ void DBG_ReadFrame()
 			}
 			else if (uart_dbg_mode == WRITE_DATA_MODE)
 			{
+				CLRFLAG(g_bF_ReadingVol_state);
 				processWrittingMode();
 			}
 			else {}
@@ -130,26 +130,28 @@ void DBG_ReadFrame()
 
 void DBG_RespondUART()
 {
-	if (commandID != 0 && isControlEnabled == 1) {
-		if (uart_dbg_mode == READ_DATA_MODE || uart_dbg_mode == WRITE_DATA_MODE) {
-			uint16_t responseId = commandID + RESPONSEOFFSET;
-			UART_Write((responseId / 100) + '0');
-			UART_Write((responseId / 10 % 10) + '0');
-			UART_Write(responseId % 10 + '0');
-			UART_Write(',');
-			UART_Write(dataID + '0');
-			UART_Write(',');
-
-			UART_WriteString("1234");
-			UART_Write('/');
-			UART_Write('\n');
+	if (IsTimeOut(UARTWritingWaitTime) == 1) {
+		if (uart_commandID != 0 && isControlEnabled == 1) {
+			if (uart_dbg_mode == READ_DATA_MODE || uart_dbg_mode == WRITE_DATA_MODE) {
+				uint16_t responseId = uart_commandID + RESPONSEOFFSET;
+				UART_Write((responseId / 100) + '0');
+				UART_Write((responseId / 10 % 10) + '0');
+				UART_Write(responseId % 10 + '0');
+				UART_Write(',');
+				UART_Write(uart_dataID + '0');
+				UART_Write(',');
+				BDG_RespondData(uart_dataID);
+				UART_Write('/');
+				UART_Write('\n');
+			}
 		}
+		StartTimer(UARTWritingWaitTime,25);
 	}
 }
 
 static void processReadingMode() {
-	commandID = 1;
-	dataID = 0;
+	uart_commandID = 1;
+	uart_dataID = 0;
 	uint8_t n = 0;
 	uint8_t i = bufferCount - 3;
 	while (i >= 0) {
@@ -158,16 +160,16 @@ static void processReadingMode() {
 			n = 0;
 			break;
 		}
-		dataID += (frame_buffer[i] - '0') * (uint16_t)pow((uint16_t)10, n);
+		uart_dataID += (frame_buffer[i] - '0') * (uint16_t)pow((uint16_t)10, n);
 		n++;
 		i--;
 	}
 }
 
 static void processWrittingMode() {
-	commandID = 8;
-	dataID = 0;
-	data = 0;
+	//uart_commandID = 8;
+	//uart_dataID = 0;
+	uart_data = 0;
 	uint8_t n = 0;
 	uint8_t i = bufferCount - 2;
 	while (i >= 0) {
@@ -176,7 +178,7 @@ static void processWrittingMode() {
 			n = 0;
 			break;
 		}
-		data += (frame_buffer[i] - '0') * (uint16_t)pow((uint16_t)10, n);
+		uart_data += (frame_buffer[i] - '0') * pow((uint16_t)10, n);
 		n++;
 		i--;
 	}
@@ -184,11 +186,11 @@ static void processWrittingMode() {
 		if (frame_buffer[i] == ',') {
 			break;
 		}
-		dataID += (frame_buffer[i] - '0') * (uint16_t)pow((uint16_t)10, n);
+		uart_dataID += (frame_buffer[i] - '0') * (uint16_t)pow((uint16_t)10, n);
 		i--;
 		n++;
 	}
-	BDG_saveData(dataID);
+	BDG_saveData(uart_dataID);
 }
 
 uint32_t pow(uint16_t num, uint8_t n)
@@ -225,27 +227,35 @@ static void setConnectionState() {
 	else {}
 }
 
-static void BDG_writeData(uint8_t id) {
+static void BDG_RespondData(uint8_t id) {
 	switch (id)
 	{
-	case 0x00:
+	case READING_VOLTAGE_ID:
 	{
+		UART_WriteNumber(ADC_voltage);
 		break;
 	}
-	case 0x01:
+	case READING_Angle_ID:
 	{
+		UART_WriteNumber(ADC_angle);
 		break;
 	}
-	case 0x02:
+	case READING_SPEED_ID:
 	{
+		UART_Write('0');
+		UART_Write('0');
 		break;
 	}
-	case 0x03:
+	case READING_SYSTEM_ERROR_ID:
 	{
+		UART_Write('0');
+		UART_Write('0');
 		break;
 	}
-	case 0x04:
+	case READING_DISTANCE_ID:
 	{
+		UART_Write('0');
+		UART_Write('0');
 		break;
 	}
 	default:
@@ -256,23 +266,25 @@ static void BDG_writeData(uint8_t id) {
 static void BDG_saveData(uint8_t id) {
 	switch (id)
 	{
-	case 0x00:
+	case WRITTING_VOLTAGE_ID:
+	{
+		ADC_voltage = (uint16_t)uart_data;
+		break;
+	}
+	case WRITTING_Angle_ID:
+	{
+		ADC_angle = uart_data;
+		break;
+	}
+	case WRITTING_SPEED_ID:
 	{
 		break;
 	}
-	case 0x01:
+	case WRITTING_SYSTEM_ERROR_ID:
 	{
 		break;
 	}
-	case 0x02:
-	{
-		break;
-	}
-	case 0x03:
-	{
-		break;
-	}
-	case 0x04:
+	case WRITTING_REQUESTMOTOR_ID:
 	{
 		break;
 	}

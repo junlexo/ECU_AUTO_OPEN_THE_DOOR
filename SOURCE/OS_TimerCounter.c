@@ -12,10 +12,9 @@
 #include <avr/interrupt.h>
 #include "Timer_count.h"
 
-static volatile uint8_t counter_1ms = 0U;
 static volatile uint8_t counter_10ms = 0U;
-static volatile uint16_t counter_100ms = 0U;
-static volatile uint16_t counter_1000ms = 0U;
+static volatile uint8_t counter_100ms = 0U;
+static volatile uint16_t counter_1s = 0U;
 static void	(*callbackFunc)(void);
 static void OS_Timer_Counter(void);
 
@@ -27,7 +26,7 @@ void OS_TimerCounter_Init()
 	TCCR1B = 0;
 	TIMSK1 = 0;
 	TCCR1B |= (1 << WGM12) | (1 << CS11) | (1 << CS10);
-	OCR1A = 24;
+	OCR1A = 249;
 	TIMSK1 |= (1 << OCIE1A);
 
 
@@ -58,10 +57,9 @@ void OS_Timer_Counter(void)
 	uint16_t *p16;
 	uint32_t *p32;
 
-	counter_1ms++;
 	counter_10ms++;
 	counter_100ms++;
-	counter_1000ms++;
+	counter_1s++;
 
 	SETFLAG(bF_Task_100US);
 	/********************************   100US    *************************************************/
@@ -103,8 +101,6 @@ void OS_Timer_Counter(void)
 #endif
 
 	/********************************   1MS    *************************************************/
-	if (counter_1ms >= 10)
-	{
 #if	TIMER_UINT8_1MS != 0U
 		/* decrement 1Byte(uint8_t) Timer Variable */
 		for (p8 = (uint8_t*)&timer_uint8_1ms;
@@ -141,12 +137,9 @@ void OS_Timer_Counter(void)
 			}
 		}
 #endif
-		counter_1ms = 0U; /* Clear counter */
-		SETFLAG(bF_Task_1MS);
-	}
 
 	/********************************   10MS    *************************************************/
-	if (counter_10ms >= 100U)
+	if (counter_10ms >= 10U)
 	{
 #if	TIMER_UINT8_10MS != 0U
 		/* decrement 1Byte(uint8_t) Timer Variable */
@@ -186,10 +179,11 @@ void OS_Timer_Counter(void)
 #endif
 		counter_10ms = 0U;	/* Clear counter */
 		SETFLAG(bF_Task_10MS);
+		SETFLAG(bF_AppTask_10MS);
 	}
 
 	/********************************   100MS    *************************************************/
-	if (counter_100ms >= 1000U)
+	if (counter_100ms >= 100U)
 	{
 #if	TIMER_UINT8_100MS != 0U
 
@@ -233,7 +227,7 @@ void OS_Timer_Counter(void)
 	}
 
 	/********************************   1000MS    *************************************************/
-	if (counter_1000ms >= 10000U)
+	if (counter_1s >= 1000U)
 	{
 #if	TIMER_UINT8_1000MS != 0U
 		/* decrement 1Byte(uint8_t) Timer Variable */
@@ -271,7 +265,7 @@ void OS_Timer_Counter(void)
 			}
 		}
 #endif
-		counter_1000ms = 0U;	/* Clear Counter */
+		counter_1s = 0U;	/* Clear Counter */
 		SETFLAG(bF_Task_1S);
 	}
 }

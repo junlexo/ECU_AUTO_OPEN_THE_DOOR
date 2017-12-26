@@ -8,7 +8,8 @@
 extern "C" {
 #endif
 
-	extern  void Task_10MS();
+	extern void Task_10MS();
+	extern void HandleAppTask_10MS();
 
 #ifdef __cplusplus
 } // extern "C"

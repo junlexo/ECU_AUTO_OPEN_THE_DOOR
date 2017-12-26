@@ -15,6 +15,7 @@ struct _flag_list {
 	uint8_t bF_Task_100US : 1;
 	uint8_t bF_Task_1MS : 1;
 	uint8_t bF_Task_10MS : 1;
+	uint8_t bF_AppTask_10MS : 1;
 	uint8_t bF_Task_100MS : 1;
 	uint8_t bF_Task_1S : 1;
 
@@ -63,7 +64,9 @@ struct _flag_list {
 	uint8_t g_bF_Led_State : 1;
 
 	/***** UART  ****/
-	uint8_t g_bF_UART_Error_Frame : 1;
+
+	/***** UART  ****/
+	uint8_t g_bF_ReadingVol_state : 1;
 
 	/******  FAIL SAFE *******/
 	uint8_t StepMotor_TimeClose : 1;
@@ -80,6 +83,7 @@ extern struct _flag_list flags_list;
 #define bF_Task_100US       			flags_list.bF_Task_100US
 #define bF_Task_1MS 					flags_list.bF_Task_1MS
 #define bF_Task_10MS   					flags_list.bF_Task_10MS
+#define bF_AppTask_10MS					flags_list.bF_AppTask_10MS
 #define bF_Task_100MS  					flags_list.bF_Task_100MS
 #define bF_Task_1S  					flags_list.bF_Task_1S
 
@@ -116,8 +120,8 @@ extern struct _flag_list flags_list;
 /* SYS MARCHINE LEARNING*/
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
 /* UART*/
-#define g_bF_UART_Error_Frame			flags_list.g_bF_UART_Error_Frame
-
+/* ADC*/
+#define g_bF_ReadingVol_state			flags_list.g_bF_ReadingVol_state
 /* FailSafe*/
 /* Step Motor*/
 #define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	

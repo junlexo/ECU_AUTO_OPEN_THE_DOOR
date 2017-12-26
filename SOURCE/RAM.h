@@ -14,12 +14,10 @@ extern volatile uint8_t count_list;
 uint8_t g_SystemError;
 
 /*  ADC  */
-extern volatile uint8_t PB0_State ;
-extern volatile uint8_t PB1_State ;
-extern volatile uint8_t PB2_State ;
+
 extern volatile uint8_t buttonState ;
-extern volatile uint16_t voltage ;
-extern volatile uint16_t angle ;
+extern volatile uint16_t ADC_voltage;
+extern volatile uint32_t ADC_angle;
 extern volatile uint16_t temperature ;
 
 /*LED */
@@ -43,6 +41,10 @@ extern uint8_t isBTN1Disable();;
 extern uint16_t g_Kp;
 extern uint16_t g_Ki;
 extern uint16_t g_Kd;
+
+
+/* ADC */
+
 
 /* define use ADC in here */
 /*

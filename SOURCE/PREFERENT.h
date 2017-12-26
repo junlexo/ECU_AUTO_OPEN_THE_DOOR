@@ -91,9 +91,6 @@ enum ERROR_CODE
 #define BLINK1S 1000
 
 /*ADC */
-#define ANGLE_ADDRESS 0x00
-#define TEMPERATURE_ADDRESS 0x04
-#define VOLTAGE_ADDRESS 0x20
 
 /*IO */
 #define	MAX_PORT_NUM 22

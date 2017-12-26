@@ -12,6 +12,7 @@ extern void Software_Init();
 extern void CPU_Init();
 static void Init_FLAG_SYS();
 static void Init_RAM_SYS();
+void Application_SYS();
 
 #ifdef __cplusplus
 } // extern "C"
