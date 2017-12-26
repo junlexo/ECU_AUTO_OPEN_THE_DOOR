@@ -17,7 +17,7 @@ void Task_10MS()
 	}
 	ADCUpdateEvery10ms();
 	
-	if (TSTFLAG(g_bF_eeprom_writeData) == 1) {
+	if (BTN1_STATUS == ADC_BTN_PRESS && BTN2_STATUS == ADC_BTN_PRESS) {
 		EEPROM_SaveAllData();
 	}
 }

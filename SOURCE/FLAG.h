@@ -67,7 +67,7 @@ struct _flag_list {
 	uint8_t g_bF_eeprom_writeData : 1;
 
 	/***** ADC  ****/
-	uint8_t g_bF_ReadingVol_state : 1;
+	uint8_t g_bF_disableSensor_state : 1;
 
 	/******  FAIL SAFE *******/
 	uint8_t StepMotor_TimeClose : 1;
@@ -123,7 +123,7 @@ extern struct _flag_list flags_list;
 /* EEPROM*/
 #define g_bF_eeprom_writeData			flags_list.g_bF_eeprom_writeData
 /* ADC*/
-#define g_bF_ReadingVol_state			flags_list.g_bF_ReadingVol_state
+#define g_bF_disableSensor_state			flags_list.g_bF_disableSensor_state
 /* FailSafe*/
 /* Step Motor*/
 #define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	

@@ -96,7 +96,7 @@ void Init_FLAG_SYS()
 	g_bF_eeprom_writeData = 0;
 
 	/* ADC*/
-	g_bF_ReadingVol_state = 1;
+	g_bF_disableSensor_state = 0;
 
 	/* SYSTEM*/
 	g_SystemError = NON_ERROR;
