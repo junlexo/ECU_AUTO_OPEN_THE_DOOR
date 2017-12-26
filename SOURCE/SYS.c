@@ -92,6 +92,9 @@ void Init_FLAG_SYS()
 
 	g_bF_DOOR_OPEN = 0;
 
+	/* EEPROM */
+	g_bF_eeprom_writeData = 0;
+
 	/* ADC*/
 	g_bF_ReadingVol_state = 1;
 

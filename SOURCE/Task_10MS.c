@@ -8,6 +8,7 @@
 #include "Timer_count.h"
 #include "ADC.h"
 #include "UARTDebugging.h"
+#include "EEPROM.h"
 
 void Task_10MS()
 {
@@ -15,6 +16,10 @@ void Task_10MS()
 		SW();
 	}
 	ADCUpdateEvery10ms();
+	
+	if (TSTFLAG(g_bF_eeprom_writeData) == 1) {
+		EEPROM_SaveAllData();
+	}
 }
 
 void HandleAppTask_10MS() {

@@ -97,14 +97,9 @@ void EEPROM_GetAllData()
 	if (ee_isAvailable == 1) {
 		uint8_t dataArr[4];
 		EEPROM_ReadBlock(ee_angle_id, dataArr, 4);
-		uint32_t angle = (dataArr[0] << 24) | (dataArr[1] << 16) | (dataArr[2] << 8) | dataArr[3];
+		ADC_angle = (dataArr[0] << 24) | (dataArr[1] << 16) | (dataArr[2] << 8) | dataArr[3];
 		EEPROM_ReadBlock(ee_voltage_id, dataArr, 2);
-		uint16_t voltage = (dataArr[0] << 8) | dataArr[1];
-		UART_WriteString("angle: ");
-		UART_WriteNumber(angle);
-		UART_WriteString(" voltage: ");
-		UART_WriteNumber(voltage);
-		UART_Write('\n');
+		ADC_voltage = (dataArr[0] << 8) | dataArr[1];
 	}
 }
 
@@ -115,11 +110,6 @@ void EEPROM_SaveAllData()
 		uint8_t voltage2byte[] = { ADC_voltage >> 8, ADC_voltage };
 		EEPROM_WriteBlock(ee_angle_id, angle4byte, 4);
 		EEPROM_WriteBlock(ee_voltage_id, voltage2byte, 2);
-		UART_WriteString("angleW: ");
-		UART_WriteNumber(ADC_angle);
-		UART_WriteString(" voltageW: ");
-		UART_WriteNumber(ADC_voltage);
-		UART_Write('\n');
 	}
 }
 
