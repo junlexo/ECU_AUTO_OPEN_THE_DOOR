@@ -14,6 +14,7 @@
 #include "EEPROM.h"
 #include "UART.h"
 
+static void maintainSYS();
 
 void CPU_Init()
 {
@@ -30,9 +31,10 @@ void Hardware_Init()
 	SW_Init();
 	ADC_init();
 	OS_Init();
+	WDT_Init();
+	WDT_RegisterFunc(&maintainSYS);
 
 	//bF_Hardware_Init = 1;
-
 }
 void Software_Init()
 {
@@ -99,9 +101,17 @@ void Init_FLAG_SYS()
 }
 void Init_RAM_SYS()
 {
-
+	
 }
 
 void Application_SYS() {
 	OS_runApplicationTasks();
+	WDT_Reset();
+}
+
+void maintainSYS()
+{
+	UART_WriteString("reset \n");
+	EEPROM_SaveAllData();
+	Software_Init();
 }
