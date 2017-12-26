@@ -104,5 +104,4 @@ void showLED(uint8_t Pin[2], uint8_t time, uint8_t nPin)
 void resetFlagLED()
 {
 	g_SystemError = NON_ERROR;
-	g_bF_UART_Error_Frame = 0;
 }

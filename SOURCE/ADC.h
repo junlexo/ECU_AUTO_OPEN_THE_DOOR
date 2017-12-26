@@ -14,10 +14,11 @@ enum ADC_STATUS
 typedef struct _ADC_DATA 
 {
 	uint8_t ADC_index;
+	uint8_t ADC_Status;
 	uint16_t ADC_AnalogValue;
 	uint16_t ADC_VoltageValue;
-	uint8_t ADC_Status;
 	uint16_t ADC_CountTimeMS;
+	uint32_t ADC_AngleValue;
 }ADC_DATA;
 
 /**** ADC DEFINES ****/

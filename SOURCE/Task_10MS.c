@@ -15,6 +15,8 @@ void Task_10MS()
 		SW();
 	}
 	ADCUpdateEvery10ms();
-	DBG_RespondUART();
 }
 
+void HandleAppTask_10MS() {
+	DBG_RespondUART();
+}

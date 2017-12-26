@@ -16,7 +16,6 @@ extern "C" {
 	uint8_t UART_Read(void);
 	void UART_WriteString(uint8_t* str);
 	void UART_WriteNumber(uint32_t num);
-	void USART_SendIntNum(uint16_t num);
 	uint8_t UART_IsRxBufferEmpty(void);
 	uint8_t UART_IsTxBufferEmpty(void);
 	uint8_t UART_IsRxBufferFull(void);

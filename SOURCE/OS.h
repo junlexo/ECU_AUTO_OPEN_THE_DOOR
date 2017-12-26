@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 	extern void OS_Init();
-	//extern void OS_ControlTask();
+	extern void OS_runApplicationTasks();
 #ifdef __cplusplus
 } // extern "C"
 #endif

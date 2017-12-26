@@ -5,7 +5,7 @@
 #include "RAM.h"
 
 /************************************************************************************/
-#define TIMER_UINT8_100US		1U
+#define TIMER_UINT8_100US		0U
 #define TIMER_UINT16_100US		0U
 #define TIMER_UINT32_100US		0U
 

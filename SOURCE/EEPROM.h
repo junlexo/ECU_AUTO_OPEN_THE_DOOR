@@ -13,7 +13,8 @@ extern "C" {
 	uint8_t EEPROM_ReadBlock(uint16_t address, uint8_t* data, uint8_t sizeBlock);
 	uint8_t EEPROM_WriteBlock(uint16_t address, uint8_t* data, uint8_t sizeBlock);
 	uint8_t EEPROM_Available();
-
+	void EEPROM_GetAllData();
+	void EEPROM_SaveAllData();
 #ifdef __cplusplus
 } // extern "C"
 #endif

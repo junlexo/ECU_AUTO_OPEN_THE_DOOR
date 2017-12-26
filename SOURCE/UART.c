@@ -6,12 +6,12 @@
 #include <avr/interrupt.h>
 #include "UARTDebugging.h"
 
-static volatile uint8_t tx_ring_head;
-static volatile uint8_t tx_ring_tail;
+static volatile uint8_t tx_ring_head = 0;
+static volatile uint8_t tx_ring_tail = 0;
 static volatile uint8_t tx_ring_data[RING_SIZE];
 
-static volatile uint8_t rx_ring_head;
-static volatile uint8_t rx_ring_tail;
+static volatile uint8_t rx_ring_head = 0;
+static volatile uint8_t rx_ring_tail = 0;
 static volatile uint8_t rx_ring_data[RING_SIZE];
 
 static uint8_t tx_ring_add(uint8_t c);
@@ -39,8 +39,7 @@ void UART_Init(uint16_t baudRate)
 
 void UART_Write(uint8_t data) {
 	// Wait until there's room in the ring buffer
-	if (UART_IsTxBufferFull())
-		return;
+	while (UART_IsTxBufferFull());
 
 	// Add the data to the ring buffer now that there's room
 	tx_ring_add(data);
@@ -72,21 +71,6 @@ void UART_WriteNumber(uint32_t num)
 {
 	uint8_t str[11];
 	uint8_t i = 1;
-	while (num) {
-		str[i] = num % 10 + '0';
-		i++;
-		num = num / 10;
-	}
-	for (uint8_t j = i - 1; j >= 1; j--) {
-		UART_Write(str[j]);
-	}
-	
-}
-
-void USART_SendIntNum(uint16_t num)
-{
-	uchar_t str[10];
-	uint8_t i = 1;
 	if (num == 0) {
 		str[i] = '0';
 		i++;
@@ -102,7 +86,6 @@ void USART_SendIntNum(uint16_t num)
 		UART_Write(str[j]);
 	}
 }
-
 
 
 uint8_t UART_IsRxBufferEmpty(void) {
