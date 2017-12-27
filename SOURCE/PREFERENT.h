@@ -58,7 +58,7 @@
 #define START_COUNTER(counter,times) 	((counter)=(times))
 #define CHECK_COUNTER(counter) 			(((counter)==0U))
 
-
+#define SBI_V2(sfr, bit) ((*(volatile uint8_t *)((uint16_t) &(sfr))) |= (1 << (bit)))
 /******************* Typedef ******************/
 typedef void(*FuncPtr)(void*);
 typedef unsigned long ulong_t;

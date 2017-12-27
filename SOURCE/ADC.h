@@ -22,7 +22,7 @@ typedef struct _ADC_DATA
 }ADC_DATA;
 
 /**** ADC DEFINES ****/
-#define CHANNELS 6
+#define CHANNELS 8
 
 /**** LOW PASS FILTER DEFINES ****/
 
@@ -60,6 +60,7 @@ extern "C" {
 	void sendRequestToMotorStep();
 	void ADC_HISTORY_DBG(uint8_t status); //DBG
 	uint8_t isDisableReadingVolume();
+	uint16_t getVoltageA6();
 #ifdef __cplusplus
 } // extern "C"
 #endif

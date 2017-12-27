@@ -34,7 +34,8 @@ extern volatile uint32_t g_ui32_StepDemention;
 extern uint8_t getADCStatus(uint8_t);
 extern uint16_t getVolumeDegree();
 extern uint8_t getVolumeVoltage();
-extern uint8_t isBTN1Disable();;
+extern uint8_t isBTN1Disable();
+extern uint16_t getVoltageA6();
 
 #endif
 /* MOTOR DC */
@@ -62,6 +63,7 @@ ADC_FIR_STATUS == 1 <=> fir on
 #define BTN1_STATUS getADCStatus(1)
 #define BTN2_STATUS getADCStatus(2)
 #define BTN1_DISABLE isBTN1Disable()
+#define DETECT_VOLE_A6 getVoltageA6()
 #define ADC_FIR_STATUS getADCStatus(3)
 #define ADC_GET_VOLUME_DEGREE getVolumeDegree()
 #define ADC_GET_VOLUME_VOLTAGE getVolumeVoltage() 

@@ -8,7 +8,7 @@ volatile int isr_chnl;
 volatile ADC_DATA adc_info[CHANNELS];
 volatile uint16_t adc_interrupt_result[CHANNELS] = {0}; /*store adc value when interrupt*/
 volatile uint16_t adc_lpf_result[CHANNELS] = {0}; //low pass filter result
-volatile uint8_t btn1_status_history[6] = {0};
+volatile uint8_t btn1_status_history[CHANNELS] = {0};
 volatile uint8_t btn1_check_motor_step_next_index = 0;
 volatile uint8_t g_disable_btn_1 = 0;
 volatile uint8_t g_bF_BTN1_PassCode = 0; /* 0 - PassCode is invalid / 1 - PassCode is valid*/
@@ -361,4 +361,9 @@ uint8_t isDisableReadingVolume()
 {
 	/*0 - Read/ 1- */
 	return g_bF_disableSensor_state; 
+}
+
+extern uint16_t getVoltageA6()
+{
+	return adc_lpf_result[6];
 }

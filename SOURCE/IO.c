@@ -11,8 +11,6 @@ void IO_Init()
 /*****     LED    *****/
 	SetPin(D_12, OUTPUT); // Blink LED1 in number_port 12
 	SetPin(D_13, OUTPUT); // Blink LED0 in number_port 13
-/*****     DETECT FACE     *****/
-	SetPin(A_6, INPUT_PULLUP); // DETECT in number_port A_6 on nano board
 /*****   STEP MOTOR       ******/
 #if STEPMOTOR == ON
 	SetPin(D_8, OUTPUT);

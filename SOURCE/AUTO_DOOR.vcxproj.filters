@@ -106,6 +106,12 @@
     <Filter Include="Header Files\MOTOR DC">
       <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DETECT">
+      <UniqueIdentifier>{30598df5-6573-4ba7-9e2e-b0c5b0191f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DETECT">
+      <UniqueIdentifier>{3f52d117-814d-4366-842b-2bfba5f97b36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -186,6 +192,9 @@
     <ClInclude Include="WDT.h">
       <Filter>Header Files\WDT</Filter>
     </ClInclude>
+    <ClInclude Include="DETECT.h">
+      <Filter>Header Files\DETECT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task_100US.c">
@@ -256,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="WDT.c">
       <Filter>Source Files\WDT</Filter>
+    </ClCompile>
+    <ClCompile Include="DETECT.c">
+      <Filter>Source Files\DETECT</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
