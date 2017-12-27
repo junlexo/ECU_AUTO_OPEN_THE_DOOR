@@ -65,10 +65,11 @@ struct _flag_list {
 	/***** LED ****/
 	uint8_t g_bF_Led_State : 1;
 
-	/***** UART  ****/
+	/***** EEPROM  ****/
+	uint8_t g_bF_eeprom_writeData : 1;
 
-	/***** UART  ****/
-	uint8_t g_bF_ReadingVol_state : 1;
+	/***** ADC  ****/
+	uint8_t g_bF_disableSensor_state : 1;
 
 	/******  FAIL SAFE *******/
 	uint8_t StepMotor_TimeClose : 1;
@@ -123,9 +124,10 @@ extern struct _flag_list flags_list;
 #define g_bF_Led_State					flags_list.g_bF_Led_State
 /* SYS MARCHINE LEARNING*/
 #define g_bF_DOOR_OPEN					flags_list.DOOR_OPEN
-/* UART*/
+/* EEPROM*/
+#define g_bF_eeprom_writeData			flags_list.g_bF_eeprom_writeData
 /* ADC*/
-#define g_bF_ReadingVol_state			flags_list.g_bF_ReadingVol_state
+#define g_bF_disableSensor_state			flags_list.g_bF_disableSensor_state
 /* FailSafe*/
 /* Step Motor*/
 #define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	

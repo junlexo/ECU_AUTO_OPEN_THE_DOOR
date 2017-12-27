@@ -138,10 +138,27 @@ void ADCUpdateEvery10ms()
 			}
 		}
 		/* Update ADC Value*/
-		adc_lpf_result[i] = lowPassFilter(adc_interrupt_result[i], adc_lpf_result[i]);
-		adc_info[i].ADC_AnalogValue = adc_lpf_result[i];
-		adc_info[i].ADC_VoltageValue = voltageConvert(adc_info[i].ADC_AnalogValue);
-
+		if (i == ADC_VOLUME)
+		{
+			if(isDisableReadingVolume())
+			{
+				//do nothing
+			}
+			else
+			{
+				adc_lpf_result[i] = lowPassFilter(adc_interrupt_result[i], adc_lpf_result[i]);
+				adc_info[i].ADC_AnalogValue = adc_lpf_result[i];
+				adc_info[i].ADC_VoltageValue = voltageConvert(adc_info[i].ADC_AnalogValue);
+				ADC_voltage = adc_info[i].ADC_AnalogValue;
+				ADC_angle = getVolumeDegree();
+			}
+		}
+		else
+		{
+			adc_lpf_result[i] = lowPassFilter(adc_interrupt_result[i], adc_lpf_result[i]);
+			adc_info[i].ADC_AnalogValue = adc_lpf_result[i];
+			adc_info[i].ADC_VoltageValue = voltageConvert(adc_info[i].ADC_AnalogValue);
+		}
 	}
 };
 
@@ -317,6 +334,7 @@ void setStatusIntoHistory(uint8_t status)
 	}
 		
 }
+
 void ADC_HISTORY_DBG(uint8_t status)
 {
 	UART_Write(btn1_check_motor_step_next_index + '0');
@@ -333,7 +351,14 @@ void ADC_HISTORY_DBG(uint8_t status)
 		UART_WriteString("PRESS"); //DBG
 	}
 }
+
 void sendRequestToMotorStep()
 {
 	g_bF_REQUEST_BY_PASSCODE_FROM_BTN1 = 1;
+}
+
+uint8_t isDisableReadingVolume()
+{
+	/*0 - Read/ 1- */
+	return g_bF_disableSensor_state; 
 }

@@ -1,6 +1,3 @@
-// 
-// 
-// 
 
 #include "SYS.h"
 #include "RAM.h"
@@ -14,6 +11,7 @@
 #include "EEPROM.h"
 #include "UART.h"
 
+static void maintainSYS();
 
 void CPU_Init()
 {
@@ -30,6 +28,9 @@ void Hardware_Init()
 	SW_Init();
 	ADC_init();
 	OS_Init();
+	WDT_Init();
+	WDT_RegisterFunc(&maintainSYS);
+	//bF_Hardware_Init = 1;
 
 }
 void Software_Init()
@@ -78,8 +79,11 @@ void Init_FLAG_SYS()
 
 	g_bF_DOOR_OPEN = 0;
 
+	/* EEPROM */
+	g_bF_eeprom_writeData = 0;
+
 	/* ADC*/
-	g_bF_ReadingVol_state = 1;
+	g_bF_disableSensor_state = 0;
 
 	/* SYSTEM*/
 	g_SystemError = NON_ERROR;
@@ -92,4 +96,12 @@ void Init_RAM_SYS()
 
 void Application_SYS() {
 	OS_runApplicationTasks();
+	WDT_Reset();
+}
+
+void maintainSYS()
+{
+	UART_WriteString("reset \n");
+	EEPROM_SaveAllData();
+	Software_Init();
 }

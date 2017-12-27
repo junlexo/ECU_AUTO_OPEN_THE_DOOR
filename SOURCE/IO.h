@@ -27,6 +27,7 @@ enum port_available {
 	A_3,
 	A_4,
 	A_5,
+	A_6,
 };
 
 

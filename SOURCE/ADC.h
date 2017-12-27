@@ -59,6 +59,7 @@ extern "C" {
 	void setStatusIntoHistory(uint8_t status);
 	void sendRequestToMotorStep();
 	void ADC_HISTORY_DBG(uint8_t status); //DBG
+	uint8_t isDisableReadingVolume();
 #ifdef __cplusplus
 } // extern "C"
 #endif

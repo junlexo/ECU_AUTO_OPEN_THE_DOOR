@@ -5,6 +5,7 @@
 #include "EEPROM.h"
 #include "RAM.h"
 #include <avr/interrupt.h>
+#include "UART.h"
 
 static volatile uint8_t ee_isAvailable = 1;
 static volatile uint16_t ee_address = 0;
@@ -34,18 +35,9 @@ void EEPROM_Init()
 
 uint8_t EEPROM_ReadByte(uint16_t address)
 {
-	/*if(ee_isAvailable == 0)
-	{*/
-	//UART_SendString("O \n");
-	//while ((EECR & Bit(EEPE)) == 1);
 	EEAR = address;
 	EECR = Bit(EERE);
 	return EEDR;
-	//}
-	//else {
-	//	//UART_SendString("K \n");
-	//	return 0xFF;
-	//}
 }
 
 uint8_t EEPROM_WriteByte(uint16_t address, uint8_t data)

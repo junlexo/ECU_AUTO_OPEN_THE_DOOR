@@ -111,13 +111,14 @@ void DBG_ReadFrame()
 		&& uart_dbg_mode != NONE)
 	{
 		if (isControlEnabled) {
+			CLRFLAG(g_bF_disableSensor_state);
 			if (uart_dbg_mode == READ_DATA_MODE)
 			{
 				processReadingMode();
 			}
 			else if (uart_dbg_mode == WRITE_DATA_MODE)
 			{
-				CLRFLAG(g_bF_ReadingVol_state);
+				SETFLAG(g_bF_disableSensor_state);
 				processWrittingMode();
 			}
 			else {}
@@ -223,6 +224,7 @@ static void setConnectionState() {
 			bufferCount--;
 		}
 		isControlEnabled = 0;
+		CLRFLAG(g_bF_disableSensor_state);
 	}
 	else {}
 }
