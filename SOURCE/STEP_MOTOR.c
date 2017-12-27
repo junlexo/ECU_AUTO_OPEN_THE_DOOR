@@ -1,6 +1,3 @@
-// 
-// 
-// 
 
 #include "STEP_MOTOR.h"
 /*****   STEP MOTOR       ******/
@@ -69,6 +66,7 @@ void STEP_MANNER()
 			STEP_InitDIR();
 		}
 		STEP_Control();
+
 	}
 
 	STEPMOTOR_CheckFailSafe();
@@ -152,17 +150,24 @@ void STEPMOTOR_CheckFailSafe()
 	{
 		g_SystemError = ERROR_STEPMOTOR_CLOSE_running;
 		g_RangeError = NG;
+		STEP_HOLD_ON();
 
 	}
-	if (TSTFLAG(g_bF_FS_StepMotor_TimeOpen))
+	else if (TSTFLAG(g_bF_FS_StepMotor_TimeOpen))
 	{
 		g_SystemError = ERROR_STEPMOTOR_OPEN_running;
 		g_RangeError = NG;
+		STEP_HOLD_ON();
 	}
-	if (TSTFLAG(g_bF_FS_StepMotor_TimeCloseInit))
+	else if (TSTFLAG(g_bF_FS_StepMotor_TimeCloseInit))
 	{
 		g_SystemError = ERROR_STEPMOTOR_CLOSE_init;
 		g_RangeError = NG;
+		STEP_HOLD_ON();
+	}
+	else
+	{
+		STEP_HOLD_OFF();
 	}
 }
 
@@ -538,19 +543,6 @@ void STEP_SPEED_RANGE()
 	}
 }
 
-
-void STEP_HOLD_ON()
-{
-	IOPort_Write(PIN_HOLD, HIGH);
-}
-
-
-void STEP_HOLD_OFF()
-{
-	IOPort_Write(PIN_HOLD, LOW);
-}
-
-
 /*
 Funtion : STEP_PWM()
 Dep : Push PWM for Step Motor
@@ -616,6 +608,15 @@ void STEP_Speed(uint8_t ui8_StepSpeed_SET)
 		ui8_StepSpeed_SET = STEP_SPEED_MIN;
 	}
 	g_ui8_SpeedStepValue = 256 - ui8_StepSpeed_SET;
+}
+
+void STEP_HOLD_ON()
+{
+	IOPort_Write(PIN_HOLD,HIGH);
+}
+void STEP_HOLD_OFF()
+{
+	IOPort_Write(PIN_HOLD,LOW);
 }
 
 #endif // STEP MOTOR 

@@ -53,6 +53,8 @@ extern "C" {
 	static void STEP_RUN_DEFAULT();
 	static void STEP_CheckTimerOpen();
 	static void STEP_CheckTimerClose();
+	static void STEP_HOLD_ON();
+	static void STEP_HOLD_OFF();
 #ifdef __cplusplus
 } // extern "C"
 #endif
