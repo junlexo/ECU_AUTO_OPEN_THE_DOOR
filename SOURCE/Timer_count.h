@@ -106,6 +106,7 @@ struct _timer_uint8_10ms
 {
 	uint8_t SWWaitTime;
 	uint8_t UART_WritingWaitTime;
+	uint8_t DETECT_WaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
@@ -223,6 +224,7 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 
 /*TIME */
 #define	SW_WaitTime									timer_uint8_10ms.SWWaitTime
+#define	DETECT_WaitTime									timer_uint8_10ms.DETECT_WaitTime
 /*LED */
 #define LedBlinkingWaitTime							timer_uint8_1000ms.Led_BlinkingWaitTime
 #define	LedBlinkingWaitTimeMS						timer_uint8_100ms.Led_BlinkingWaitTimeMS
