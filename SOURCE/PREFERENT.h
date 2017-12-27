@@ -75,15 +75,21 @@ typedef struct Data_frame {
 	uint32_t data;
 } DataFrame;
 
-/******************* ENUM ******************/
+
+/******************* Faile Safe******************/
 enum ERROR_CODE
 {
 	NON_ERROR = 0,
 	ERROR_VOLUME,
 	ERROR_BTN,
 	ERROR_UART,
+	ERROR_STEPMOTOR_CLOSE_init,
+	ERROR_STEPMOTOR_OPEN_running,
+	ERROR_STEPMOTOR_CLOSE_running,
 };
 
+#define NG 1U
+#define WARNING 2U
 
 /*LED */
 #define BLINK250MS 250
@@ -98,9 +104,9 @@ enum ERROR_CODE
 /*STEP MOTOR */
 #define STEPMOTOR   ON
 
-#define STEP_SPEED_MAX 255
-#define STEP_SPEED_MIN 20
-#define SPEED_DEFAULT 75
+#define STEP_SPEED_MAX 246
+#define STEP_SPEED_MIN 150
+#define SPEED_DEFAULT 240
 #define PIN_SPEED  9
 #define PIN_DIR 8
 #define PIN_HOLD 7
@@ -108,9 +114,11 @@ enum ERROR_CODE
 #define OPEN LOW
 #define DEBUG OFF
 #define TIMEWAITTING_CLOSE_INIT 30
-#define TIMEWAITTING_CLOSE 10
-#define TIMEWATTING_OPEN 30
-#define FAILSAFE_TIMEWAITTING_CLOSE 50
+#define FAILSAFE_TIMEWAITTING_CLOSE 60
+#define FAILSAFE_TIMEWAITTING_OPEN 60
+#define StepCountPWM_OPEN 4
+#define StepCountPWM_CLOSE 8
+#define TIMEWAITTING_STANDING 15
 
 
 

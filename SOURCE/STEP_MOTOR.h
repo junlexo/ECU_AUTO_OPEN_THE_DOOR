@@ -14,17 +14,18 @@
 #include "IO.h"
 #include "Timer_count.h"
 #include "PREFERENT.h"
+#include "UART.h"
 
 /*****   STEP MOTOR       ******/
 #if STEPMOTOR == ON
-static uint16_t step_Fullspeed;
-static uint16_t step_Decelerating;
-static uint16_t step_Accelerating;
-static uint32_t step_Speed;
-static uint32_t fullspeed;
-static uint32_t accelerating;
-static uint32_t demention_open;
-static uint32_t demention_close;
+ uint32_t step_Fullspeed;
+ uint32_t step_Decelerating;
+ uint32_t step_Accelerating;
+ uint32_t fullspeed;
+ uint32_t accelerating;
+ uint32_t demention_open;
+ uint32_t demention_close;
+ uint16_t step_loop;
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,9 +52,7 @@ extern "C" {
 	static void STEP_Running_Close();
 	static void STEP_RUN_DEFAULT();
 	static void STEP_CheckTimerOpen();
-
-
-
+	static void STEP_CheckTimerClose();
 #ifdef __cplusplus
 } // extern "C"
 #endif

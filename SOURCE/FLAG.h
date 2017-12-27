@@ -7,11 +7,11 @@
 
 struct _flag_list {
 	/****  INIT   *****/
-	uint8_t bF_Hardware_Init : 1;
-	uint8_t bF_Software_Init : 1;
+	uint8_t bF_HardwareInit : 1;
+	uint8_t bF_SoftwareInit : 1;
 
 	/****  Task OS   *****/
-	uint8_t bF_TaskRunning : 1;
+	uint8_t bF_Task_Running : 1;
 	uint8_t bF_Task_100US : 1;
 	uint8_t bF_Task_1MS : 1;
 	uint8_t bF_Task_10MS : 1;
@@ -36,7 +36,9 @@ struct _flag_list {
 	uint8_t REOPEN : 1;
 	uint8_t TAKE_DEMENTION : 1;
 	uint8_t WAITTINGOPEN : 1;
+	uint8_t WAITTINGCLOSE : 1;
 	uint8_t REQUEST_BY_PASSCODE_FROM_BTN1 : 1;
+	uint8_t STANDINGCLOSE : 1 ;
 #endif 
 
 	/*******     SWITCH    ************/
@@ -79,7 +81,7 @@ extern struct _flag_list flags_list;
 
 /******************************** Global Flags ***********************************************/
 /*OS */
-#define bF_TaskRunning        			flags_list.bF_TaskRunning
+#define bF_TaskRunning        			flags_list.bF_Task_Running
 #define bF_Task_100US       			flags_list.bF_Task_100US
 #define bF_Task_1MS 					flags_list.bF_Task_1MS
 #define bF_Task_10MS   					flags_list.bF_Task_10MS
@@ -102,7 +104,9 @@ extern struct _flag_list flags_list;
 #define g_bF_STEP_ReOpen				flags_list.REOPEN
 #define g_bF_STEP_TAKE_DEMENTION		flags_list.TAKE_DEMENTION
 #define g_bF_STEP_WAITTING_OPEN			flags_list.WAITTINGOPEN
+#define g_bF_STEP_WAITTING_CLOSE		flags_list.WAITTINGCLOSE
 #define g_bF_REQUEST_BY_PASSCODE_FROM_BTN1	flags_list.REQUEST_BY_PASSCODE_FROM_BTN1
+#define g_bF_STEP_STANDING_CLOSE		flags_list.STANDINGCLOSE
 
 /*SWITCH */
 #define g_bF_SW1_Status					flags_list.SW1_STATUS
@@ -126,7 +130,7 @@ extern struct _flag_list flags_list;
 /* Step Motor*/
 #define g_bF_FS_StepMotor_TimeClose			flags_list.StepMotor_TimeClose	
 #define g_bF_FS_StepMotor_TimeOpen			flags_list.StepMotor_TimeOpen	
-#define g_bF_FS_StepMotor_TimeCloseInit		flags_list.StepMotor_TimeCloseInit
+#define g_bF_FS_StepMotor_TimeCloseInit		flags_list.StepMotor_TimeCloseInit		
 
 #endif
 

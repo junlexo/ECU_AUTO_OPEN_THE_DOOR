@@ -40,7 +40,7 @@ void OS_TimerCounter_Init()
 	TCCR2B |= (1 << CS22) | (1 << CS21); // Set CS21 bit for 16 prescaler
 	TCCR2A |= (1 << WGM21);
 	TIMSK2 |= (1 << OCIE2A);
-	OCR2A = 50;
+	OCR2A = 2;
 #endif // STEP MOTOR
 
 	sei();

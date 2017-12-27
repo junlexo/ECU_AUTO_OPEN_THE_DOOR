@@ -4,6 +4,7 @@
 
 #include "STEP_MOTOR.h"
 /*****   STEP MOTOR       ******/
+
 #if STEPMOTOR == ON
 
 void STEP_MANNER()
@@ -50,6 +51,8 @@ void STEP_MANNER()
 			{
 				SETFLAG(g_bF_STEP_Start);
 				SETFLAG(g_bF_STEPMOTOR_DIR_Open);
+				g_ui32_StepCount = 0;
+				CLRFLAG(g_bF_STEP_Cal_Range);
 				if (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1))
 				{
 					CLRFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1);
@@ -85,55 +88,50 @@ void STEP_Control()
 		{
 			if (!TSTFLAG(g_bF_SW2_Status))
 			{
-				STEP_Running_Open();
 				STEP_SPEED_RANGE();
+				STEP_Running_Open();
 				STEP_CheckTimerOpen();
-				g_bF_READ_DEMENTION = 0;
+				CLRFLAG(g_bF_READ_DEMENTION);
 			}
 			else
 			{
 				STEP_STOP();
 				STEP_READ_DEMENTION();
-				STEP_SPEED_RANGE();
 				STEP_WAITING_CLOSE();
-				CLRFLAG(g_bF_STEP_ReOpen);
 			}
 		}
 		else if (TSTFLAG(g_bF_STEPMOTOR_DIR_Close))
 		{
-			if (TSTFLAG(g_bF_SW1_Status) == 1)
-			{
-				STEP_STOP();
-				CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
-				CLRFLAG(g_bF_STEP_ReOpen);
-				CLRFLAG(g_bF_STEP_Start);
-			}
-			else if ((TSTFLAG(g_bF_FIR_Status)) || (TSTFLAG(g_bF_BT1_Press)))
+
+			if ((TSTFLAG(g_bF_FIR_Status)) || (TSTFLAG(g_bF_BT1_Press)))
 			{
 					SETFLAG(g_bF_STEP_ReOpen);
+					SETFLAG(g_bF_STEPMOTOR_DIR_Open);
+					CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
 					STEP_STOP();
 					STEP_READ_DEMENTION();
 					STEP_SPEED_RANGE();
-					SETFLAG(g_bF_STEPMOTOR_DIR_Open);
-					CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
+					step_Speed = STEP_SPEED_MIN;
+					CLRFLAG(g_bF_STEP_ReOpen);
+					CLRFLAG(g_bF_STEP_WAITTING_CLOSE);
 			}
-			else if ((TSTFLAG(g_bF_STEP_Start)))
+			else if ((!TSTFLAG(g_bF_SW1_Status)))
 			{
-				STEP_Running_Close();
 				STEP_SPEED_RANGE();
-				g_bF_READ_DEMENTION = 0;
-				if ((CHECK_TIMER(g_t_ui8_S_StepMotor_WattingClose)))
-				{
-					SETFLAG(g_bF_FS_StepMotor_TimeClose);
-				}
+				STEP_Running_Close();
+				STEP_CheckTimerClose();
+				CLRFLAG(g_bF_READ_DEMENTION);
+			}
+			else if (TSTFLAG(g_bF_SW1_Status))
+			{
+				STEP_STOP();
+				CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
+				CLRFLAG(g_bF_STEP_Start);				
 			}
 			else
 			{
 				;
 			}
-
-
-
 		}
 		else
 		{
@@ -144,8 +142,7 @@ void STEP_Control()
 	}
 	else
 	{
-
-
+		;
 	}
 
 }
@@ -153,24 +150,27 @@ void STEPMOTOR_CheckFailSafe()
 {
 	if (TSTFLAG(g_bF_FS_StepMotor_TimeClose))
 	{
-		// ma loi 0x06
+		g_SystemError = ERROR_STEPMOTOR_CLOSE_running;
+		g_RangeError = NG;
 
 	}
 	if (TSTFLAG(g_bF_FS_StepMotor_TimeOpen))
 	{
-		// ma loi 0x05
+		g_SystemError = ERROR_STEPMOTOR_OPEN_running;
+		g_RangeError = NG;
 	}
 	if (TSTFLAG(g_bF_FS_StepMotor_TimeCloseInit))
 	{
-		// ma loi 0x04
+		g_SystemError = ERROR_STEPMOTOR_CLOSE_init;
+		g_RangeError = NG;
 	}
 }
 
 void STEP_CheckTimerOpen()
 {
-	if ((!(TSTFLAG(g_bF_STEP_WAITTING_OPEN))) && (CHECK_TIMER(g_t_ui8_S_StepMotor_WattingOpen)))
+	if (!(TSTFLAG(g_bF_STEP_WAITTING_OPEN)))
 	{
-		START_TIMER(g_t_ui8_S_StepMotor_WattingOpen, TIMEWATTING_OPEN);
+		START_TIMER(g_t_ui8_S_StepMotor_WattingOpen, FAILSAFE_TIMEWAITTING_OPEN);
 		SETFLAG(g_bF_STEP_WAITTING_OPEN);
 	}
 	else if ((TSTFLAG(g_bF_STEP_WAITTING_OPEN)) && (CHECK_TIMER(g_t_ui8_S_StepMotor_WattingOpen)))
@@ -182,23 +182,51 @@ void STEP_CheckTimerOpen()
 		{
 			CLRFLAG(g_bF_STEP_Start);
 		}
+		else
+		{
+			;
+		}
 	}
 	else
 	{
 		;
 	}
 }
+void STEP_CheckTimerClose()
+{
+	if (!(TSTFLAG(g_bF_STEP_WAITTING_CLOSE)))
+	{
+		START_TIMER(g_t_ui8_S_StepMotor_WattingOpen, FAILSAFE_TIMEWAITTING_CLOSE);
+		SETFLAG(g_bF_STEP_WAITTING_CLOSE);
+	}
+	else if ((TSTFLAG(g_bF_STEP_WAITTING_CLOSE)) && (CHECK_TIMER(g_t_ui8_S_StepMotor_WattingOpen)))
+	{
+		SETFLAG(g_bF_FS_StepMotor_TimeClose);
+		CLRFLAG(g_bF_STEP_WAITTING_CLOSE);
+		STEP_STOP();
+		if (TSTFLAG(g_bF_STEP_Start))
+		{
+			CLRFLAG(g_bF_STEP_Start);
+		}
+		else
+		{
+			;
+		}
+	}
+	else
+	{
+		;
+	}
+}
+
 void STEP_Running_Open()
 {
 	if (TSTFLAG(g_bF_STEPMOTOR_DIR_Open))
 	{
 		STEP_RUN();
-		CLRFLAG(g_bF_STEP_Cal_Range);
-		SETFLAG(g_bF_STEPMOTOR_Dimension);
 		IOPort_Write(PIN_DIR, OPEN);
 		STEP_Control_Speed();
 	}
-
 }
 
 void STEP_Running_Close()
@@ -206,23 +234,27 @@ void STEP_Running_Close()
 	if (TSTFLAG(g_bF_STEPMOTOR_DIR_Close))
 	{
 		STEP_RUN();
-		CLRFLAG(g_bF_STEP_Cal_Range);
-		SETFLAG(g_bF_STEPMOTOR_Dimension);
 		IOPort_Write(PIN_DIR, CLOSE);
 		STEP_Control_Speed();
 	}
-
 }
 
 
 void STEP_WAITING_CLOSE()
 {
-	if ((CHECK_TIMER(g_t_ui8_S_StepMotor_WattingClose)) || (TSTFLAG(g_bF_BT2_Press)))
+	if (!TSTFLAG(g_bF_STEP_STANDING_CLOSE))
 	{
+		START_TIMER(g_t_ui8_S_StepMotor_Standing, TIMEWAITTING_STANDING);
+		SETFLAG(g_bF_STEP_STANDING_CLOSE);
+	}
+	else if ((CHECK_TIMER(g_t_ui8_S_StepMotor_Standing)) || (TSTFLAG(g_bF_BT2_Press)))
+	{
+		CLRFLAG(g_bF_STEP_STANDING_CLOSE);
 		SETFLAG(g_bF_STEPMOTOR_DIR_Close);
 		CLRFLAG(g_bF_STEPMOTOR_DIR_Open);
-		g_t_ui8_S_StepMotor_WattingClose = 0;
-		START_TIMER(g_t_ui8_S_StepMotor_WattingClose, FAILSAFE_TIMEWAITTING_CLOSE);
+		CLRFLAG(g_bF_STEP_Cal_Range);
+		step_Speed = STEP_SPEED_MIN;
+		g_ui32_StepCount = 0;
 	}
 	else
 	{
@@ -268,6 +300,7 @@ void STEP_InitStart()
 			if (CHECK_TIMER(g_t_ui8_S_StepMotor_WattingClose))
 			{
 				STEP_STOP();
+				g_ui32_StepCount = 0;
 				SETFLAG(g_bF_STEP_Init);
 				g_bF_STEPMOTOR_DIR_Close = 0;
 				SETFLAG(g_bF_FS_StepMotor_TimeCloseInit);
@@ -294,9 +327,8 @@ void STEP_InitDIR()
 
 	if ((TSTFLAG(g_bF_SW1_Status)) && (g_bF_READ_DEMENTION == 0))
 	{
-		g_ui32_StepCount = 0;
-		SETFLAG(g_bF_STEPMOTOR_DIR_Open);
 		CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
+		SETFLAG(g_bF_STEPMOTOR_DIR_Open);
 		STEP_CheckTimerOpen();
 		STEP_RUN_DEFAULT();
 	}
@@ -332,17 +364,28 @@ void STEP_READ_DEMENTION()
 		if ((TSTFLAG(g_bF_SW2_Status)))
 		{
 			demention_open = g_ui32_StepCount;
-			START_TIMER(g_t_ui8_S_StepMotor_WattingClose, TIMEWAITTING_CLOSE);
 			SETFLAG(g_bF_READ_DEMENTION);
+			CLRFLAG(g_bF_STEP_Cal_Range);
+			g_ui32_StepCount = 0;
 		}
-		else if ((TSTFLAG(g_bF_STEPMOTOR_DIR_Close)) && (TSTFLAG(g_bF_STEP_ReOpen)))
+		else if (TSTFLAG(g_bF_STEP_ReOpen))
 		{
 			demention_close = g_ui32_StepCount;
 			SETFLAG(g_bF_READ_DEMENTION);
+			CLRFLAG(g_bF_STEP_Cal_Range);
+			g_ui32_StepCount = 0;
 		}
-		g_ui32_StepCount = 0;
-	}
+		else
+		{
+			;
+		}
+		
 
+	}
+	else
+	{
+		;
+	}
 }
 
 
@@ -392,20 +435,40 @@ void STEP_Control_Speed()
 
 	if (TSTFLAG(g_bF_STEPMOTOR_Running))
 	{
+
 		fullspeed = step_Decelerating + step_Fullspeed;
 
 		//accelerating = step_Decelerating + step_Fullspeed + step_Accelerating;
 		if (g_ui32_StepCount < step_Decelerating)
 		{
-			step_Speed = 50;
+			if (CHECK_TIMER(g_u8_StepSpeed_10MS))
+			{
+				step_Speed++;
+				START_TIMER(g_u8_StepSpeed_10MS, StepCountPWM_OPEN);
+			}
+			if (step_Speed >= STEP_SPEED_MAX)
+			{
+				step_Speed = STEP_SPEED_MAX;
+			}
 		}
-		else if ((g_ui32_StepCount > step_Decelerating) && (g_ui32_StepCount <  fullspeed))
+		else if (((g_ui32_StepCount > step_Decelerating)) && (g_ui32_StepCount <  fullspeed))
 		{
-			step_Speed = 220;
+			step_Speed = STEP_SPEED_MAX;
+			
 		}
-		else if (g_ui32_StepCount >  fullspeed)
+		else if (g_ui32_StepCount >  fullspeed )
 		{
-			step_Speed = 75;
+			if (CHECK_TIMER(g_u8_StepSpeed_10MS))
+			{
+				step_Speed -- ;
+				START_TIMER(g_u8_StepSpeed_10MS, StepCountPWM_CLOSE);
+				
+			}
+			if (step_Speed <= STEP_SPEED_MIN)
+			{
+				step_Speed = STEP_SPEED_MIN; 
+			}
+
 		}
 		else
 		{
@@ -424,7 +487,6 @@ void STEP_Control_Speed()
 
 void STEP_STOP()
 {
-
 	CLRFLAG(g_bF_STEPMOTOR_Dimension);
 	SETFLAG(g_bF_STEPMOTOR_Stop);
 	CLRFLAG(g_bF_STEPMOTOR_Running);
@@ -436,36 +498,44 @@ void STEP_RUN()
 	SETFLAG(g_bF_STEPMOTOR_Dimension);
 	CLRFLAG(g_bF_STEPMOTOR_Stop);
 	SETFLAG(g_bF_STEPMOTOR_Running);
-
 }
 
 
 void STEP_SPEED_RANGE()
 {
-	uint16_t u16tmp;
-	uint32_t u16tmp1;
+	uint32_t u32tmp;
+	uint32_t u32tmp1;
+	uint32_t u32tmp2;
+	uint32_t u32tmp3;
 	if (TSTFLAG(g_bF_STEP_Cal_Range) == 0)
 
 		if (g_ui32_StepDemention != 0)
 		{
-			if (TSTFLAG(g_bF_STEPMOTOR_DIR_Open))
+			 if (TSTFLAG(g_bF_STEP_ReOpen))
 			{
-				u16tmp1 = g_ui32_StepDemention;
+				u32tmp1 = demention_close;
 			}
-			else if (TSTFLAG(g_bF_STEP_ReOpen))
+
+			else
 			{
-				u16tmp1 = demention_close;
+				u32tmp1 = g_ui32_StepDemention;
 			}
-			u16tmp1 = u16tmp1 / 2;
-			u16tmp = u16tmp1 - step_Fullspeed;
-			step_Decelerating = u16tmp / 2;
-			step_Accelerating = u16tmp - step_Decelerating;
+			step_Fullspeed = u32tmp1 / 2;
+			u32tmp = u32tmp1 - step_Fullspeed;
+			u32tmp2 = u32tmp / 2;
+			step_Decelerating = u32tmp2;
+			u32tmp3 = u32tmp1 - (u32tmp + step_Fullspeed);
+			step_Accelerating = u32tmp3;
 			SETFLAG(g_bF_STEP_Cal_Range);
 		}
 		else
 		{
 			;
 		}
+	else
+	{
+		;
+	}
 }
 
 
@@ -492,22 +562,41 @@ void STEP_PWM()
 
 	if (TSTFLAG(g_bF_STEPMOTOR_Running))
 	{
-		if (TSTFLAG(g_bF_StepPWM))
+		step_loop++;
+		if (step_loop > g_ui8_SpeedStepValue)
 		{
-			IOPort_Write(PIN_SPEED, HIGH);
-			CLRFLAG(g_bF_StepPWM);
-			if (TSTFLAG(g_bF_STEPMOTOR_Dimension))
+			step_loop = 0;
+			if (TSTFLAG(g_bF_StepPWM))
 			{
-				g_ui32_StepCount++;
+				IOPort_Write(PIN_SPEED, HIGH);
+				CLRFLAG(g_bF_StepPWM);
+				if (TSTFLAG(g_bF_STEPMOTOR_Dimension))
+				{
+					g_ui32_StepCount++;
+				}
+				else
+				{
+					;
+				}
 			}
+			else
+			{
+				IOPort_Write(PIN_SPEED, LOW);
+				SETFLAG(g_bF_StepPWM);
+			}
+	
 		}
 		else
 		{
-			IOPort_Write(PIN_SPEED, LOW);
-			SETFLAG(g_bF_StepPWM);
+			;
 		}
+
 	}
-	OCR2A = g_ui8_SpeedStepValue;
+	else
+	{
+		;
+	}
+
 }
 
 /*
@@ -526,7 +615,7 @@ void STEP_Speed(uint8_t ui8_StepSpeed_SET)
 	{
 		ui8_StepSpeed_SET = STEP_SPEED_MIN;
 	}
-	g_ui8_SpeedStepValue = 275 - ui8_StepSpeed_SET;
+	g_ui8_SpeedStepValue = 256 - ui8_StepSpeed_SET;
 }
 
 #endif // STEP MOTOR 

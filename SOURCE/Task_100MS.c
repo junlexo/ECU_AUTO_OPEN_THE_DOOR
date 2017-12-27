@@ -12,5 +12,6 @@ void Task_100MS()
 	if (IsTimeOut(LedBlinkingWaitTimeMS) == 1) {
 		LED();
 	}
+	FailSafe_CheckSYS();
 	
 }

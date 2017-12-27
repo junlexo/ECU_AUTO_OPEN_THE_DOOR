@@ -106,6 +106,12 @@
     <Filter Include="Header Files\MOTOR DC">
       <UniqueIdentifier>{bb429564-b29b-40ec-8238-cc4387d2dac1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\FailSafe">
+      <UniqueIdentifier>{55cf7f2d-10d7-4e93-a2a2-5b3c90bca023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FailSafe">
+      <UniqueIdentifier>{63fdbcb1-fa2c-41e1-8084-512afd30d6bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AUTO_DOOR.ino" />
@@ -186,6 +192,9 @@
     <ClInclude Include="WDT.h">
       <Filter>Header Files\WDT</Filter>
     </ClInclude>
+    <ClInclude Include="FailSafe_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task_100US.c">
@@ -256,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="WDT.c">
       <Filter>Source Files\WDT</Filter>
+    </ClCompile>
+    <ClCompile Include="FailSafe_c.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

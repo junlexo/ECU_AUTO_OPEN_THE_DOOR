@@ -12,6 +12,7 @@ extern volatile uint8_t count_list;
 
 /**** ERROR FLAG ****/
 uint8_t g_SystemError;
+uint8_t g_RangeError;
 
 /*  ADC  */
 
@@ -30,13 +31,14 @@ extern  uint8_t g_fblinkled;
 extern volatile uint8_t g_ui8_SpeedStepValue;
 extern volatile uint32_t g_ui32_StepCount;
 extern volatile uint32_t g_ui32_StepDemention;
-
+extern volatile uint8_t step_Speed;
+#endif
 extern uint8_t getADCStatus(uint8_t);
 extern uint16_t getVolumeDegree();
 extern uint8_t getVolumeVoltage();
 extern uint8_t isBTN1Disable();;
 
-#endif
+
 /* MOTOR DC */
 extern uint16_t g_Kp;
 extern uint16_t g_Ki;
