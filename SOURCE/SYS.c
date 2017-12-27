@@ -1,6 +1,3 @@
-// 
-// 
-// 
 
 #include "SYS.h"
 #include "RAM.h"
@@ -33,12 +30,11 @@ void Hardware_Init()
 	OS_Init();
 	WDT_Init();
 	WDT_RegisterFunc(&maintainSYS);
-
 	//bF_Hardware_Init = 1;
+
 }
 void Software_Init()
 {
-	
 	Init_FLAG_SYS();
 	Init_RAM_SYS();
 }
@@ -52,7 +48,6 @@ void Init_FLAG_SYS()
 	bF_Task_1S = 0;
 	/*****   STEP MOTOR       ******/
 #if STEPMOTOR == ON
-
 	g_bF_StepPWM = 0;
 	g_bF_STEPMOTOR_Running = 0;
 	g_bF_STEPMOTOR_Stop = 1;
@@ -66,25 +61,17 @@ void Init_FLAG_SYS()
 	g_bF_READ_DEMENTION = 0;
 	g_bF_STEP_ReOpen = 0;
 	g_bF_STEP_TAKE_DEMENTION = 0;
-
 #endif  // STEP MOTOR
-
 	/*SWITCH */
 	g_bF_SW1_Status = 0;
 	g_bF_SW2_Status = 0;
-
-
-
 	/*BOTTON */
 	g_bF_BT1_Status = 0;
 	g_bF_BT2_Status = 0;
 	g_bF_BT1_Press = 0;
 	g_bF_BT2_Press = 0;
-
 	/* FIR  */
 	g_bF_FIR_Status = 0;
-
-
 	/* LED */
 	g_bF_Led_State = 0;
 

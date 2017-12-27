@@ -106,6 +106,8 @@ struct _timer_uint8_10ms
 {
 	uint8_t SWWaitTime;
 	uint8_t UART_WritingWaitTime;
+	uint8_t Step_SpeedPWM;
+	uint8_t DETECT_WaitTime;
 };
 extern struct _timer_uint8_10ms timer_uint8_10ms;
 
@@ -185,6 +187,7 @@ struct _timer_uint8_1000ms
 #if STEPMOTOR == ON
 	uint8_t StepMotorWattingClose;
 	uint8_t StepMotorWattingOpen;
+	uint8_t StepMotorStanding;
 #endif // STEP MOTOR
 
 	uint8_t WaitingPutButton;
@@ -230,9 +233,10 @@ extern struct _timer_uint32_1000ms timer_uint32_1000ms;
 #define	LedBlinkingWaitTimeMS						timer_uint8_100ms.Led_BlinkingWaitTimeMS
 /*****   STEP MOTOR       ******/
 #if STEPMOTOR == ON
-#define	g_u8_StepSpeed_100us			            timer_uint8_1ms.Step_SpeedPWM
+#define	g_u8_StepSpeed_10MS							timer_uint8_10ms.Step_SpeedPWM
 #define g_t_ui8_S_StepMotor_WattingClose			timer_uint8_1000ms.StepMotorWattingClose
 #define g_t_ui8_S_StepMotor_WattingOpen				timer_uint8_1000ms.StepMotorWattingOpen
+#define g_t_ui8_S_StepMotor_Standing				timer_uint8_1000ms.StepMotorStanding
 #endif // STEP MOTOR
 /*UART */
 #define UARTWritingWaitTime							timer_uint8_10ms.UART_WritingWaitTime
