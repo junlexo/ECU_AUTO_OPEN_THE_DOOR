@@ -111,6 +111,7 @@
     </Filter>
     <Filter Include="Source Files\DETECT">
       <UniqueIdentifier>{3f52d117-814d-4366-842b-2bfba5f97b36}</UniqueIdentifier>
+    </Filter>	
     <Filter Include="Header Files\FailSafe">
       <UniqueIdentifier>{55cf7f2d-10d7-4e93-a2a2-5b3c90bca023}</UniqueIdentifier>
     </Filter>
@@ -199,6 +200,7 @@
     </ClInclude>
     <ClInclude Include="DETECT.h">
       <Filter>Header Files\DETECT</Filter>
+    </ClInclude>
     <ClInclude Include="FailSafe_c.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -275,6 +277,7 @@
     </ClCompile>
     <ClCompile Include="DETECT.c">
       <Filter>Source Files\DETECT</Filter>
+    </ClCompile>
     <ClCompile Include="FailSafe_c.c">
       <Filter>Source Files</Filter>
     </ClCompile>
