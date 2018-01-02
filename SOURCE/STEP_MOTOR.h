@@ -36,6 +36,7 @@ extern "C" {
 	extern void STEPMOTOR_CheckFailSafe();
 	static void STEP_Speed(uint8_t ui8_StepSpeed_SET);
 	static void STEP_Control();
+	static void STEPMOTOR_ResetFailsafe();
 	static void STEP_InitStart();
 	static void STEP_InitDIR();
 	static void STEP_CLOSE_DEFAULT();

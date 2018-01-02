@@ -42,33 +42,47 @@ void STEP_MANNER()
 	STEP_InitStart();
 	if (TSTFLAG(g_bF_STEP_Init))
 	{
-		if ((TSTFLAG(g_bF_BT2_Press)) || (TSTFLAG(g_bF_DOOR_OPEN)) || (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1)))
+		if (g_ui32_StepDemention != 0)
 		{
-			if ((g_ui32_StepDemention != 0) && (g_bF_STEP_Start == 0))
+			if ((TSTFLAG(g_bF_BT2_Press)) || (TSTFLAG(g_bF_DOOR_OPEN)) || (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1)))
 			{
-				SETFLAG(g_bF_STEP_Start);
-				SETFLAG(g_bF_STEPMOTOR_DIR_Open);
-				g_ui32_StepCount = 0;
-				CLRFLAG(g_bF_STEP_Cal_Range);
-				if (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1))
+				if ((g_ui32_StepDemention != 0) && (g_bF_STEP_Start == 0))
 				{
-					CLRFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1);
+					SETFLAG(g_bF_STEP_Start);
+					SETFLAG(g_bF_STEPMOTOR_DIR_Open);
+					g_ui32_StepCount = 0;
+					CLRFLAG(g_bF_STEP_Cal_Range);
+					if (TSTFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1))
+					{
+						CLRFLAG(g_bF_REQUEST_BY_PASSCODE_FROM_BTN1);
+					}
 				}
+				else
+				{
+					;
+				}
+
 			}
 			else
 			{
 				;
 			}
-
 		}
-		if ((g_ui32_StepDemention == 0) || (g_bF_STEP_TAKE_DEMENTION == 0))
+		else
+		{
+			;
+		}
+		if ((g_ui32_StepDemention ==0) || ( !TSTFLAG(g_bF_STEP_TAKE_DEMENTION)))
 		{
 			STEP_InitDIR();
 		}
+		else
+		{
+			;
+		}
+
 		STEP_Control();
-
 	}
-
 	STEPMOTOR_CheckFailSafe();
 }
 /*
@@ -96,6 +110,8 @@ void STEP_Control()
 				STEP_STOP();
 				STEP_READ_DEMENTION();
 				STEP_WAITING_CLOSE();
+				STEPMOTOR_ResetFailsafe();
+				
 			}
 		}
 		else if (TSTFLAG(g_bF_STEPMOTOR_DIR_Close))
@@ -112,6 +128,8 @@ void STEP_Control()
 					step_Speed = STEP_SPEED_MIN;
 					CLRFLAG(g_bF_STEP_ReOpen);
 					CLRFLAG(g_bF_STEP_WAITTING_CLOSE);
+					STEPMOTOR_ResetFailsafe();
+					
 			}
 			else if ((!TSTFLAG(g_bF_SW1_Status)))
 			{
@@ -124,7 +142,8 @@ void STEP_Control()
 			{
 				STEP_STOP();
 				CLRFLAG(g_bF_STEPMOTOR_DIR_Close);
-				CLRFLAG(g_bF_STEP_Start);				
+				CLRFLAG(g_bF_STEP_Start);
+				STEPMOTOR_ResetFailsafe();
 			}
 			else
 			{
@@ -143,6 +162,13 @@ void STEP_Control()
 		;
 	}
 
+}
+void STEPMOTOR_ResetFailsafe()
+{
+	CLRFLAG(g_bF_STEP_WAITTING_OPEN);
+	CLRFLAG(g_bF_STEP_WAITTING_CLOSE);
+	g_t_ui8_S_StepMotor_WattingOpen = 0;
+	g_t_ui8_S_StepMotor_WattingClose = 0;
 }
 void STEPMOTOR_CheckFailSafe()
 {

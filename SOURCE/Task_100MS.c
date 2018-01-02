@@ -15,5 +15,4 @@ void Task_100MS()
 	if (IsTimeOut(DETECT_WaitTime) == 1) {
 		DETECT();
 	}
-	//FailSafe_CheckSYS();
 }

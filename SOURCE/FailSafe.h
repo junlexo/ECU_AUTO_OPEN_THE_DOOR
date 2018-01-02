@@ -11,8 +11,7 @@
 
 #include "RAM.h"
 
-
-
+void FailSafe_CheckSYS();
 
 #endif
 
