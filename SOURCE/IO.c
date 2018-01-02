@@ -17,7 +17,7 @@ void IO_Init()
 	SetPin(D_9, OUTPUT);
 	SetPin(D_7, OUTPUT);
 
-	SetPin(D_3, INPUT_PULLUP);
+	SetPin(PIN_CAMERA, INPUT_PULLUP);
 #endif // STEP MOTOR
 }
 

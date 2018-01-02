@@ -39,19 +39,7 @@ uint16_t ARead_v2(uint8_t pin)
 
 void checkDETECT()
 {
-	//UART_WriteNumber((uint32_t)!IOPort_Read(D_2));
-	//UART_Write('-');
-	//UART_WriteNumber((uint32_t)g_bF_DOOR_OPEN);
-	//UART_Write('-');
-	//UART_WriteNumber((uint32_t)g_SystemError);
-	//UART_Write('-');
-	//UART_WriteNumber((uint32_t)BTN1_DISABLE);
-	//UART_Write('\n');
-	/*if (f_D2 == 1)
-		cur_l_bF_DETECT_Status = 0;
-	else
-		cur_l_bF_DETECT_Status = 1;*/
-	cur_l_bF_DETECT_Status = !IOPort_Read(D_3);
+	cur_l_bF_DETECT_Status = !IOPort_Read(PIN_CAMERA);
 	if (cur_l_bF_DETECT_Status == pre_l_bF_DETECT_Status && cur_l_bF_DETECT_Status)
 	{
 		time_l_bF_DETECT_Status_on += 1;
@@ -70,14 +58,9 @@ void checkDETECT()
 		time_g_bF_DETECT_Status_off = 0;
 	}
 
-	/*if (time_g_bF_SW2_Status_on >= 19)
-	{
-	g_bF_SW2_Status = 2;
-	}
-	else */if (time_l_bF_DETECT_Status_on >= 9)
+	if (time_l_bF_DETECT_Status_on >= 9)
 	{
 		g_bF_DOOR_OPEN = 1;
-
 	}
 	else if (time_g_bF_DETECT_Status_off >= 1)
 	{

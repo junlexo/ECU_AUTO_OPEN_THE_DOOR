@@ -96,6 +96,8 @@ enum ERROR_CODE
 #define BLINK500MS 500
 #define BLINK1S 1000
 
+/*LED */
+#define PIN_CAMERA D_3
 /*ADC */
 
 /*IO */
