@@ -16,6 +16,8 @@ void IO_Init()
 	SetPin(D_8, OUTPUT);
 	SetPin(D_9, OUTPUT);
 	SetPin(D_7, OUTPUT);
+
+	SetPin(D_3, INPUT_PULLUP);
 #endif // STEP MOTOR
 }
 
