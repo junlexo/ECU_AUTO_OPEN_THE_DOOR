@@ -120,7 +120,8 @@ enum ERROR_CODE
 #define StepCountPWM_CLOSE 8
 #define TIMEWAITTING_STANDING 15
 
-
+/* MOTOR DC */
+#define MOTOR_DC ON
 
 enum ADC_PIN_NAME
 {

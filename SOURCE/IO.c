@@ -11,6 +11,12 @@ void IO_Init()
 /*****     LED    *****/
 	SetPin(D_12, OUTPUT); // Blink LED1 in number_port 12
 	SetPin(D_13, OUTPUT); // Blink LED0 in number_port 13
+	/*****     DC MOTOR    *****/
+	SetPin(D_2, INPUT_PULLUP);
+	//SetPin(D_3, INPUT_PULLUP);
+	SetPin(D_4, OUTPUT);
+	SetPin(D_5, OUTPUT);
+	SetPin(D_6, OUTPUT);
 /*****   STEP MOTOR       ******/
 #if STEPMOTOR == ON
 	SetPin(D_8, OUTPUT);

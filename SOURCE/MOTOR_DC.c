@@ -2,6 +2,10 @@
 #include "SW.h"
 #include "IO.h"
 #include "RAM.h"
+#include "UART.h"
+#include "OS_TimerCounter.h"
+
+//#if MOTOR_DC == ON
 
 volatile int32_t Pulse, pre_Pulse;
 volatile int32_t rSpeed, Err, pre_Err; /* for speed control */
@@ -10,25 +14,51 @@ volatile int32_t Ctrl_Speed = 5; /* van toc can dieu khien */
 volatile int32_t Output;
 volatile unsigned char sample_count = 0;
 
+
+
 void stop_Motor()
 {
-	if (!TSTFLAG(g_bF_SW1_Status) || !TSTFLAG(g_bF_SW2_Status))
-	{
-		IOPort_Write(D_4, 0);
-		IOPort_Write(D_5, 0);
-	}
+	IOPort_Write(D_4, LOW);
+	IOPort_Write(D_5, LOW);
 }
 
 void open_Door()
 {
-	IOPort_Write(D_4, 1);
-	IOPort_Write(D_5, 0);
+	IOPort_Write(D_4, HIGH);
+	IOPort_Write(D_5, LOW);
 }
+
+float rpm;
+volatile int buttonState1 = 0;
+volatile uint8_t flag_dirdc = 0;
+
+void counter()
+{
+	buttonState1 = digitalRead(3);
+	if (buttonState1 == 0) flag_dirdc = 1;
+	else if (buttonState1 == 1) flag_dirdc = 2;
+}
+
 
 void close_Door()
 {
-	IOPort_Write(D_4, 0);
-	IOPort_Write(D_5, 1);
+	UART_Write('A');
+	digitalWrite(D_4, HIGH);
+	digitalWrite(D_5, LOW);
+	UART_Write('B');
+	//analogWriteA(D_6, 150);
+	//IOPort_Write(D_4, LOW);
+	//IOPort_Write(D_5, HIGH);
+	//OCR2A = 150;
+	/*switch (flag_dirdc)
+	{
+	case 0: UART_WriteString("DONG CO DUNG");
+	break;
+	case 1: UART_WriteString("DC QUAY THUAN");
+	break;
+	case 2: UART_WriteString("DC QUAY NGHICH");
+	break;
+	}*/
 }
 
 void motor_Speed(int32_t des_speed)
@@ -47,13 +77,26 @@ void motor_Speed(int32_t des_speed)
 	pre_Err = Err; /* luu lai gia tri error */
 }
 
+void MOTOR_Init()
+{
+	//TCCR1A = 0; TCCR1B = 0;
+	//TCCR1A |= (1 << WGM01) | (1 << WGM00) | (1 << COM0A1); /* (1 << COM1A1) | (1 << COM1B1) | (WGM11); */
+	//TCCR1B |= (1 << CS02) | (1 << CS00); /* (1 << WGM13) | (1 << WGM12) | (1 << CS10) */
+
+	//									 /* khoi dong gia tri PWM */
+	//OCR1A = 100; /* do rong PWM 1/255 */
+
+	//MCUCR |= (1 << ISC01);    //ISC01=1, ISC00=0 Ngat suon xuong INT0
+	//EIMSK |= (1 << INT0);          //Ngat ngoai INT0 
+}
+
 void rotate()
 {
 	Pulse = 0;
 	/* Encoder va cac chan nhap toc do */
-	DDRB |= (1<<D_6); /* set PORTB as a input port to use the T0 input pin and INT2 */
-	//PORTB = 0xFF; /* dien tro keo len (nhat la encoder) */
-				  /* Motor */
+	DDRB |= (1 << D_6); /* set PORTB as a input port to use the T0 input pin and INT2 */
+						//PORTB = 0xFF; /* dien tro keo len (nhat la encoder) */
+						/* Motor */
 	MOTOR_DDR = 0xF0;
 	sbi(MOTOR_PORT, MOTOR_DIR);
 	/* ngat ngoai cho encoder */
@@ -68,7 +111,7 @@ void rotate()
 	TCCR1A |= (1 << WGM01) | (1 << WGM00) | (1 << COM0A1); /* (1 << COM1A1) | (1 << COM1B1) | (WGM11); */
 	TCCR1B |= (1 << CS02) | (1 << CS00); /* (1 << WGM13) | (1 << WGM12) | (1 << CS10) */
 
-	/* khoi dong gia tri PWM */
+										 /* khoi dong gia tri PWM */
 	OCR1A = 1; /* do rong PWM 1/255 */
 	ICR1 = PWM_Period;
 	sbi(MOTOR_PORT, MOTOR_EN); /* start motor */
@@ -88,15 +131,23 @@ void rotate()
 	}
 }
 
-ISR(TIMER2_OVF_vect)
-{
-	TCNT2 = 60;
-	sample_count++;
-	motor_Speed(Ctrl_Speed);
-}
+
+//ISR(INT0_vect)
+//{
+//	counter();
+//}
+
+//ISR(TIMER2_OVF_vect)
+//{
+//	TCNT2 = 60;
+//	sample_count++;
+//	motor_Speed(Ctrl_Speed);
+//}
 
 //ISR(INT1_vect)
 //{
 //	if (bit_is_set(PINB, 0)) Pulse++;
 //	else Pulse--;
 //}
+
+//#endif

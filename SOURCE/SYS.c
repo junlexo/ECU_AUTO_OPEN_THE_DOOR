@@ -10,6 +10,7 @@
 #include "FLAG.h"
 #include "EEPROM.h"
 #include "UART.h"
+#include "MOTOR_DC.h"
 
 static void maintainSYS();
 
@@ -27,6 +28,7 @@ void Hardware_Init()
 	LED_Init();
 	SW_Init();
 	ADC_init();
+	MOTOR_Init();
 	OS_Init();
 	WDT_Init();
 	WDT_RegisterFunc(&maintainSYS);
