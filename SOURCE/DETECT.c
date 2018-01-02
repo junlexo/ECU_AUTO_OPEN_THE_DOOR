@@ -51,7 +51,7 @@ void checkDETECT()
 		cur_l_bF_DETECT_Status = 0;
 	else
 		cur_l_bF_DETECT_Status = 1;*/
-	cur_l_bF_DETECT_Status = !IOPort_Read(D_2);
+	cur_l_bF_DETECT_Status = !IOPort_Read(D_3);
 	if (cur_l_bF_DETECT_Status == pre_l_bF_DETECT_Status && cur_l_bF_DETECT_Status)
 	{
 		time_l_bF_DETECT_Status_on += 1;
