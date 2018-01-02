@@ -39,15 +39,14 @@ uint16_t ARead_v2(uint8_t pin)
 
 void checkDETECT()
 {
-	UART_WriteNumber((uint32_t)!IOPort_Read(D_2));
-	UART_Write('-');
-	UART_WriteNumber((uint32_t)g_bF_DOOR_OPEN);
-	UART_Write('-');
-	UART_WriteNumber((uint32_t)g_SystemError);
-	UART_Write('-');
-	UART_WriteNumber((uint32_t)BTN1_DISABLE);
-	UART_Write('\n');
-
+	//UART_WriteNumber((uint32_t)!IOPort_Read(D_2));
+	//UART_Write('-');
+	//UART_WriteNumber((uint32_t)g_bF_DOOR_OPEN);
+	//UART_Write('-');
+	//UART_WriteNumber((uint32_t)g_SystemError);
+	//UART_Write('-');
+	//UART_WriteNumber((uint32_t)BTN1_DISABLE);
+	//UART_Write('\n');
 	/*if (f_D2 == 1)
 		cur_l_bF_DETECT_Status = 0;
 	else
