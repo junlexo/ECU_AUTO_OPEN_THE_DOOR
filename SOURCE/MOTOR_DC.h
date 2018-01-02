@@ -4,13 +4,10 @@
 #include "MOTOR_DC.h"
 #include "FLAG.h"
 #include "PREFERENT.h"
+#include "Timer_count.h"
 
-#ifndef cbi
-#define cbi(port, bit) (port)&=~(1<<(bit))
-#endif 
-#ifndef sbi
-#define sbi(port, bit) (port)|=(1<<(bit))
-#endif 
+//#if MOTOR_DC == ON
+
 
 /* dinh nghia cac duong dieu khien motor */
 #define MOTOR_DDR DDRD
@@ -25,16 +22,19 @@
 extern "C" {
 #endif
 
-	void motor_Speed(int32_t des_speed);
-	void stop_Motor();
-	void open_Door();
-	void close_Door();
-	void rotate();
+	extern void motor_Speed(int32_t des_speed);
+	extern void stop_Motor();
+	extern void open_Door();
+	extern void close_Door();
+	extern void rotate();
+	extern void MOTOR_Init();
+	extern void counter();
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-
 #endif
+
+  //#endif // MOTOR DC
 
